@@ -1,9 +1,9 @@
 // *** Header.js ***
 
-import React from "react";
-import { Grid, Image, Button } from "../elements/Index";
+import React from 'react';
+import { Grid, Image, Button } from '../elements/Index';
 
-const Header = (props) => {
+const Header = props => {
   <React.Fragment>
     <Grid></Grid>
   </React.Fragment>;

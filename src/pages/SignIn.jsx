@@ -1,8 +1,8 @@
 // *** SignIn.jsx ***
 
-import React from "react";
+import React from 'react';
 
-const SignIn = (props) => {
+const SignIn = props => {
   return (
     <React.Fragment>
       <h1>로그인 페이지</h1>

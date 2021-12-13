@@ -1,3 +1,3 @@
 // *** apis.js ***
 
-import token from '../shared/apis'
+import token from '../shared/apis';

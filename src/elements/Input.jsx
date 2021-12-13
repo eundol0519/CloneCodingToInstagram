@@ -1,11 +1,11 @@
 // *** Input.jsx ***
 
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import { Text, Grid } from "./index";
+import { Text, Grid } from './index';
 
-const Input = (props) => {
+const Input = props => {
   const {
     label,
     placeholder,
@@ -42,14 +42,19 @@ const Input = (props) => {
             placeholder={placeholder}
             onChange={_onChange}
             value={value}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") {
+            onKeyPress={e => {
+              if (e.key === 'Enter') {
                 onSubmit(e);
               }
             }}
           />
         ) : (
-          <ElInput type={type} placeholder={placeholder} onChange={_onChange} onKeyUp={_onKeyUp}/>
+          <ElInput
+            type={type}
+            placeholder={placeholder}
+            onChange={_onChange}
+            onKeyUp={_onKeyUp}
+          />
         )}
       </Grid>
     </React.Fragment>
@@ -59,9 +64,9 @@ const Input = (props) => {
 Input.defaultProps = {
   multiLine: false,
   label: false,
-  placeholder: "텍스트를 입력해주세요.",
-  type: "text",
-  value: "",
+  placeholder: '텍스트를 입력해주세요.',
+  type: 'text',
+  value: '',
   is_submit: false,
   onSubmit: () => {},
   _onChange: () => {},
