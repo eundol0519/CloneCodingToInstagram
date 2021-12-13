@@ -2,10 +2,12 @@
 
 import React from 'react';
 
-const NotFound = (props)=>{
+const NotFound = props => {
+  return (
     <React.Fragment>
-        <h1>게시물을 찾을 수 없습니다.</h1>
+      <h1>게시물을 찾을 수 없습니다.</h1>
     </React.Fragment>
-}
+  );
+};
 
-export default NotFound
+export default NotFound;

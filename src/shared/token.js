@@ -1,5 +1,6 @@
 // *** token.js ***
 
+
 // 키값 기준으로 쿠키에 저장된 값을 가져오는 함수
 const getToken = () => {
   // 쿠키 값을 가져옵니다.
@@ -58,3 +59,4 @@ localStorage.setItem('id', res.data.user.id)
 localStorage.setItem('nickname', res.data.user.nickname)
 dispatch(setUser({ email: email.email, nickname: res.data.user.nickname }))
 */
+
