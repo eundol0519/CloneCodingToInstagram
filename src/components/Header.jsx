@@ -13,27 +13,22 @@ const Header = props => {
   const history = useHistory();
   return (
     <React.Fragment>
-      <Grid is_flex margin="-2% 0px 0px 0px">
-        <Grid>
-          <Logo src={logo}></Logo>
-        </Grid>
-        <Grid>
+      <Grid is_flex padding="1% 0px 0px 0px">
+        <Logo src={logo}></Logo>
+        <Grid is_flex gap="20px" width="auto">
           <Btn
-            margin="4% 5% 0px 0px;"
             src={write}
             onClick={() => {
               history.push('/postWrite');
             }}
           ></Btn>
           <Btn
-            margin="3% 5% 0px 0px;"
             src={myPage}
             onClick={() => {
               history.push('/myPage');
             }}
           ></Btn>
           <Btn
-            margin="3% 0px 0px 0px;"
             src={logOut}
             onClick={() => {
               window.alert('로그아웃 되었습니다.');
@@ -46,15 +41,13 @@ const Header = props => {
 };
 
 const Logo = styled.img`
-  width: 18%;
+  width: 150px;
   height: 23%;
-  margin: 3% 0px 0px 0px;
   cursor: pointer;
 `;
 
 const Btn = styled.img`
-  width: 4%;
-  margin : ${props => props.margin}
+  width: 30px;
   cursor: pointer;
 `;
 
