@@ -28,7 +28,7 @@ const Image = props => {
 };
 
 Image.defaultProps = {
-  shape: 'circle',
+  shape: '',
   src: 'https://i.ytimg.com/vi/Ct1Pp_4FEIY/maxresdefault.jpg',
   size: 36,
   _onKeyUp: () => {},
