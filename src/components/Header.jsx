@@ -2,7 +2,11 @@
 
 import React from 'react';
 import styled from 'styled-components';
+<<<<<<< HEAD
 import { Grid, Image, Button } from '../elements/index';
+=======
+import { Grid, Image, Button } from '../elements/';
+>>>>>>> 2dc530b80c7d83d00351d9f4c1cc69cabe839ae2
 import logo from '../logo.png';
 import write from '../add.svg';
 import myPage from '../person.svg';
