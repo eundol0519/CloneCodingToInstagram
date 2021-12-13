@@ -1,23 +1,36 @@
-// *** myPost.js ***
-
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-import axios from 'axios';
-import apis from '../../shared/apis';
 
-// 액션 타입
+// Actions
 
-// 액션 생성 함수
+const INSTAGRAMADD = 'INSTAGRAMADD';
 
-// 초기값
-const initialState = {};
+const initialState = {
+  cards: [],
+};
 
-// 미들웨어
+// Action Creators
 
-// 리듀서
-export default handleActions({});
+const todo_delect = createAction(INSTAGRAMADD, (id, pid) => ({
+  id,
+  pid,
+}));
 
-// 액션 생성 함수 export
-const actionCreators = {};
+//미들웨이
+const todoAddDB = (pid, todoText) => {
+  return async function (dispatch, getstate, { history }) {};
+};
+
+// Reducer
+export default handleActions(
+  {
+    [INSTAGRAMADD]: (state, action) => produce(state, draft => {}),
+  },
+  initialState
+);
+
+const actionCreators = {
+  todo_delect,
+};
 
 export { actionCreators };

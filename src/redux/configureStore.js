@@ -18,17 +18,16 @@ export const history = createBrowserHistory();
 
 // *** rootReducer 만들기
 const rootReducer = combineReducers({
-  comment: comment,
-  myPost: myPost,
-  post: post,
-  user: user,
+  comment,
+  myPost,
+  post,
+  user,
   router: connectRouter(history),
 });
 
 // *** 미들웨어 설정하기
 const middlewares = [thunk.withExtraArgument({ history: history })];
 
-// *** 지금이 어디 환경인 지 알려준다. (개발환경, 프로덕션(배포) 환경)
 const env = process.env.NODE_ENV;
 
 // *** 개발환경에서는 로거라는 걸 하나만 더 써볼게요.
