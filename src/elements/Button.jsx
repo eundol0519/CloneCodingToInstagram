@@ -6,6 +6,7 @@ import styled from 'styled-components';
 const Button = props => {
   const {
     text,
+    img,
     _onClick,
     is_float,
     children,
@@ -28,6 +29,7 @@ const Button = props => {
     margin: margin,
     width: width,
     padding: padding,
+    img: img,
   };
 
   return (
@@ -54,12 +56,14 @@ Button.defaultProps = {
   width: '100%',
   padding: '12px 0px',
   disabled: false,
+  img: false,
 };
 
 const ElButton = styled.button`
   width: ${props => props.width};
   background-color: ${props =>
     props.className === 'unActiveBtn' ? 'gray' : 'black'};
+  ${props => (props.img ? `background-image : ${props.img};` : '')}
   color: #ffffff;
   padding: ${props => props.padding};
   box-sizing: border-box;

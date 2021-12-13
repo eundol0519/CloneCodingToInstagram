@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 const Button = props => {
   const {
+    is_flex,
     text,
     _onClick,
     is_float,
@@ -26,6 +27,7 @@ const Button = props => {
 
   const styles = {
     margin: margin,
+    is_flex: is_flex,
     width: width,
     padding: padding,
   };
@@ -59,19 +61,23 @@ Button.defaultProps = {
 const ElButton = styled.button`
   width: ${props => props.width};
   background-color: ${props =>
-    props.className === 'unActiveBtn' ? 'gray' : 'black'};
-  color: #ffffff;
+    props.className === 'unActiveBtn' ? 'gray' : '#ffffff'};
+  color: black;
   padding: ${props => props.padding};
   box-sizing: border-box;
   border: none;
   ${props => (props.margin ? `margin: ${props.margin};` : '')}
+  ${props =>
+    props.is_flex
+      ? `display: flex; align-items: center; justify-content: space-evenly; `
+      : ''}
 `;
 
 const FloatButton = styled.button`
   width: 50px;
   height: 50px;
-  background-color: #212121;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: black;
   box-sizing: border-box;
   font-size: 36px;
   font-weight: 800;
@@ -82,6 +88,10 @@ const FloatButton = styled.button`
   vertical-align: middle;
   border: none;
   border-radius: 50px;
+  ${props =>
+    props.is_flex
+      ? `display: flex; align-items: center; justify-content: space-evenly; `
+      : ''}
 `;
 
 export default Button;
