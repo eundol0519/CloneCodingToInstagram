@@ -1,6 +1,6 @@
 // *** Main.jsx ***
 
-import React from 'react';
+import React from 'react'
 
 const Main = (props)=>{
     return (
@@ -10,4 +10,4 @@ const Main = (props)=>{
     );
 }
 
-export default Main;
+export default Main
