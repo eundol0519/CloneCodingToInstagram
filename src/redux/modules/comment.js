@@ -11,7 +11,7 @@ const initialState = {
 
 // Action Creators
 
-const todo_delect = createAction(INSTAGRAMADD, (id, pid) => ({
+const instaAction = createAction(INSTAGRAMADD, (id, pid) => ({
   id,
   pid,
 }));
@@ -30,7 +30,7 @@ export default handleActions(
 );
 
 const actionCreators = {
-  todo_delect,
+  instaAction,
 };
 
 export { actionCreators };

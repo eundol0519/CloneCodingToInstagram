@@ -1,4 +1,5 @@
 import './App.css';
+import styled from 'styled-components';
 
 import React from 'react';
 import Main from '../pages/Main';
@@ -17,24 +18,30 @@ import { history } from '../redux/configureStore';
 function App() {
   return (
     <div className="App">
-      <ConnectedRouter history={history}>
-        <Switch>
-          <Route path="/" exact component={Main}></Route>
-          <Route path="/signIn" exact component={SignIn}></Route>
-          <Route path="/signUp" exact component={SignUp}></Route>
-          <Route path="/postWrite" exact component={PostWrite}></Route>
-          <Route
-            path="/postDetail/:postId"
-            exact
-            component={PostDetail}
-          ></Route>
-          <Route path="/profileEdit" exact component={ProfileEdit}></Route>
-          <Route path="/myPage" exact component={MyPage}></Route>
-          <Route component={NotFound}></Route>
-        </Switch>
-      </ConnectedRouter>
+      <Container>
+        <ConnectedRouter history={history}>
+          <Switch>
+            <Route path="/" exact component={Main}></Route>
+            <Route path="/signIn" exact component={SignIn}></Route>
+            <Route path="/signUp" exact component={SignUp}></Route>
+            <Route path="/postWrite" exact component={PostWrite}></Route>
+            <Route
+              path="/postDetail/:postId"
+              exact
+              component={PostDetail}
+            ></Route>
+            <Route path="/profileEdit" exact component={ProfileEdit}></Route>
+            <Route path="/myPage" exact component={MyPage}></Route>
+            <Route component={NotFound}></Route>
+          </Switch>
+        </ConnectedRouter>
+      </Container>
     </div>
   );
 }
 
+const Container = styled.div`
+  margin: auto;
+  width: 935px;
+`;
 export default App;
