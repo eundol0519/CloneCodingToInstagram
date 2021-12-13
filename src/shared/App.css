@@ -3,6 +3,14 @@
    License: none (public domain)
 */
 
+body {
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 html,
 body,
 div,

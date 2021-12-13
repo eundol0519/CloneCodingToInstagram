@@ -2,15 +2,17 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Image, Button } from '../elements/Index';
+import { Grid, Image, Button } from '../elements/index';
 import logo from '../logo.png';
 import write from '../add.svg';
 import myPage from '../person.svg';
 import logOut from '../exit.svg';
+import PostWrite from '../pages/PostWrite';
 import { useHistory } from 'react-router-dom';
 
 const Header = props => {
   const history = useHistory();
+  const [postWrtieModal, setPostWriteModal] = React.useState(false);
   return (
     <React.Fragment>
       <Grid is_flex padding="1% 0px 0px 0px">
@@ -19,9 +21,15 @@ const Header = props => {
           <Btn
             src={write}
             onClick={() => {
-              history.push('/postWrite');
+              setPostWriteModal(true);
             }}
           ></Btn>
+          {postWrtieModal && (
+            <PostWrite
+              modal={postWrtieModal}
+              setPostWriteModal={setPostWriteModal}
+            ></PostWrite>
+          )}
           <Btn
             src={myPage}
             onClick={() => {
