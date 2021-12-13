@@ -4,9 +4,11 @@ import React from 'react';
 import { Grid, Image, Button } from '../elements/Index';
 
 const Header = props => {
-  <React.Fragment>
+  return(
+    <React.Fragment>
     <Grid></Grid>
-  </React.Fragment>;
+  </React.Fragment>
+  );
 };
 
 export default Header;
