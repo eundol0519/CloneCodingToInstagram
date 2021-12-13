@@ -1,10 +1,13 @@
 // *** Header.js ***
 
 import React from 'react';
+import {Grid, Image, Button} from '../elements/Index';
 
 const Header = (props) => {
     <React.Fragment>
+        <Grid>
 
+        </Grid>
     </React.Fragment>
 }
 

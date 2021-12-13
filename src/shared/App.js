@@ -4,7 +4,7 @@ import React from "react";
 import Main from "../pages/Main";
 import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
-import PostWrite from "../pages/PostWrtie";
+import PostWrite from "../pages/PostWrite";
 import PostDetail from "../pages/PostDetail";
 import ProfileEdit from "../pages/ProfileEdit";
 import MyPage from "../pages/MyPage";
@@ -17,8 +17,8 @@ import { history } from "../redux/configureStore";
 function App() {
   return (
     <div className="App">
-      <Switch>
-        <ConnectedRouter history={history}>
+      <ConnectedRouter history={history}>
+        <Switch>
           <Route path="/" exact component={Main}></Route>
           <Route path="/signIn" exact component={SignIn}></Route>
           <Route path="/signUp" exact component={SignUp}></Route>
@@ -30,9 +30,9 @@ function App() {
           ></Route>
           <Route path="/profileEdit" exact component={ProfileEdit}></Route>
           <Route path="/myPage" exact component={MyPage}></Route>
-          <Route exact component={NotFound}></Route>
-        </ConnectedRouter>
-      </Switch>
+          <Route component={NotFound}></Route>
+        </Switch>
+      </ConnectedRouter>
     </div>
   );
 }
