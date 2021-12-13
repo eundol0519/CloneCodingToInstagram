@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Image, Button } from '../elements/Index';
+import { Grid, Image, Button } from '../elements/';
 import logo from '../logo.png';
 import write from '../add.svg';
 import myPage from '../person.svg';

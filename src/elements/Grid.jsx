@@ -1,4 +1,4 @@
-// Grid.js
+//  v.js
 
 // *** 패키지 import
 import React from 'react';
@@ -20,6 +20,7 @@ const Grid = props => {
     justifyContent,
     noWrap,
     boxShadow,
+    gap,
   } = props;
 
   const styles = {
@@ -34,6 +35,7 @@ const Grid = props => {
     bg: bg,
     center: center,
     flexFlow: flexFlow,
+    gap: gap,
   };
 
   if (noWrap) {
@@ -75,6 +77,7 @@ const GridBox = styled.div`
   height: ${props => props.height};
   gap: ${props => props.gap};
   box-sizing: border-box;
+  gap: ${props => props.gap};
   ${props => (props.padding ? `padding: ${props.padding};` : '')}
   ${props => (props.margin ? `margin: ${props.margin};` : '')}
     ${props => (props.bg ? `background-color: ${props.bg};` : '')}
@@ -87,7 +90,7 @@ const GridBox = styled.div`
     ${props =>
     props.justifyContent
       ? 'justify-content: flex-start;'
-      : 'justify-content: space-between;'}
+      : 'justify-content: space-between;'};
 `;
 
 const NoWrap = styled.div`
