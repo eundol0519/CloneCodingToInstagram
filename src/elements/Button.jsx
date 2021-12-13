@@ -15,6 +15,9 @@ const Button = props => {
     className,
     padding,
     disabled,
+    bg,
+    color,
+    border,
   } = props;
 
   if (is_float) {
@@ -30,6 +33,9 @@ const Button = props => {
     width: width,
     padding: padding,
     img: img,
+    bg,
+    color,
+    border,
   };
 
   return (
@@ -57,18 +63,24 @@ Button.defaultProps = {
   padding: '12px 0px',
   disabled: false,
   img: false,
+  bg: false,
+  color: '#ffffff',
+  border: 'none',
 };
 
 const ElButton = styled.button`
   width: ${props => props.width};
   background-color: ${props =>
-    props.className === 'unActiveBtn' ? 'gray' : 'black'};
+    props.className === 'unActiveBtn' ? '#B2DFFC' : '#0095F6'};
   ${props => (props.img ? `background-image : ${props.img};` : '')}
-  color: #ffffff;
+  color: ${props => props.color};
+  background: ${props => props.bg};
   padding: ${props => props.padding};
   box-sizing: border-box;
-  border: none;
+  border-radius: 3px;
+  border: ${props => props.border};
   ${props => (props.margin ? `margin: ${props.margin};` : '')}
+  cursor: pointer;
 `;
 
 const FloatButton = styled.button`
@@ -85,6 +97,7 @@ const FloatButton = styled.button`
   text-align: center;
   vertical-align: middle;
   border: none;
+  cursor: pointer;
   border-radius: 50px;
 `;
 

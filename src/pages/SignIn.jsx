@@ -4,18 +4,28 @@ import React from 'react';
 import styled from 'styled-components';
 import signin_img from '../images/signin_img.png';
 import { Grid } from '../elements';
-
+import SignBox from '../components/SignBox';
 const SignIn = props => {
   return (
-    <Grid>
-      <img src={signin_img} alt="" />
-      <Grid width="375px">로그인 페이지</Grid>
-    </Grid>
+    <SenterWep>
+      <Grid is_flex justifyContent gap="30px">
+        <img src={signin_img} alt="" />
+        <SignBox />
+      </Grid>
+    </SenterWep>
   );
 };
 const SenterWep = styled.div`
   width: 100%;
   height: atuo;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `;
-
+const Logo = styled.img`
+  width: 150px;
+  height: 23%;
+  cursor: pointer;
+`;
 export default SignIn;

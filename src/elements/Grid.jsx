@@ -20,6 +20,8 @@ const Grid = props => {
     justifyContent,
     noWrap,
     boxShadow,
+    column,
+    border,
   } = props;
 
   const styles = {
@@ -34,7 +36,8 @@ const Grid = props => {
     bg: bg,
     center: center,
     flexFlow: flexFlow,
-    gap: gap,
+    column,
+    border,
   };
 
   if (noWrap) {
@@ -69,6 +72,8 @@ Grid.defaultProps = {
   center: false,
   flexFlow: false,
   _onClick: () => {},
+  column: false,
+  border: '0px',
 };
 
 const GridBox = styled.div`
@@ -76,19 +81,19 @@ const GridBox = styled.div`
   height: ${props => props.height};
   gap: ${props => props.gap};
   box-sizing: border-box;
+  border-raidus: 5px;
+  border: ${props => props.border};
+  flex-direction: ${props => props.column};
   gap: ${props => props.gap};
   ${props => (props.padding ? `padding: ${props.padding};` : '')}
   ${props => (props.margin ? `margin: ${props.margin};` : '')}
     ${props => (props.bg ? `background-color: ${props.bg};` : '')}
-    ${props =>
-    props.is_flex
-      ? `display: flex; align-items: center; justify-content: space-between; `
-      : ''}
+    ${props => (props.is_flex ? `display: flex; align-items: center; ` : '')}
     ${props => (props.center ? `text-align: center;` : '')}
     ${props => (props.flexFlow ? 'flex-flow : row wrap;' : '')}
     ${props =>
     props.justifyContent
-      ? 'justify-content: flex-start;'
+      ? 'justify-content: center;'
       : 'justify-content: space-between;'};
 `;
 

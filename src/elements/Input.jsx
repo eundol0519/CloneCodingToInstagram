@@ -72,17 +72,21 @@ Input.defaultProps = {
 };
 
 const ElTextarea = styled.textarea`
-  border: 1px solid #212121;
+  border: 1px solid #dfdfdf;
   width: 100%;
-  padding: 12px 4px;
+  padding: 12px 10px;
   box-sizing: border-box;
+  background-color: #fafafa;
+  border-radius: 3px;
 `;
 
 const ElInput = styled.input`
-  border: 1px solid #212121;
+  border: 1px solid #dfdfdf;
   width: 100%;
-  padding: 12px 4px;
+  padding: 12px 10px;
   box-sizing: border-box;
+  background-color: #fafafa;
+  border-radius: 3px;
 `;
 
 export default Input;
