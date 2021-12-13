@@ -1,97 +1,99 @@
-// *** Grid.jsx ***
+// Grid.js
 
+// *** 패키지 import
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = props => {
+const Grid = props => {
   const {
     is_flex,
-    text,
-    _onClick,
-    is_float,
-    children,
-    margin,
     width,
-    className,
+    height,
+    margin,
     padding,
-    disabled,
+    bg,
+    children,
+    center,
+    _onClick,
+    flexFlow,
+    justifyContent,
+    noWrap,
+    boxShadow,
   } = props;
 
-  if (is_float) {
+  const styles = {
+    boxShadow: boxShadow,
+    justifyContent: justifyContent,
+    is_flex: is_flex,
+    width: width,
+    margin: margin,
+    height: height,
+    padding: padding,
+    bg: bg,
+    center: center,
+    flexFlow: flexFlow,
+  };
+
+  if (noWrap) {
     return (
       <React.Fragment>
-        <FloatButton onClick={_onClick}>{text ? text : children}</FloatButton>
+        <NoWrap onClick={_onClick} {...styles}>
+          {children}
+        </NoWrap>
       </React.Fragment>
     );
   }
 
-  const styles = {
-    margin: margin,
-    is_flex: is_flex,
-    width: width,
-    padding: padding,
-  };
-
   return (
     <React.Fragment>
-      <ElButton
-        className={className}
-        {...styles}
-        onClick={_onClick}
-        disabled={disabled}
-      >
-        {text ? text : children}
-      </ElButton>
+      <GridBox onClick={_onClick} {...styles}>
+        {children}
+      </GridBox>
     </React.Fragment>
   );
 };
 
-Button.defaultProps = {
-  className: '',
-  text: false,
-  children: null,
-  _onClick: () => {},
-  is_float: false,
-  margin: false,
+Grid.defaultProps = {
+  boxShadow: null,
+  justifyContent: false,
+  chidren: null,
+  is_flex: false,
   width: '100%',
-  padding: '12px 0px',
-  disabled: false,
+  padding: false,
+  margin: false,
+  bg: false,
+  center: false,
+  flexFlow: false,
+  _onClick: () => {},
 };
 
-const ElButton = styled.button`
+const GridBox = styled.div`
   width: ${props => props.width};
-  background-color: ${props =>
-    props.className === 'unActiveBtn' ? 'gray' : '#ffffff'};
-  color: black;
-  padding: ${props => props.padding};
+  height: ${props => props.height};
   box-sizing: border-box;
-  border: none;
+  ${props => (props.padding ? `padding: ${props.padding};` : '')}
   ${props => (props.margin ? `margin: ${props.margin};` : '')}
-  ${props =>
+    ${props => (props.bg ? `background-color: ${props.bg};` : '')}
+    ${props =>
     props.is_flex
       ? `display: flex; align-items: center; justify-content: space-evenly; `
       : ''}
+    ${props => (props.center ? `text-align: center;` : '')}
+    ${props => (props.flexFlow ? 'flex-flow : row wrap;' : '')}
+    ${props =>
+    props.justifyContent
+      ? 'justify-content: flex-start;'
+      : 'justify-content: space-evenly;'}
 `;
 
-const FloatButton = styled.button`
-  width: 50px;
-  height: 50px;
-  background-color: #ffffff;
-  color: black;
-  box-sizing: border-box;
-  font-size: 36px;
-  font-weight: 800;
-  position: fixed;
-  bottom: 50px;
-  right: 16px;
-  text-align: center;
-  vertical-align: middle;
-  border: none;
-  border-radius: 50px;
-  ${props =>
-    props.is_flex
-      ? `display: flex; align-items: center; justify-content: space-evenly; `
-      : ''}
+const NoWrap = styled.div`
+  width: 450px;
+  border-radius: 15px;
+  height: 60px;
+  /* border: 1px solid black; */
+  box-shadow: 0px 5px 16px rgba(180, 150, 150, 0.4);
+  background-color: #fafafa;
+  justify-content: flex-start;
 `;
 
-export default Button;
+export default Grid;
