@@ -20,7 +20,6 @@ const Grid = props => {
     justifyContent,
     noWrap,
     boxShadow,
-    gap,
   } = props;
 
   const styles = {
