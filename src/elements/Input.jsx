@@ -19,12 +19,10 @@ const Input = props => {
     cols,
     children,
     _ref,
-    is_flex,
     width,
     ti_margin,
     margin,
     size,
-    center,
     bg,
     name,
   } = props;
@@ -127,7 +125,9 @@ const ElTextarea = styled.textarea`
   resize: none;
   word-break: keep-all;
   word-wrap: break-word;
-  resize: vertical;
+  resize: none;
+  border-color: #fff;
+
   &:focus {
     outline: none;
   }

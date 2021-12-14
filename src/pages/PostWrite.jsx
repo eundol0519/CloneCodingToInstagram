@@ -33,7 +33,7 @@ const PostWrtie = props => {
   };
 
   const upload = () => {
-    const state = true;
+    const state = false;
 
     if (state) {
       setImgFile('https://i.ytimg.com/vi/Ct1Pp_4FEIY/maxresdefault.jpg');
@@ -110,66 +110,77 @@ const PostWrtie = props => {
           },
         }}
       >
+        {/* ---------------------게시물 작성하기 text 부분--------------------- */}
         <Grid width="100vw" borderBottom="solid rgba(188, 191, 187, 0.93) 1px">
           <Text margin="0px 0px 1% 25%" bold>
             게시물 작성하기
           </Text>
         </Grid>
-        {/* ----------------------------------------------- */}
+        {/* ---------------------이미지 업로드 부분--------------------- */}
         <Grid is_flex is_fix>
-          <Grid width="130vw" margin="4% 0px 0px 0px">
-            <Grid margin="6% 10px 2% 10px"></Grid>
-            <Grid>
-              {preview ? (
-                <Image
-                  src={preview}
-                  alt="게시물 사진"
-                  shape="rectangle"
-                  width="50%"
-                ></Image>
-              ) : (
-                <Image
-                  src="https://blog.kakaocdn.net/dn/yNtgW/btrmKkQHuOa/OleSub2Kfz7nKcaA54M3Jk/img.gif"
-                  alt="게시물 사진"
-                  shape="rectangle"
-                  width="50%"
-                  border="2px solid black"
-                ></Image>
-              )}
-            </Grid>
+          <Grid width="130vw" margin="5% 0px 0px 0px">
             <Grid margin="1% 0px 0px 0px" center>
-              <FileLabel for="file">업로드</FileLabel>
-              <FileInput
-                type="file"
-                id="file"
-                encType="multipart/form-data"
-                onChange={selectFile}
-                ref={fileInput}
-              ></FileInput>
+              <form
+                action="/api/posts/uploadFile"
+                enctype="multipart/form-data"
+                method="post"
+              >
+                <label htmlFor="file">
+                  {preview ? (
+                    <Image
+                      src={preview}
+                      alt="게시물 사진"
+                      shape="rectangle"
+                      size="10"
+                    ></Image>
+                  ) : (
+                    <Image
+                      src="https://lh3.googleusercontent.com/proxy/eN7kqAaYEdN961JDil-W2VAIs0C9ly0deQQg2l2aFqNwECL08FoT4ltpSGQJpILDP_AhPFoKBQyN0l-rU3mlTEYE"
+                      alt="게시물 사진"
+                      shape="rectangle"
+                      size="10"
+                    ></Image>
+                  )}
+                </label>
+                <FileInput
+                  type="file"
+                  id="file"
+                  name="img"
+                  encType="multipart/form-data"
+                  onChange={selectFile}
+                  ref={fileInput}
+                ></FileInput>
+                <FileBtn type="submit">업로드</FileBtn>
+              </form>
             </Grid>
           </Grid>
-          {/* ----------------------------------------------- */}
-          <Grid width="68vw" margin="2% 5% 0px 0px">
+          {/* ---------------------게시물 내용 작성하는 부분--------------------- */}
+          <Grid width="68vw" margin="2% 1% 0px 2%">
             <Grid is_flex justifyContent>
               <Image shape="circle"></Image>
               <Text bold>eundol</Text>
             </Grid>
             <Grid>
               <Input
-                rows="30"
-                cols="60"
+                rows="20"
+                width="300px"
                 wrap="on"
                 value={contents}
                 _onChange={changeContents}
                 multiLine
                 placeholder="문구 입력..."
               ></Input>
-              <Button
-                width="55%"
-                padding="5px"
-                margin="0px 0px 0px 30%"
-                text="작성하기"
-              ></Button>
+              <FileBtn
+                style={{
+                  width: '55%',
+                  height: '28px',
+                  padding: '5px',
+                  margin: '11% 0px 0px 22%',
+                  lineHeight: '16px',
+                }}
+              >
+                작성하기
+              </FileBtn>
             </Grid>
           </Grid>
           {/* ----------------------------------------------- */}
@@ -179,7 +190,7 @@ const PostWrtie = props => {
   );
 };
 
-const FileLabel = styled.label`
+const FileBtn = styled.button`
   display: inline-block;
   width: 28%;
   height: 27px;
@@ -187,10 +198,11 @@ const FileLabel = styled.label`
   color: #ffffff;
   line-height: 45px;
   border-radius: 3px;
+  border-color : #0095f6;
   text-align: center;
   line-height: 27px;
   font-size: 14px;
-  margin-top: 15%;
+  margin-top: 3%;
 }`;
 
 const FileInput = styled.input`
