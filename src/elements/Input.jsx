@@ -25,12 +25,16 @@ const Input = props => {
     size,
     bg,
     name,
+    padding,
+    height,
   } = props;
   const styles = {
     width,
     size,
     bg,
     margin,
+    padding,
+    height,
   };
   if (multiLine) {
     return (
@@ -86,6 +90,7 @@ const Input = props => {
             name={name}
             ref={_ref}
             type={type}
+            value={value}
             placeholder={placeholder}
             onChange={_onChange}
             onKeyUp={_onKeyUp}
@@ -119,15 +124,15 @@ const ElTextarea = styled.textarea`
   font-size: ${props => props.size};
   padding: ${props => props.padding};
   margin: ${props => props.margin};
+  min-height: ${props => props.height};
   box-sizing: border-box;
   background-color: ${props => props.bg};
   border-radius: 3px;
   resize: none;
   word-break: keep-all;
   word-wrap: break-word;
-  resize: none;
-  border-color: #fff;
-
+  resize: vertical;
+  outline: none;
   &:focus {
     outline: none;
   }
@@ -141,6 +146,8 @@ const ElInput = styled.input`
   box-sizing: border-box;
   background-color: ${props => props.bg};
   border-radius: 3px;
+  outline: none;
+  -webkit-appearance: none;
 `;
 
 export default Input;

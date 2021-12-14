@@ -8,16 +8,20 @@ import write from '../add.svg';
 import myPage from '../person.svg';
 import logOut from '../exit.svg';
 import PostWrite from '../pages/PostWrite';
-import { useHistory } from 'react-router-dom';
+import { history } from '../redux/configureStore';
 import { Container } from '../elements';
 const Header = props => {
-  const history = useHistory();
   const [postWrtieModal, setPostWriteModal] = React.useState(false);
   return (
     <HeaderWeb>
       <Container>
         <Grid is_flex is_fix padding="0.5rem" bg="white">
-          <Logo src={logo}></Logo>
+          <Logo
+            src={logo}
+            onClick={() => {
+              history.push('/');
+            }}
+          ></Logo>
           <Grid is_flex gap="20px" width="auto">
             <Btn
               src={write}
@@ -40,6 +44,7 @@ const Header = props => {
             <Btn
               src={logOut}
               onClick={() => {
+                localStorage.clear();
                 window.alert('로그아웃 되었습니다.');
               }}
             ></Btn>

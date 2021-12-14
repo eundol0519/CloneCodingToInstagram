@@ -79,7 +79,7 @@ Grid.defaultProps = {
   column: false,
   border: '0px',
   baseline: false,
-  borderBottom: '0px',
+  borderBottom: false,
 };
 
 const GridBox = styled.div`
