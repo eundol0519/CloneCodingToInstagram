@@ -15,6 +15,7 @@ const Input = props => {
     value,
     is_submit,
     onSubmit,
+    _ref,
   } = props;
 
   if (multiLine) {
@@ -22,6 +23,7 @@ const Input = props => {
       <Grid>
         {label && <Text margin="0px">{label}</Text>}
         <ElTextarea
+          ref={_ref}
           rows={10}
           value={value}
           placeholder={placeholder}
@@ -37,6 +39,7 @@ const Input = props => {
         {label && <Text margin="0px">{label}</Text>}
         {is_submit ? (
           <ElInput
+            ref={_ref}
             type={type}
             placeholder={placeholder}
             onChange={_onChange}
@@ -49,6 +52,7 @@ const Input = props => {
           />
         ) : (
           <ElInput
+            ref={_ref}
             type={type}
             placeholder={placeholder}
             onChange={_onChange}

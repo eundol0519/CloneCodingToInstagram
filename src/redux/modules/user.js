@@ -3,34 +3,42 @@ import { produce } from 'immer';
 
 // Actions
 
-const INSTAGRAMADD = 'INSTAGRAMADD';
+const LOGIN = 'LOGIN';
 
 const initialState = {
-  cards: [],
+  users: [],
 };
 
 // Action Creators
 
-const todo_delect = createAction(INSTAGRAMADD, (id, pid) => ({
-  id,
-  pid,
+const LoginGet = createAction(LOGIN, user => ({
+  user,
 }));
 
 //미들웨이
-const todoAddDB = (pid, todoText) => {
-  return async function (dispatch, getstate, { history }) {};
+const signInGetDB = (username, pw) => {
+  return async function (dispatch, getstate, { history }) {
+    console.log(username, pw);
+  };
+};
+const signUpPostDB = userInfo => {
+  return async function (dispatch, getstate, { history }) {
+    console.log(userInfo);
+  };
 };
 
 // Reducer
 export default handleActions(
   {
-    [INSTAGRAMADD]: (state, action) => produce(state, draft => {}),
+    [LOGIN]: (state, action) => produce(state, draft => {}),
   },
   initialState
 );
 
 const actionCreators = {
-  todo_delect,
+  LoginGet,
+  signInGetDB,
+  signUpPostDB,
 };
 
 export { actionCreators };
