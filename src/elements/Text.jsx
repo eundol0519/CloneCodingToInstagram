@@ -23,6 +23,13 @@ const P = styled.p`
   font-size: ${props => props.size};
   font-weight: ${props => (props.bold ? '600' : '400')};
   ${props => (props.margin ? `margin: ${props.margin};` : '')}
+
+  // 텍스트를 마우스로 드래그하는 것을 방지하는 CSS
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 `;
 
 export default Text;

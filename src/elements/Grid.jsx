@@ -22,6 +22,7 @@ const Grid = props => {
     boxShadow,
     column,
     border,
+    borderBottom,
   } = props;
 
   const styles = {
@@ -38,6 +39,7 @@ const Grid = props => {
     flexFlow: flexFlow,
     column,
     border,
+    borderBottom,
   };
 
   if (noWrap) {
@@ -74,6 +76,7 @@ Grid.defaultProps = {
   _onClick: () => {},
   column: false,
   border: '0px',
+  borderBottom: '0px',
 };
 
 const GridBox = styled.div`
@@ -83,6 +86,7 @@ const GridBox = styled.div`
   box-sizing: border-box;
   border-radius: 5px;
   border: ${props => props.border};
+  border-bottom: ${props => props.borderBottom};
   flex-direction: ${props => props.column};
   gap: ${props => props.gap};
   ${props => (props.padding ? `padding: ${props.padding};` : '')}

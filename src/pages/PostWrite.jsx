@@ -52,7 +52,7 @@ const PostWrtie = props => {
         }}
       >
         <Grid width="100vw" borderBottom="solid rgba(188, 191, 187, 0.93) 1px">
-          <Text margin="0px 0px 1% 22%" bold>
+          <Text margin="0px 0px 1% 25%" bold>
             게시물 작성하기
           </Text>
         </Grid>
