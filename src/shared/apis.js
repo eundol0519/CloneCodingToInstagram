@@ -30,7 +30,7 @@ const apis = {
   getPost: () => instance.get('/api/posts'), // 전체 게시글 조회
 
   //게시글 작성페이지 (모달창)
-  uploadPostImage: () => instance.post(`/api/posts/imageUpload`), // 게시글 이미지업로드
+  uploadPostImage: img => instance.post(`/api/posts/imageUpload`, img), // 게시글 이미지업로드
   postWrite: postInfo => instance.post(`/api/posts/write`, postInfo), // 게시글 작성
 
   //게시물 상세 페이지 (모달창)
