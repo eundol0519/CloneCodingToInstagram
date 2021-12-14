@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 const Grid = props => {
   const {
+    Reaction,
     is_flex,
     gap,
     width,
@@ -42,6 +43,7 @@ const Grid = props => {
     border,
     baseline,
     borderBottom,
+    Reaction,
   };
 
   if (noWrap) {
@@ -103,6 +105,8 @@ const GridBox = styled.div`
       ? 'justify-content: flex-start;'
       : 'justify-content: space-between;'};
   ${props => (props.baseline ? `align-items: baseline;` : '')}
+  ${props =>
+    props.Reaction ? '@media (max-width: 935px) { width: 100%;}' : ''}
 `;
 
 const NoWrap = styled.div`

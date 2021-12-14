@@ -9,12 +9,18 @@ const SignIn = props => {
   return (
     <SenterWep>
       <Grid is_flex justifyContent gap="30px" width="auto">
-        <img src={signin_img} alt="" />
+        <LoginImg src={signin_img} />
         <SignBox />
       </Grid>
     </SenterWep>
   );
 };
+const LoginImg = styled.img`
+  display: block;
+  @media (max-width: 935px) {
+    display: none;
+  }
+`;
 const SenterWep = styled.div`
   width: auto;
   height: atuo;
