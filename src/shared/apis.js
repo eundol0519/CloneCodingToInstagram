@@ -25,7 +25,7 @@ const apis = {
   // 로그인,회원가입
   signin: userInfo => instance.post('/api/users/login', userInfo), // 로그인
   signup: userInfo => instance.post('/api/users/Signup', userInfo), // 회원가입
-
+  getUserInfo: () => instance.get('/api/users/me'), //로그인 시 유저정보 가지고 오는 api
   //전체 게시글 조회 페이지
   getPost: () => instance.get('/api/posts'), // 전체 게시글 조회
 
@@ -48,10 +48,9 @@ const apis = {
   getMyPost: nickname => instance.get(`/api/mypage/posts/${nickname}`), // 마이페이지 리스트
 
   //프로필 수정페이지
-  getMyprofile: nickname => instance.get(`/api/mypage/modify/${nickname}`), // 마이페이지 수정페이지 최초 조회
-  uploadMyImage: () => instance.GET(`/api/mypage/profileImageUpload`), // 프로필 이미지업로드
-  editMyProfile: (nickname, myPageInfo) =>
-    instance.PUT(`/api/mypage/modify/${nickname}`, myPageInfo), // 마이페이지/내 정보 수정
+  uploadMyImage: (userId, url) => instance.post(`/api/users/${userId}`, url), // 프로필 이미지업로드
+  editMyProfile: (userId, myPageInfo) =>
+    instance.put(`/api/users/${userId}`, myPageInfo), // 마이페이지/내 정보 수정
 };
 
 export default apis;
