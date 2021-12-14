@@ -23,6 +23,7 @@ const Grid = props => {
     column,
     border,
     borderBottom,
+    baseline,
   } = props;
 
   const styles = {
@@ -39,6 +40,7 @@ const Grid = props => {
     flexFlow: flexFlow,
     column,
     border,
+    baseline,
     borderBottom,
   };
 
@@ -76,6 +78,7 @@ Grid.defaultProps = {
   _onClick: () => {},
   column: false,
   border: '0px',
+  baseline: false,
   borderBottom: '0px',
 };
 
@@ -99,6 +102,7 @@ const GridBox = styled.div`
     props.justifyContent
       ? 'justify-content: flex-start;'
       : 'justify-content: space-between;'};
+  ${props => (props.baseline ? `align-items: baseline;` : '')}
 `;
 
 const NoWrap = styled.div`

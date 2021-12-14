@@ -34,7 +34,11 @@ const SignBox = props => {
           <Input _ref={nameRef} placeholder="성명"></Input>
           <Input _ref={nicknameRef} placeholder="사용자 이름"></Input>
           <Input _ref={pwRef} placeholder="비밀번호"></Input>
-          <Button margin="10px 0px 0px" _onClick={ClickEvent}>
+          <Button
+            margin="10px 0px 0px"
+            className="unActiveBtn"
+            _onClick={ClickEvent}
+          >
             가입
           </Button>
         </Grid>

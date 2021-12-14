@@ -18,6 +18,7 @@ const Button = props => {
     bg,
     color,
     border,
+    size,
   } = props;
 
   if (is_float) {
@@ -36,6 +37,7 @@ const Button = props => {
     bg,
     color,
     border,
+    size,
   };
 
   return (
@@ -66,6 +68,7 @@ Button.defaultProps = {
   bg: false,
   color: '#ffffff',
   border: 'none',
+  size: '12px',
 };
 
 const ElButton = styled.button`
@@ -81,6 +84,7 @@ const ElButton = styled.button`
   border: ${props => props.border};
   ${props => (props.margin ? `margin: ${props.margin};` : '')}
   cursor: pointer;
+  font-size: ${props => props.size};
 `;
 
 const FloatButton = styled.button`

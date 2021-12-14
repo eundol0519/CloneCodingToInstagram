@@ -1,5 +1,4 @@
 import './App.css';
-import styled from 'styled-components';
 
 import React from 'react';
 import Main from '../pages/Main';
@@ -10,7 +9,7 @@ import PostDetail from '../pages/PostDetail';
 import ProfileEdit from '../pages/ProfileEdit';
 import MyPage from '../pages/MyPage';
 import NotFound from '../pages/NotFound';
-
+import { Container } from '../elements';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
@@ -40,8 +39,4 @@ function App() {
   );
 }
 
-const Container = styled.div`
-  ${props => (props.margin ? `margin: ${props.margin};` : 'margin: auto;')}
-  width: 935px;
-`;
 export default App;

@@ -19,13 +19,30 @@ const Input = props => {
     cols,
     children,
     _ref,
+    is_flex,
+    width,
+    margin,
+    size,
+    center,
+    bg,
+    name,
   } = props;
-
+  const styles = {
+    width,
+    size,
+    bg,
+  };
   if (multiLine) {
     return (
-      <Grid>
-        {label && <Text margin="0px">{label}</Text>}
+      <Grid is_flex baseline>
+        {label && (
+          <Text margin={margin} size={size} center bold>
+            {label}
+          </Text>
+        )}
         <ElTextarea
+          {...styles}
+          name={name}
           ref={_ref}
           rows={rows}
           cols={cols}
@@ -42,10 +59,16 @@ const Input = props => {
 
   return (
     <React.Fragment>
-      <Grid>
-        {label && <Text margin="0px">{label}</Text>}
+      <Grid is_flex baseline>
+        {label && (
+          <Text margin={margin} size={size} bold>
+            {label}
+          </Text>
+        )}
         {is_submit ? (
           <ElInput
+            {...styles}
+            name={name}
             ref={_ref}
             type={type}
             placeholder={placeholder}
@@ -59,6 +82,8 @@ const Input = props => {
           />
         ) : (
           <ElInput
+            {...styles}
+            name={name}
             ref={_ref}
             type={type}
             placeholder={placeholder}
@@ -78,35 +103,31 @@ Input.defaultProps = {
   type: 'text',
   value: '',
   is_submit: false,
+  width: '100%',
+  size: '14px',
+  bg: '#fafafa',
   onSubmit: () => {},
   _onChange: () => {},
 };
 
 const ElTextarea = styled.textarea`
-  border: 1px solid white;
-  background-color: whites;
-  width: 100%;
-  margin: 4% 2% 4% 2%;
-  padding: 2% 2% 2% 2%;
+  border: 1px solid #dfdfdf;
+  width: ${props => props.width};
+  font-size: ${props => props.size};
+  padding: 12px 10px;
   box-sizing: border-box;
+  background-color: ${props => props.bg};
   border-radius: 3px;
-  // textarea 넓이 조정 안되게 설정
-  resize: none;
-  // 자동으로 줄바꿈
-  word-break: keep-all;
-  word-wrap: break-word;
-
-  &:focus {
-    outline: none;
-  }
+  resize: vertical;
 `;
 
 const ElInput = styled.input`
   border: 1px solid #dfdfdf;
-  width: 20%;
+  width: ${props => props.width};
+  font-size: ${props => props.size};
   padding: 12px 10px;
   box-sizing: border-box;
-  background-color: #fafafa;
+  background-color: ${props => props.bg};
   border-radius: 3px;
 `;
 
