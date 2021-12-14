@@ -8,14 +8,14 @@ import SignupBox from '../components/SignupBox';
 const SignIn = props => {
   return (
     <SenterWep>
-      <Grid is_flex justifyContent gap="30px">
+      <Grid is_flex justifyContent gap="30px" width="auto">
         <SignupBox />
       </Grid>
     </SenterWep>
   );
 };
 const SenterWep = styled.div`
-  width: 100%;
+  width: auto;
   height: atuo;
   position: absolute;
   left: 50%;

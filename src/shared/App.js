@@ -13,10 +13,11 @@ import { Container } from '../elements';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
-
+import Header from '../components/Header';
 function App() {
   return (
     <div className="App">
+      <Header></Header>
       <Container margin="0px">
         <ConnectedRouter history={history}>
           <Switch>

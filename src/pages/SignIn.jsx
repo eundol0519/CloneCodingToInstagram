@@ -8,7 +8,7 @@ import SignBox from '../components/SignBox';
 const SignIn = props => {
   return (
     <SenterWep>
-      <Grid is_flex justifyContent gap="30px">
+      <Grid is_flex justifyContent gap="30px" width="auto">
         <img src={signin_img} alt="" />
         <SignBox />
       </Grid>
@@ -16,7 +16,7 @@ const SignIn = props => {
   );
 };
 const SenterWep = styled.div`
-  width: 100%;
+  width: auto;
   height: atuo;
   position: absolute;
   left: 50%;

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Grid, Image, Button } from '../elements/index';
-import Header from '../components/Header';
 import PostDetail from '../pages/PostDetail';
 
 const Main = props => {
@@ -10,7 +9,6 @@ const Main = props => {
 
   return (
     <React.Fragment>
-      <Header></Header>
       <Grid padding="70px 0px 0px 0px"></Grid>
       <Grid padding="30px 0px 0px 0px" center>
         <button

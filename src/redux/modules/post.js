@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-import {apis} from '../../shared/apis';
+import apis from '../../shared/apis';
 // Actions
 
 const INSTAGRAMADD = 'INSTAGRAMADD';
@@ -18,7 +18,10 @@ const todo_delect = createAction(INSTAGRAMADD, (id, pid) => ({
 
 //미들웨이
 const todoAddDB = (pid, todoText) => {
-  return async function (dispatch, getstate, { history }) {};
+  return async function (dispatch, getstate, { history }) {
+    const lof = await apis.signin();
+    console.log(lof);
+  };
 };
 
 // Reducer

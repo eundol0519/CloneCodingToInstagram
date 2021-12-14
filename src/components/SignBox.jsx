@@ -24,8 +24,8 @@ const SignBox = props => {
           <Logo src={logo} />
         </Grid>
         <Grid is_flex padding="34px 42px" column="column" gap="10px">
-          <Input _ref={idref} placeholder="이메일"></Input>
-          <Input _ref={pwref} placeholder="비밀번호"></Input>
+          <Input _ref={idref} placeholder="이메일" width="100%"></Input>
+          <Input _ref={pwref} placeholder="비밀번호" width="100%"></Input>
           <Button margin="10px 0px 0px" _onClick={LoginClickEvent}>
             로그인
           </Button>

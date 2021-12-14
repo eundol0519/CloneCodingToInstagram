@@ -30,10 +30,31 @@ const SignBox = props => {
         </Grid>
         <SubTi>친구들의 사진과 동영상을 보려면 가입하세요</SubTi>
         <Grid is_flex padding="34px 42px" column="column" gap="10px">
-          <Input _ref={emailRef} placeholder="이메일 주소"></Input>
-          <Input _ref={nameRef} placeholder="성명"></Input>
-          <Input _ref={nicknameRef} placeholder="사용자 이름"></Input>
-          <Input _ref={pwRef} placeholder="비밀번호"></Input>
+          <Input
+            _ref={emailRef}
+            placeholder="이메일 주소"
+            width="100%"
+            margin="0px"
+          ></Input>
+          <Input
+            _ref={nameRef}
+            placeholder="성명"
+            width="100%"
+            margin="0px"
+          ></Input>
+          <Input
+            _ref={nicknameRef}
+            placeholder="사용자 이름"
+            width="100%"
+            margin="0px"
+          ></Input>
+          <Input
+            _ref={pwRef}
+            placeholder="비밀번호"
+            width="100%"
+            margin="0px"
+            type="password"
+          ></Input>
           <Button
             margin="10px 0px 0px"
             className="unActiveBtn"

@@ -9,53 +9,50 @@ import myPage from '../person.svg';
 import logOut from '../exit.svg';
 import PostWrite from '../pages/PostWrite';
 import { useHistory } from 'react-router-dom';
-
+import { Container } from '../elements';
 const Header = props => {
   const history = useHistory();
   const [postWrtieModal, setPostWriteModal] = React.useState(false);
   return (
-    <React.Fragment>
-      <Grid
-        is_flex
-        is_fix
-        padding="0.5rem"
-        width="100vw"
-        bg="white"
-        margin="-0.6% 0px 0px 0px"
-        borderBottom="solid rgba(188, 191, 187, 0.93) 1px"
-      >
-        <Logo src={logo}></Logo>
-        <Grid is_flex gap="20px" width="auto">
-          <Btn
-            src={write}
-            onClick={() => {
-              setPostWriteModal(true);
-            }}
-          ></Btn>
-          {postWrtieModal && (
-            <PostWrite
-              modal={postWrtieModal}
-              setPostWriteModal={setPostWriteModal}
-            ></PostWrite>
-          )}
-          <Btn
-            src={myPage}
-            onClick={() => {
-              history.push('/myPage');
-            }}
-          ></Btn>
-          <Btn
-            src={logOut}
-            onClick={() => {
-              window.alert('로그아웃 되었습니다.');
-            }}
-          ></Btn>
+    <HeaderWeb>
+      <Container>
+        <Grid is_flex is_fix padding="0.5rem" bg="white">
+          <Logo src={logo}></Logo>
+          <Grid is_flex gap="20px" width="auto">
+            <Btn
+              src={write}
+              onClick={() => {
+                setPostWriteModal(true);
+              }}
+            ></Btn>
+            {postWrtieModal && (
+              <PostWrite
+                modal={postWrtieModal}
+                setPostWriteModal={setPostWriteModal}
+              ></PostWrite>
+            )}
+            <Btn
+              src={myPage}
+              onClick={() => {
+                history.push('/myPage');
+              }}
+            ></Btn>
+            <Btn
+              src={logOut}
+              onClick={() => {
+                window.alert('로그아웃 되었습니다.');
+              }}
+            ></Btn>
+          </Grid>
         </Grid>
-      </Grid>
-    </React.Fragment>
+      </Container>
+    </HeaderWeb>
   );
 };
-
+const HeaderWeb = styled.div`
+  background-color: #fff;
+  border-bottom: solid rgba(188, 191, 187, 0.93) 1px;
+`;
 const Logo = styled.img`
   width: 150px;
   height: 23%;

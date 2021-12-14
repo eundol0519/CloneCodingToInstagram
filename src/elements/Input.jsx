@@ -21,6 +21,7 @@ const Input = props => {
     _ref,
     is_flex,
     width,
+    ti_margin,
     margin,
     size,
     center,
@@ -31,12 +32,13 @@ const Input = props => {
     width,
     size,
     bg,
+    margin,
   };
   if (multiLine) {
     return (
       <Grid is_flex baseline>
         {label && (
-          <Text margin={margin} size={size} center bold>
+          <Text margin={ti_margin} size={size} center bold>
             {label}
           </Text>
         )}
@@ -61,7 +63,7 @@ const Input = props => {
     <React.Fragment>
       <Grid is_flex baseline>
         {label && (
-          <Text margin={margin} size={size} bold>
+          <Text margin={ti_margin} size={size} bold>
             {label}
           </Text>
         )}
@@ -103,22 +105,32 @@ Input.defaultProps = {
   type: 'text',
   value: '',
   is_submit: false,
-  width: '100%',
+  width: '20%',
   size: '14px',
-  bg: '#fafafa',
+  bg: '#fff',
+  border: '1px solid #fff',
+  margin: '4% 2% 4% 2%',
+  padding: '2% 2% 2% 2%',
   onSubmit: () => {},
   _onChange: () => {},
 };
 
 const ElTextarea = styled.textarea`
-  border: 1px solid #dfdfdf;
+  border: ${props => props.border};
   width: ${props => props.width};
   font-size: ${props => props.size};
-  padding: 12px 10px;
+  padding: ${props => props.padding};
+  margin: ${props => props.margin};
   box-sizing: border-box;
   background-color: ${props => props.bg};
   border-radius: 3px;
+  resize: none;
+  word-break: keep-all;
+  word-wrap: break-word;
   resize: vertical;
+  &:focus {
+    outline: none;
+  }
 `;
 
 const ElInput = styled.input`

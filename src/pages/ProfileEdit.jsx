@@ -1,7 +1,6 @@
 // *** ProfileEdit.jsx ***
 
 import React from 'react';
-import Header from '../components/Header';
 import { Grid, Input, Button, Image, Text } from '../elements/';
 import styled from 'styled-components';
 const ProfileEdit = props => {
@@ -24,7 +23,6 @@ const ProfileEdit = props => {
   };
   return (
     <React.Fragment>
-      <Header></Header>
       <Grid padding="40px 200px 40px 110px" bg="#fff" margin="40px 0 0">
         <Grid is_flex column="column" gap="20px">
           <Grid is_flex padding="0px 0px 0px 12%">
@@ -38,9 +36,10 @@ const ProfileEdit = props => {
               name="editName"
               label="이름"
               width="80%"
-              margin="0px 3% 0px auto"
+              ti_margin="0px 3% 0px auto"
               size="16px"
               bg="#fff"
+              margin="0px"
               placeholder="이름"
               value={editName}
               _onChange={onChange}
@@ -56,9 +55,10 @@ const ProfileEdit = props => {
               name="editnickName"
               label="사용자 이름"
               width="80%"
-              margin="0px 3% 0px auto"
+              ti_margin="0px 3% 0px auto"
               size="16px"
               bg="#fff"
+              margin="0px"
               placeholder="사용자 이름 "
               value={editnickName}
               _onChange={onChange}
@@ -74,9 +74,10 @@ const ProfileEdit = props => {
               name="introduction"
               label="소개"
               width="80%"
-              margin="0px 3% 0px auto"
+              ti_margin="0px 3% 0px auto"
               size="16px"
               bg="#fff"
+              margin="0px"
               placeholder="소개"
               value={introduction}
               _onChange={onChange}
