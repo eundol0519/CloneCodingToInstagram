@@ -18,7 +18,7 @@ import { history } from '../redux/configureStore';
 function App() {
   return (
     <div className="App">
-      <Container>
+      <Container margin="0px">
         <ConnectedRouter history={history}>
           <Switch>
             <Route path="/" exact component={Main}></Route>
@@ -41,7 +41,7 @@ function App() {
 }
 
 const Container = styled.div`
-  margin: auto;
+  ${props => (props.margin ? `margin: ${props.margin};` : 'margin: auto;')}
   width: 935px;
 `;
 export default App;

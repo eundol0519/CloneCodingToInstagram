@@ -15,7 +15,15 @@ const Header = props => {
   const [postWrtieModal, setPostWriteModal] = React.useState(false);
   return (
     <React.Fragment>
-      <Grid is_flex padding="1% 0px 0px 0px">
+      <Grid
+        is_flex
+        is_fix
+        padding="0.5rem"
+        width="100vw"
+        bg="white"
+        margin="-0.6% 0px 0px 0px"
+        borderBottom="solid rgba(188, 191, 187, 0.93) 1px"
+      >
         <Logo src={logo}></Logo>
         <Grid is_flex gap="20px" width="auto">
           <Btn

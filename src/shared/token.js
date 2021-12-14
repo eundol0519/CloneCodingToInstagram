@@ -1,10 +1,9 @@
 // *** token.js ***
 
-
 // 키값 기준으로 쿠키에 저장된 값을 가져오는 함수
 const getToken = () => {
   // 쿠키 값을 가져옵니다.
-  const accessToken = document.cookie.split("=")[1];
+  const accessToken = document.cookie.split('=')[1];
   console.log(accessToken);
   return accessToken;
 };
@@ -19,12 +18,12 @@ const setToken = (name, value, exp = 5) => {
 };
 
 // 만료일을 예전으로 설정해 쿠키를 지웁니다.
-const delToken = (name) => {
-  let date = new Date("2020-01-01").toUTCString();
+const delToken = name => {
+  let date = new Date('2020-01-01').toUTCString();
 
   console.log(date);
 
-  document.cookie = name + "=; expires=" + date;
+  document.cookie = name + '=; expires=' + date;
 };
 export { getToken, setToken, delToken };
 
@@ -59,4 +58,3 @@ localStorage.setItem('id', res.data.user.id)
 localStorage.setItem('nickname', res.data.user.nickname)
 dispatch(setUser({ email: email.email, nickname: res.data.user.nickname }))
 */
-

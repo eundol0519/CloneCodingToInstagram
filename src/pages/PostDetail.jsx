@@ -45,7 +45,7 @@ const PostDetail = props => {
           },
         }}
       >
-        <Grid center>
+        <Grid>
           <h1>게시물 상세 페이지</h1>
           <p>
             게시물 이미지 / 시용자 프로필 사진 / 사용자 닉네임 / 게시물 내용 /

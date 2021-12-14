@@ -81,7 +81,7 @@ const GridBox = styled.div`
   height: ${props => props.height};
   gap: ${props => props.gap};
   box-sizing: border-box;
-  border-raidus: 5px;
+  border-radius: 5px;
   border: ${props => props.border};
   flex-direction: ${props => props.column};
   gap: ${props => props.gap};
@@ -93,7 +93,7 @@ const GridBox = styled.div`
     ${props => (props.flexFlow ? 'flex-flow : row wrap;' : '')}
     ${props =>
     props.justifyContent
-      ? 'justify-content: center;'
+      ? 'justify-content: flex-start;'
       : 'justify-content: space-between;'};
 `;
 

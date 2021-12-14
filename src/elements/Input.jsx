@@ -15,6 +15,8 @@ const Input = props => {
     value,
     is_submit,
     onSubmit,
+    rows,
+    children,
   } = props;
 
   if (multiLine) {
@@ -22,11 +24,14 @@ const Input = props => {
       <Grid>
         {label && <Text margin="0px">{label}</Text>}
         <ElTextarea
-          rows={10}
+          rows={rows}
           value={value}
           placeholder={placeholder}
+          onKeyUp={_onKeyUp}
           onChange={_onChange}
-        ></ElTextarea>
+        >
+          {children}
+        </ElTextarea>
       </Grid>
     );
   }
@@ -72,17 +77,25 @@ Input.defaultProps = {
 };
 
 const ElTextarea = styled.textarea`
-  border: 1px solid #dfdfdf;
+  border: 1px solid white;
+  background-color: whites;
   width: 100%;
-  padding: 12px 10px;
+  margin: 4% 2% 4% 2%;
+  padding: 2% 2% 2% 2%;
   box-sizing: border-box;
-  background-color: #fafafa;
   border-radius: 3px;
+  resize: none;
+  white-space: pre; // 개행과 공백을 원래대로 보이게 해준다.
+  wrap: 'virtual'; // 화면에 자동으로 줄바꿈 , 전송 시에는 입력대로 전송
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const ElInput = styled.input`
   border: 1px solid #dfdfdf;
-  width: 100%;
+  width: 20%;
   padding: 12px 10px;
   box-sizing: border-box;
   background-color: #fafafa;
