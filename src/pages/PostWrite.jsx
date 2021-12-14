@@ -23,6 +23,7 @@ const PostWrtie = props => {
 
   // 글 내용
   const changeContent = e => {
+    console.log(e.target.value);
     setContent(e.target.value);
   };
 
@@ -78,8 +79,10 @@ const PostWrtie = props => {
   const checkActive = () => {
     if (imgFile === '') {
       console.log('이미지 없다.');
+      setActive(true);
     } else if (content === '') {
       console.log('글 내용 없다.');
+      setActive(true);
     } else {
       setActive(false);
     }
