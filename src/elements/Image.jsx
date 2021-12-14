@@ -42,6 +42,8 @@ const ImageCircle = styled.div`
 
   background-image: url('${props => props.src}');
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   margin: 4px;
 `;
 
@@ -50,7 +52,9 @@ const ImageDefault = styled.div`
   width: var(--size);
   height: var(--size);
   background-image: url('${props => props.src}');
-  background-size: cover;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 const AspectOutter = styled.div`
@@ -63,7 +67,9 @@ const AspectInner = styled.div`
   padding-top: 75%;
   overflow: hidden;
   background-image: url('${props => props.src}');
-  background-size: cover;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 export default Image;

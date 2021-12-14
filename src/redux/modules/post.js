@@ -1,9 +1,10 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import apis from '../../shared/apis';
+
 // Actions
 
-const INSTAGRAMADD = 'INSTAGRAMADD';
+const ADD_POST = 'ADD_POST';
 
 const initialState = {
   cards: [],
@@ -11,29 +12,45 @@ const initialState = {
 
 // Action Creators
 
-const todo_delect = createAction(INSTAGRAMADD, (id, pid) => ({
-  id,
-  pid,
+const addPosts = createAction(ADD_POST, postInfo => ({
+  postInfo,
 }));
 
-//미들웨이
-const todoAddDB = (pid, todoText) => {
-  return async function (dispatch, getstate, { history }) {
-    const lof = await apis.signin();
-    console.log(lof);
+//Middleware
+
+const PostWriteFB = (content, imageUrl) => {
+  return async function (dispatch, getState, { history }) {
+    const request = { content: content, imageUrl: imageUrl };
+    const response = await apis.postWrite(request);
+    console.log('PostWrtieFB response', response.data.status);
+
+    try {
+      console.log('PostWrtieFB try');
+      const request = { content: content, imageUrl: imageUrl };
+      const response = await apis.postWrite(request);
+      console.log('PostWrtieFB response', response.data.status);
+
+      dispatch(addPosts(request));
+    } catch (error) {
+      console.log('PostWrtieFB error');
+    }
   };
 };
 
 // Reducer
 export default handleActions(
   {
-    [INSTAGRAMADD]: (state, action) => produce(state, draft => {}),
+    [ADD_POST]: (state, action) => {
+      produce(state, draft => {
+        draft.cards.push(action.payload.postInfo);
+      });
+    },
   },
   initialState
 );
 
 const actionCreators = {
-  todo_delect,
+  PostWriteFB,
 };
 
 export { actionCreators };

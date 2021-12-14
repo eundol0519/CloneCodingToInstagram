@@ -2,20 +2,28 @@
 
 import React from 'react';
 import Modal from 'react-modal';
-import axios from 'axios';
+import apis from '../shared/apis';
 import { getToken } from '../shared/token';
 import { Grid, Text, Image, Button, Input } from '../elements/index';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { actionCreators as postActions } from '../redux/modules/post';
 
 const PostWrtie = props => {
+  const dispatch = useDispatch();
   const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
   const [active, setActive] = React.useState(true); // 버튼 활성화 유무
-  const [contents, setContents] = React.useState(''); // 글 내용 작성
+  const [content, setContent] = React.useState(''); // 글 내용 작성
 
   // 모달창을 닫으면 header state도 false로 바꾸기
   const modalOff = () => {
     setModal(false);
     props.setPostWriteModal(false);
+  };
+
+  // 글 내용
+  const changeContent = e => {
+    setContent(e.target.value);
   };
 
   // 이미지 업로드
@@ -32,12 +40,14 @@ const PostWrtie = props => {
     upload();
   };
 
-  const upload = () => {
-    const state = false;
+  const upload = async () => {
+    const state = true;
 
     if (state) {
       setImgFile('https://i.ytimg.com/vi/Ct1Pp_4FEIY/maxresdefault.jpg');
       setPreview('https://i.ytimg.com/vi/Ct1Pp_4FEIY/maxresdefault.jpg');
+
+      checkActive(); // 글, 이미지 모두 삽입 되었는 지 확인
     } else {
       setImgFile(
         'https://img.insight.co.kr/static/2021/01/10/700/img_20210110130830_kue82l80.webp'
@@ -46,37 +56,37 @@ const PostWrtie = props => {
         'https://img.insight.co.kr/static/2021/01/10/700/img_20210110130830_kue82l80.webp'
       );
     }
+    const formData = new FormData();
+    formData.append('file', files);
 
-    // const formData = new FormData();
-    // formData.append('file', files);
-    // axios({
-    //   method: 'post',
-    //   url: '/api/posts/images',
-    //   data: formData,
-    //   headers: {
-    //     'Content-Type': 'multipart/form-data',
-    //     Authorization: getToken(),
-    //   },
-    // })
-    //   .then(response => {
-    //     if (response.data.success) {
-    //       window.alert('사진이 업로드 되었습니다.');
-    //       setImgFile(response.data.url); // 서버에서 받아온 이미지 url
-    //       setPreview(`http://3.37.36.119${response.data.url}`); // 이미지 url 변수에 저장
-    //     } else {
-    //       window.alert('파일을 업로드 하지 못했습니다.');
-    //       setImgFile('');
-    //       setPreview('');
-    //     }
-    //   })
-    //   .catch(err => {
-    //     window.alert('사진 업로드 실패');
-    //   });
+    const response = await apis.uploadPostImage(formData);
+
+    if (response.data.status === 201) {
+      window.alert('사진이 업로드 되었습니다.');
+      setImgFile(response.data.url); // 서버에서 받아온 이미지 url
+      setPreview(`http://3.37.36.119${response.data.url}`); // 이미지 url 변수에 저장
+      checkActive(); // 글, 이미지 모두 삽입 되었는 지 확인
+    } else {
+      window.alert('파일을 업로드 하지 못했습니다.');
+      setImgFile('');
+      setPreview('');
+    }
   };
 
-  // 내용 onchange 함수
-  const changeContents = e => {
-    setContents(e.target.value);
+  // 버튼 활성화 / 비활성화 유무 확인
+  const checkActive = () => {
+    if (imgFile === '') {
+      console.log('이미지 없다.');
+    } else if (content === '') {
+      console.log('글 내용 없다.');
+    } else {
+      setActive(false);
+    }
+  };
+
+  // 게시글 작성
+  const write = () => {
+    postActions.PostWriteFB(content, imgFile);
   };
 
   return (
@@ -120,38 +130,32 @@ const PostWrtie = props => {
         <Grid is_flex is_fix>
           <Grid width="130vw" margin="5% 0px 0px 0px">
             <Grid margin="1% 0px 0px 0px" center>
-              <form
-                action="/api/posts/uploadFile"
-                enctype="multipart/form-data"
-                method="post"
-              >
-                <label htmlFor="file">
-                  {preview ? (
-                    <Image
-                      src={preview}
-                      alt="게시물 사진"
-                      shape="rectangle"
-                      size="10"
-                    ></Image>
-                  ) : (
-                    <Image
-                      src="https://lh3.googleusercontent.com/proxy/eN7kqAaYEdN961JDil-W2VAIs0C9ly0deQQg2l2aFqNwECL08FoT4ltpSGQJpILDP_AhPFoKBQyN0l-rU3mlTEYE"
-                      alt="게시물 사진"
-                      shape="rectangle"
-                      size="10"
-                    ></Image>
-                  )}
-                </label>
-                <FileInput
-                  type="file"
-                  id="file"
-                  name="img"
-                  encType="multipart/form-data"
-                  onChange={selectFile}
-                  ref={fileInput}
-                ></FileInput>
-                <FileBtn type="submit">업로드</FileBtn>
-              </form>
+              <label htmlFor="file">
+                {preview ? (
+                  <Image
+                    src={preview}
+                    alt="게시물 사진"
+                    shape="rectangle"
+                    size="20"
+                  ></Image>
+                ) : (
+                  <Image
+                    src="https://lh3.googleusercontent.com/proxy/eN7kqAaYEdN961JDil-W2VAIs0C9ly0deQQg2l2aFqNwECL08FoT4ltpSGQJpILDP_AhPFoKBQyN0l-rU3mlTEYE"
+                    alt="게시물 사진"
+                    shape="rectangle"
+                    size="20"
+                  ></Image>
+                )}
+              </label>
+              <FileInput
+                type="file"
+                id="file"
+                name="img"
+                encType="multipart/form-data"
+                onChange={selectFile}
+                ref={fileInput}
+              ></FileInput>
+              <FileBtn onClick={upload}>업로드</FileBtn>
             </Grid>
           </Grid>
           {/* ---------------------게시물 내용 작성하는 부분--------------------- */}
@@ -165,8 +169,9 @@ const PostWrtie = props => {
                 rows="20"
                 width="300px"
                 wrap="on"
-                value={contents}
-                _onChange={changeContents}
+                value={content}
+                _onChange={changeContent}
+                _onKeyUp={checkActive}
                 multiLine
                 placeholder="문구 입력..."
               ></Input>
@@ -178,6 +183,8 @@ const PostWrtie = props => {
                   margin: '11% 0px 0px 22%',
                   lineHeight: '16px',
                 }}
+                disabled={active}
+                onClick={write}
               >
                 작성하기
               </FileBtn>
