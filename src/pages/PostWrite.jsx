@@ -156,7 +156,12 @@ const PostWrtie = props => {
                 onChange={selectFile}
                 ref={fileInput}
               ></FileInput>
-              <FileBtn onClick={upload}>업로드</FileBtn>
+              <FileBtn
+                onClick={upload}
+                className={imgFile !== '' ? 'activeBtn' : 'unActiveBtn'}
+              >
+                업로드
+              </FileBtn>
             </Grid>
           </Grid>
           {/* ---------------------게시물 내용 작성하는 부분--------------------- */}
@@ -184,6 +189,7 @@ const PostWrtie = props => {
                   margin: '11% 0px 0px 22%',
                   lineHeight: '16px',
                 }}
+                className={!active ? 'activeBtn' : 'unActiveBtn'}
                 disabled={active}
                 onClick={write}
               >
@@ -202,11 +208,13 @@ const FileBtn = styled.button`
   display: inline-block;
   width: 28%;
   height: 27px;
-  background-color: #0095f6;
+  background-color: ${props =>
+    props.className === 'unActiveBtn' ? '#B2DFFC' : '#0095f6'};
+  border-color : ${props =>
+    props.className === 'unActiveBtn' ? '#B2DFFC' : '#0095f6'};
   color: #ffffff;
   line-height: 45px;
   border-radius: 3px;
-  border-color : #0095f6;
   text-align: center;
   line-height: 27px;
   font-size: 14px;
