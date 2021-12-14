@@ -56,6 +56,7 @@ const PostWrtie = props => {
         'https://img.insight.co.kr/static/2021/01/10/700/img_20210110130830_kue82l80.webp'
       );
     }
+
     const formData = new FormData();
     formData.append('file', files);
 
