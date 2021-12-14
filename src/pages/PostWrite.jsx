@@ -70,7 +70,9 @@ const PostWrtie = props => {
             </Grid>
             <Grid>
               <Input
-                rows="32"
+                rows="30"
+                cols="60"
+                wrap="on"
                 value={contents}
                 _onChange={changeContents}
                 multiLine

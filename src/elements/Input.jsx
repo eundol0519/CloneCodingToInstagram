@@ -16,6 +16,7 @@ const Input = props => {
     is_submit,
     onSubmit,
     rows,
+    cols,
     children,
     _ref,
   } = props;
@@ -26,7 +27,8 @@ const Input = props => {
         {label && <Text margin="0px">{label}</Text>}
         <ElTextarea
           ref={_ref}
-          rows={10}
+          rows={rows}
+          cols={cols}
           value={value}
           placeholder={placeholder}
           onKeyUp={_onKeyUp}
@@ -88,9 +90,11 @@ const ElTextarea = styled.textarea`
   padding: 2% 2% 2% 2%;
   box-sizing: border-box;
   border-radius: 3px;
+  // textarea 넓이 조정 안되게 설정
   resize: none;
-  white-space: pre; // 개행과 공백을 원래대로 보이게 해준다.
-  wrap: 'virtual'; // 화면에 자동으로 줄바꿈 , 전송 시에는 입력대로 전송
+  // 자동으로 줄바꿈
+  word-break: keep-all;
+  word-wrap: break-word;
 
   &:focus {
     outline: none;
