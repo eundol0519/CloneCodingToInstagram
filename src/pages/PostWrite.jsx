@@ -182,6 +182,7 @@ const PostWrtie = props => {
                 _onChange={changeContent}
                 _onKeyUp={checkActive}
                 multiLine
+                border="none"
                 placeholder="문구 입력..."
               ></Input>
               <FileBtn

@@ -27,6 +27,7 @@ const Input = props => {
     name,
     padding,
     height,
+    border,
   } = props;
   const styles = {
     width,
@@ -35,6 +36,7 @@ const Input = props => {
     margin,
     padding,
     height,
+    border,
   };
   if (multiLine) {
     return (
@@ -129,10 +131,9 @@ const ElTextarea = styled.textarea`
   background-color: ${props => props.bg};
   border-radius: 3px;
   resize: none;
+  outline: none;
   word-break: keep-all;
   word-wrap: break-word;
-  resize: vertical;
-  outline: none;
   &:focus {
     outline: none;
   }
