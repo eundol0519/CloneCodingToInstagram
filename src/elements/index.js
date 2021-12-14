@@ -7,5 +7,5 @@ import Input from './Input';
 import Span from './Span';
 import Text from './Text';
 import Spinner from './Spinner';
-
-export { Button, Grid, Input, Text, Span, Image, Spinner };
+import Container from './Container';
+export { Button, Grid, Input, Text, Span, Image, Spinner, Container };

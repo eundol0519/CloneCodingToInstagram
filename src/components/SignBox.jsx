@@ -38,6 +38,7 @@ const SignBox = props => {
         bg="#fff"
         color="#000"
         _onClick={ClickEvent}
+        className="unActiveBtn"
       >
         계정이 없으신가요?{' '}
         <span style={{ color: '#0095F6', fontWeight: 'bold' }}>가입하기</span>
