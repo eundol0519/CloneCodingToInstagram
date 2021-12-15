@@ -80,6 +80,21 @@ const CommentLookUpFB = postId => {
   };
 };
 
+const AddCommentFB = (postId, content) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log('AddCommentFB try');
+      const response = await apis.commentWrite(postId, content);
+
+      if (response.status === 204) {
+        dispatch(CommentLookUpFB(postId)); // 댓글 목록 다시 요청
+      }
+    } catch (error) {
+      console.log('AddCommentFB error');
+    }
+  };
+};
+
 // Reducer
 export default handleActions(
   {
@@ -93,6 +108,7 @@ export default handleActions(
 
 const actionCreators = {
   CommentLookUpFB,
+  AddCommentFB,
 };
 
 export { actionCreators };

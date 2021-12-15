@@ -21,6 +21,7 @@ const Main = props => {
         <PostDetail
           modal={postDetailModal}
           setPostDetailModal={setPostDetailModal}
+          postId="0" // postId 넘겨 주시면 됩니다.
         ></PostDetail>
       )}
       <Container>
