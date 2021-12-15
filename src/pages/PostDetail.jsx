@@ -18,15 +18,16 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ClearIcon from '@mui/icons-material/Clear';
 
 const PostDetail = props => {
-  const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
-  const [active, setActive] = React.useState(true); // 버튼 활성화 유무
-  const [commentBox, setCommentBox] = React.useState(false); // 댓글창 활성화 유무
-  const [content, setContent] = React.useState('');
-
   const postId = useParams(); // 파라미터로 넘어온 postId
   const dispatch = useDispatch();
   const postInfo = useSelector(state => state.post.cards[1]);
   const commentInfo = useSelector(state => state.comment.cards[1]);
+
+  const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
+  const [active, setActive] = React.useState(true); // 버튼 활성화 유무
+  const [commentBox, setCommentBox] = React.useState(false); // 댓글창 활성화 유무
+  const [content, setContent] = React.useState('');
+  const [like, setLike] = React.useState(postInfo.myLike ? true : false); // 사용자별 좋아요 유무
 
   // 모달창을 닫으면 state도 false로 바꾸기
   const modalOff = () => {
@@ -35,12 +36,16 @@ const PostDetail = props => {
   };
 
   React.useEffect(() => {
-    // dispatch(postActions.PostDetailLookUpFB(postId));
+    dispatch(postActions.PostDetailLookUpFB(postId));
   }, []);
 
   const commentList = () => {
-    setCommentBox(true);
-    // dispatch(commentActions.CommentLookUpFB(postId));
+    if (!commentBox) {
+      dispatch(commentActions.CommentLookUpFB(postId));
+      setCommentBox(true);
+    } else {
+      setCommentBox(false);
+    }
   };
 
   const back = () => {
@@ -61,8 +66,43 @@ const PostDetail = props => {
       return;
     }
 
-    dispatch(commentActions.AddCommentFB(props.postId, content));
+    dispatch(commentActions.CommentAddFB(props.postId, content));
     setContent(''); // 댓글을 입력하면 input의 value를 날려준다.
+  };
+
+  const commentDelete = commentId => {
+    const deleteConfirm = window.confirm('댓글을 삭제 하시겠습니까?');
+
+    if (deleteConfirm) {
+      dispatch(commentActions.CommentDeleteFB(commentId, props.postId));
+    }
+  };
+
+  const postDelete = () => {
+    const deleteConfirm = window.confirm('게시물을 삭제 하시겠습니까?');
+
+    if (deleteConfirm) {
+      dispatch(postActions.PostDeleteFB(props.postId))
+        .then(response => {
+          setModal(false);
+          props.setPostDetailModal(false);
+        })
+        .catch(error => {
+          console.log('PostDetail.jsx PostDeleteFB error', error);
+        });
+    }
+  };
+
+  const postLike = () => {
+    if (!like) {
+      // 좋아요 갯수 +1
+      setLike(true);
+      dispatch(postActions.PostLikeFB(props.postId, 'plus'));
+    } else {
+      // 좋아요 갯수 -1
+      setLike(false);
+      dispatch(postActions.PostLikeFB(props.postId, 'minus'));
+    }
   };
 
   return (
@@ -134,12 +174,7 @@ const PostDetail = props => {
                         <Grid
                           width="50%"
                           _onClick={() => {
-                            const deleteConfirm =
-                              window.confirm('댓글을 삭제 하시겠습니까?');
-
-                            if (deleteConfirm) {
-                              window.alert('댓글을 삭제 합니다.');
-                            }
+                            commentDelete(c.commentId);
                           }}
                         >
                           <ClearIcon></ClearIcon>
@@ -169,15 +204,17 @@ const PostDetail = props => {
               <Grid>
                 <IconButton aria-label="add to favorites">
                   <FavoriteBorderIcon
-                    onClick={() => {
-                      console.log('1');
-                    }}
+                    style={{ color: like && 'pink' }}
+                    onClick={postLike}
                   />
                 </IconButton>
                 <IconButton aria-label="comment">
                   <ChatBubbleOutlineIcon
                     onClick={commentList}
                   ></ChatBubbleOutlineIcon>
+                </IconButton>
+                <IconButton aria-label="delete">
+                  <ClearIcon onClick={postDelete}></ClearIcon>
                 </IconButton>
               </Grid>
             </Grid>
