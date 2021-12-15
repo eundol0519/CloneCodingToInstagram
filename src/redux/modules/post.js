@@ -4,8 +4,6 @@ import apis from '../../shared/apis';
 
 // Action Type
 
-<<<<<<< HEAD
-const ADD_POST = 'ADD_POST';
 const GET_ONE_POST = 'GET_ONE_POST';
 const GET_POST = 'GET_POST'; // 항민
 const GET_MYPOST = 'GET_MYPOST'; // 항민
@@ -54,86 +52,35 @@ const initialState = {
   },
 
   cards: [
-=======
-const GET_POST = 'GET_POST'; //항민
-const GET_MYPOST = 'GET_MYPOST'; //항민
-
-//const LOADING = "LOADING";
-
-// Action Creator
-
-const getPosts = createAction(GET_POST, post_list => ({ post_list })); //항민
-const getMyPost = createAction(GET_MYPOST, myPostInfo => ({ myPostInfo })); //항민
-
-//const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
-
-// initialState
-
-const initialState = {
-  postList: [
->>>>>>> 290cfe3072fb90d8078bca1f91e81cf29967abb6
+    {
+      status: 200,
+    },
     {
       postId: 1,
       content: '카카오프렌즈',
       likeCount: '2',
-      userNickname: '초콜렛',
+      nickname: '초콜렛',
       imageUrl:
-        'https://www.google.com/imgres?imgurl=https%3A%2F%2Ft1.kakaocdn.net%2Fkakaocorp%2Fkakaocorp%2Fadmin%2Fservice%2Fa85d0594017900001.jpg&imgrefurl=https%3A%2F%2Fwww.kakaocorp.com%2Fpage%2Fdetail%2F580&tbnid=1bXXZ3LxWNcp9M&vet=12ahUKEwjFtYH4j-H0AhWVCt4KHb9ZAXsQMygAegUIARDSAQ..i&docid=1F2bVLbF5-kfJM&w=1920&h=1079&itg=1&q=%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%94%84%EB%A0%8C%EC%A6%88&ved=2ahUKEwjFtYH4j-H0AhWVCt4KHb9ZAXsQMygAegUIARDSAQ',
+        'https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg',
       createdAt: '2021-12-13',
     },
   ],
+};
 
-  post: {
-    postId: 4,
-    content: '글내용',
-    likeCount: '2',
-    userNickname: '스펀지밥',
-    imageUrl: 'uploads/posts/1639370169898_myPhoto.jpg',
-    createdAt: '2021-12-13',
-  },
-
-<<<<<<< HEAD
-const addPost = createAction(ADD_POST, postInfo => ({
-  postInfo,
-}));
-const getPost = createAction(GET_POST, postInfo => ({
+// action creators
+const getOnePost = createAction(GET_POST, postInfo => ({
   postInfo,
 }));
 const getPosts = createAction(GET_POST, post_list => ({ post_list })); //항민
 const getMyPost = createAction(GET_MYPOST, myPostInfo => ({ myPostInfo })); //항민
 
-//Middleware
-=======
-  myPageList: [
-    {
-      userEmail: 'test@test.com',
-      userName: '라이언',
-      nickname: '라이언일병구하기',
-      imageUrl_profile:
-        'https://www.google.com/imgres?imgurl=https%3A%2F%2Fitem.kakaocdn.net%2Fdo%2F30cef086c8778d80e1487385bd5efe7b82f3bd8c9735553d03f6f982e10ebe70&imgrefurl=https%3A%2F%2Fe.kakao.com%2Ft%2Fhello-kakao-friends&tbnid=5m-6mpSjEHrZLM&vet=12ahUKEwjFtYH4j-H0AhWVCt4KHb9ZAXsQMygPegUIARDxAQ..i&docid=G_LuMlbZBAamHM&w=210&h=210&itg=1&q=%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%94%84%EB%A0%8C%EC%A6%88&ved=2ahUKEwjFtYH4j-H0AhWVCt4KHb9ZAXsQMygPegUIARDxAQ',
-      introduce: '안녕!!',
-      phoneNumber: '010-1234-5678',
-    },
-  ],
-
-  mypage: {
-    userEmail: 'test@test.com',
-    userName: '홍길동',
-    nickname: '스펀지밥',
-    imageUrl_profile: 'uploads/profiles/1639343163898_myPhoto.jpg',
-    introduce: '내소개',
-    phoneNumber: '010-1234-5678',
-  },
-};
 // middleware
->>>>>>> 290cfe3072fb90d8078bca1f91e81cf29967abb6
 const getPostDB = () => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('getPostDB try!!');
       const response = await apis.getPost();
       console.log(response);
-<<<<<<< HEAD
 
       const post_list = response.data;
       console.log(post_list);
@@ -167,38 +114,31 @@ const getMyPostDB = nickname => {
     }
   };
 };
-=======
->>>>>>> 290cfe3072fb90d8078bca1f91e81cf29967abb6
 
-      const post_list = response.data;
-      console.log(post_list);
+const PostWriteFB = (content, imageUrl) => {
+  return async (dispatch, getState, { history }) => {
+    try {
+      console.log('PostWriteFB try!!');
+      const postInfo = { contnet: content, imageurl: imageUrl };
+      const response = await apis.postWrite(postInfo);
 
-      const getPost = createAction(GET_POST, postInfo => ({
-        postInfo,
-      }));
-
-      dispatch(getPosts(post_list));
+      if (response === 201) {
+        dispatch(getPosts());
+      }
     } catch (error) {
       console.log(error);
-      window.alert(error);
     }
   };
 };
 
-const getMyPostDB = nickname => {
+const PostDetailLookUpFB = postId => {
   return async (dispatch, getState, { history }) => {
     try {
-      console.log('getMyPostDB try!!');
-      const response = await apis.getMyPost(nickname);
-      console.log(response);
-
-      const myPostInfo = response.data;
-      console.log(myPostInfo);
-
-      dispatch(getMyPost(myPostInfo));
+      console.log('PostDetailLookUpFB try!!');
+      const response = await apis.getDetailPost(postId);
+      dispatch(getOnePost(response.data[1]));
     } catch (error) {
       console.log(error);
-      window.alert(error);
     }
   };
 };
@@ -209,41 +149,25 @@ export default handleActions(
   {
     [GET_POST]: (state, action) =>
       produce(state, draft => {
-<<<<<<< HEAD
-        draft.cards.push(action.payload.postInfo);
-      });
-    },
+        draft.postList = action.payload.post_list;
+      }),
     [GET_ONE_POST]: (state, action) => {
       produce(state, draft => {
         draft.cards.push(action.payload.postInfo);
       });
     },
-    [GET_POST]: (state, action) =>
-      produce(state, draft => {
-        draft.postList = action.payload.post_list;
-      }),
     [GET_MYPOST]: (state, action) =>
       produce(state, draft => {
         draft.myPageList = action.payload.myPostInfo;
-=======
-        draft.postList = action.payload.post_list; //[{},{}]
-      }),
-    [GET_MYPOST]: (state, action) =>
-      produce(state, draft => {
-        draft.myPageList = action.payload.myPostInfo; //[{},{}]
->>>>>>> 290cfe3072fb90d8078bca1f91e81cf29967abb6
+        draft.postList = action.payload.post_list;
       }),
   },
   initialState
 );
 
-<<<<<<< HEAD
 const actionCreators = {
   PostWriteFB,
   PostDetailLookUpFB,
-=======
-export const postActions = {
->>>>>>> 290cfe3072fb90d8078bca1f91e81cf29967abb6
   getPostDB,
   getMyPostDB,
 };
