@@ -171,3 +171,5 @@ const actionCreators = {
   getPostDB,
   getMyPostDB,
 };
+
+export { actionCreators };
