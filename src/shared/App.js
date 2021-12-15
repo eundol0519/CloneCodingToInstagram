@@ -14,28 +14,46 @@ import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
 import Header from '../components/Header';
+import { ThemeProvider } from 'styled-components';
+
 function App() {
+  console.log();
   return (
     <div className="App">
-      <Header></Header>
-      <Container margin="0px">
-        <ConnectedRouter history={history}>
-          <Switch>
-            <Route path="/" exact component={Main}></Route>
-            <Route path="/signIn" exact component={SignIn}></Route>
-            <Route path="/signUp" exact component={SignUp}></Route>
-            <Route path="/postWrite" exact component={PostWrite}></Route>
-            <Route
-              path="/postDetail/:postId"
-              exact
-              component={PostDetail}
-            ></Route>
-            <Route path="/profileEdit" exact component={ProfileEdit}></Route>
-            <Route path="/myPage" exact component={MyPage}></Route>
-            <Route component={NotFound}></Route>
-          </Switch>
-        </ConnectedRouter>
-      </Container>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Route path="/:path?" exact>
+            <Header>
+              <Container margin="0px">
+                <Switch>
+                  <Route path="/" exact component={Main}></Route>
+                  <Route path="/postWrite" exact component={PostWrite}></Route>
+                  <Route
+                    path="/postDetail/:postId"
+                    exact
+                    component={PostDetail}
+                  ></Route>
+                  <Route
+                    path="/profileEdit"
+                    exact
+                    component={ProfileEdit}
+                  ></Route>
+                  <Route path="/myPage" exact component={MyPage}></Route>
+                </Switch>
+              </Container>
+            </Header>
+          </Route>
+          <Route path="/in/:path?" exact>
+            <Container margin="0px">
+              <Switch>
+                <Route path="/in/signIn" exact component={SignIn}></Route>
+                <Route path="/in/signUp" exact component={SignUp}></Route>
+              </Switch>
+            </Container>
+          </Route>
+          <Route component={NotFound}></Route>
+        </Switch>
+      </ConnectedRouter>
     </div>
   );
 }
