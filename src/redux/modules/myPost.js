@@ -5,6 +5,7 @@ import { produce } from 'immer';
 
 const INSTAGRAMADD = 'INSTAGRAMADD';
 
+// ...
 const initialState = {
   cards: [],
 };
