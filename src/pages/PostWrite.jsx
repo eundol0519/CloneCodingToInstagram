@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 import { Container } from '../elements';
 
+
 const PostWrtie = props => {
   const dispatch = useDispatch();
   const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
@@ -90,7 +91,7 @@ const PostWrtie = props => {
 
   // 게시글 작성
   const write = () => {
-    postActions.PostWriteFB(content, imgFile);
+    // postActions.PostWriteFB(content, imgFile);
   };
 
   return (
