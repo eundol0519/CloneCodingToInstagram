@@ -40,8 +40,8 @@ const apis = {
   deletePost: postId => instance.delete(`/api/posts/details/${postId}`), // 게시글 삭제
 
   getComment: postId => instance.get(`/api/comments/${postId}`), // 댓글 조회
-  commentWrite: (postId, commentInfo) =>
-    instance.post(`/api/comments/${postId}`, commentInfo), // 댓글 작성
+  writeComment: (postId, content) =>
+    instance.post(`/api/comments/${postId}`, content), // 댓글 작성
   deleteComment: commentId => instance.delete(`/api/comments/${commentId}`), // 댓글 삭제
 
   //마이페이지

@@ -5,8 +5,9 @@ import apis from '../../shared/apis';
 // Action Type
 
 const GET_ONE_POST = 'GET_ONE_POST';
-const GET_POST = 'GET_POST'; // 항민
-const GET_MYPOST = 'GET_MYPOST'; // 항민
+const GET_POST = 'GET_POST';
+const GET_MYPOST = 'GET_MYPOST';
+const SET_LIKE = 'SET_LIKE';
 
 const initialState = {
   postList: [
@@ -92,8 +93,9 @@ const initialState = {
 const getOnePost = createAction(GET_POST, postInfo => ({
   postInfo,
 }));
-const getPosts = createAction(GET_POST, post_list => ({ post_list })); //항민
-const getMyPost = createAction(GET_MYPOST, myPostInfo => ({ myPostInfo })); //항민
+const getPosts = createAction(GET_POST, post_list => ({ post_list }));
+const getMyPost = createAction(GET_MYPOST, myPostInfo => ({ myPostInfo }));
+const setLike = createAction(SET_LIKE, postInfo => ({ postInfo }));
 
 // middleware
 const getPostDB = () => {
@@ -101,7 +103,6 @@ const getPostDB = () => {
     try {
       console.log('getPostDB try!!');
       const response = await apis.getPost();
-      console.log(response);
 
       const post_list = response.data;
       console.log(post_list);
@@ -160,6 +161,46 @@ const PostDetailLookUpFB = postId => {
   };
 };
 
+const PostDeleteFB = postId => {
+  return async (dispatch, getState, { history }) => {
+    try {
+      console.log('PostDeleteFB try');
+      // const response = await apis.deletePost(postId);
+
+      // if (response.status === 204) {
+      //   window.alert('게시물이 삭제 되었습니다.');
+      // } else {
+      //   return;
+      // }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const PostLikeFB = (postId, likeStatus) => {
+  return async (dispatch, getState, { history }) => {
+    try {
+      console.log('PostLikeFB try');
+      // const response = await apis.postLikeCancel(postId);
+      let likeCount = parseInt(getState().post.cards[1].likeCount);
+
+      if (likeStatus === 'plus') {
+        console.log('좋아요 +1');
+        likeCount++;
+      } else if (likeStatus === 'minus') {
+        console.log('좋아요 -1');
+        likeCount--;
+      }
+
+      let postInfo = { ...getState().post.cards[1], likeCount: likeCount };
+      dispatch(setLike(postInfo));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 // Reducer
 
 export default handleActions(
@@ -177,6 +218,10 @@ export default handleActions(
       produce(state, draft => {
         draft.myPageList = action.payload.myPostInfo;
       }),
+    [SET_LIKE]: (state, action) =>
+      produce(state, draft => {
+        draft.cards[1] = action.payload.postInfo;
+      }),
   },
   initialState
 );
@@ -186,6 +231,8 @@ const actionCreators = {
   PostDetailLookUpFB,
   getPostDB,
   getMyPostDB,
+  PostDeleteFB,
+  PostLikeFB,
 };
 
 export { actionCreators };

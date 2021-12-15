@@ -80,6 +80,39 @@ const CommentLookUpFB = postId => {
   };
 };
 
+const CommentAddFB = (postId, content) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log('AddCommentFB try');
+      const response = await apis.writeComment(postId, content);
+
+      if (response.status === 204) {
+        dispatch(CommentLookUpFB(postId)); // 댓글 목록 다시 요청
+      }
+    } catch (error) {
+      console.log('AddCommentFB error');
+    }
+  };
+};
+
+const CommentDeleteFB = (commentId, postId) => {
+  return async (dispatch, getState, { history }) => {
+    try {
+      console.log('CommentDeleteFB try');
+      const response = await apis.deleteComment(commentId);
+
+      if (response.status === 204) {
+        window.alert('댓글이 삭제 되었습니다.');
+        dispatch(CommentLookUpFB(postId));
+      } else {
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 // Reducer
 export default handleActions(
   {
@@ -93,6 +126,8 @@ export default handleActions(
 
 const actionCreators = {
   CommentLookUpFB,
+  CommentAddFB,
+  CommentDeleteFB,
 };
 
 export { actionCreators };
