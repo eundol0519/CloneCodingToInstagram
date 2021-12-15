@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 const Grid = props => {
   const {
+    overflow,
     Reaction,
     is_flex,
     gap,
@@ -25,6 +26,7 @@ const Grid = props => {
     border,
     borderBottom,
     baseline,
+    float,
   } = props;
 
   const styles = {
@@ -44,6 +46,8 @@ const Grid = props => {
     baseline,
     borderBottom,
     Reaction,
+    float,
+    overflow,
   };
 
   if (noWrap) {
@@ -82,14 +86,15 @@ Grid.defaultProps = {
   border: '0px',
   baseline: false,
   borderBottom: false,
+  overflow: false,
 };
 
 const GridBox = styled.div`
   width: ${props => props.width};
   height: ${props => props.height};
+  float: ${props => props.float};
   gap: ${props => props.gap};
   box-sizing: border-box;
-  border-radius: 5px;
   border: ${props => props.border};
   border-bottom: ${props => props.borderBottom};
   flex-direction: ${props => props.column};
@@ -105,6 +110,7 @@ const GridBox = styled.div`
       ? 'justify-content: flex-start;'
       : 'justify-content: space-between;'};
   ${props => (props.baseline ? `align-items: baseline;` : '')}
+  ${props => (props.overflow ? `overflow:scroll;` : '')}
   ${props =>
     props.Reaction ? '@media (max-width: 935px) { width: 100%;}' : ''}
 `;

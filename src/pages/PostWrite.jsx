@@ -3,11 +3,11 @@
 import React from 'react';
 import Modal from 'react-modal';
 import apis from '../shared/apis';
-import { getToken } from '../shared/token';
 import { Grid, Text, Image, Button, Input } from '../elements/index';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
+import { Container } from '../elements';
 
 const PostWrtie = props => {
   const dispatch = useDispatch();
@@ -110,100 +110,105 @@ const PostWrtie = props => {
           },
           content: {
             position: 'absolute',
-            inset: '10% 20%',
-            border: '1px solid rgb(204, 204, 204)',
+            top: '50%',
+            left: '50%',
+            width: '50%',
+            height: '60%',
+            // width: '60%',
+            border: 'none',
             background: 'rgb(255, 255, 255)',
             overflow: 'auto',
             borderRadius: '5px',
             outline: 'none',
-            width: '935px',
             padding: '20px 0px',
-            // transform: 'translate(-50%, -50%)',
+            transform: 'translate(-50%, -50%)',
           },
         }}
       >
-        {/* ---------------------게시물 작성하기 text 부분--------------------- */}
-        <Grid
-          width="100%"
-          center
-          borderBottom="solid rgba(188, 191, 187, 0.93) 1px"
-        >
-          <Text lineHeight="10px" bold>
-            게시물 작성하기
-          </Text>
-        </Grid>
-        {/* ---------------------이미지 업로드 부분--------------------- */}
-        <Grid is_flex>
-          <Grid width="70%">
-            <Grid center>
-              <label htmlFor="file">
-                {preview ? (
-                  <Image
-                    src={preview}
-                    alt="게시물 사진"
-                    shape="rectangle"
-                    size="20"
-                  ></Image>
-                ) : (
-                  <Image
-                    src="https://lh3.googleusercontent.com/proxy/eN7kqAaYEdN961JDil-W2VAIs0C9ly0deQQg2l2aFqNwECL08FoT4ltpSGQJpILDP_AhPFoKBQyN0l-rU3mlTEYE"
-                    alt="게시물 사진"
-                    shape="rectangle"
-                    size="20"
-                  ></Image>
-                )}
-              </label>
-              <FileInput
-                type="file"
-                id="file"
-                name="img"
-                encType="multipart/form-data"
-                onChange={selectFile}
-                ref={fileInput}
-              ></FileInput>
-              <FileBtn
-                onClick={upload}
-                className={imgFile !== '' ? 'activeBtn' : 'unActiveBtn'}
-              >
-                업로드
-              </FileBtn>
-            </Grid>
+        <Container>
+          {/* ---------------------게시물 작성하기 text 부분--------------------- */}
+          <Grid
+            width="100%"
+            center
+            borderBottom="solid rgba(188, 191, 187, 0.93) 1px"
+          >
+            <Text lineHeight="10px" bold>
+              게시물 작성하기
+            </Text>
           </Grid>
-          {/* ---------------------게시물 내용 작성하는 부분--------------------- */}
-          <Grid width="30%">
-            <Grid is_flex justifyContent>
-              <Image shape="circle"></Image>
-              <Text bold>eundol</Text>
+          {/* ---------------------이미지 업로드 부분--------------------- */}
+          <Grid is_flex>
+            <Grid width="70%">
+              <Grid center margin="-6% 0px 0px 0px">
+                <label htmlFor="file">
+                  {preview ? (
+                    <Image
+                      src={preview}
+                      alt="게시물 사진"
+                      shape="rectangle"
+                      size="20"
+                    ></Image>
+                  ) : (
+                    <Image
+                      src="https://lh3.googleusercontent.com/proxy/eN7kqAaYEdN961JDil-W2VAIs0C9ly0deQQg2l2aFqNwECL08FoT4ltpSGQJpILDP_AhPFoKBQyN0l-rU3mlTEYE"
+                      alt="게시물 사진"
+                      shape="rectangle"
+                      size="20"
+                    ></Image>
+                  )}
+                </label>
+                <FileInput
+                  type="file"
+                  id="file"
+                  name="img"
+                  encType="multipart/form-data"
+                  onChange={selectFile}
+                  ref={fileInput}
+                  margin="5% 0px 0px 0px"
+                ></FileInput>
+                <FileBtn
+                  onClick={upload}
+                  className={imgFile !== '' ? 'activeBtn' : 'unActiveBtn'}
+                >
+                  업로드
+                </FileBtn>
+              </Grid>
             </Grid>
-            <Grid>
-              <Input
-                rows="20"
-                width="300px"
-                wrap="on"
-                value={content}
-                _onChange={changeContent}
-                _onKeyUp={checkActive}
-                multiLine
-                border="none"
-                placeholder="문구 입력..."
-              ></Input>
-              <FileBtn
-                style={{
-                  width: '55%',
-                  height: '28px',
-                  padding: '5px',
-                  ilneHeight: '16px',
-                }}
-                className={!active ? 'activeBtn' : 'unActiveBtn'}
-                disabled={active}
-                onClick={write}
-              >
-                작성하기
-              </FileBtn>
+            {/* ---------------------게시물 내용 작성하는 부분--------------------- */}
+            <Grid width="30%">
+              <Grid is_flex justifyContent>
+                <Image shape="circle"></Image>
+                <Text bold>eundol</Text>
+              </Grid>
+              <Grid>
+                <Input
+                  rows="15"
+                  width="100%"
+                  wrap="on"
+                  value={content}
+                  _onChange={changeContent}
+                  _onKeyUp={checkActive}
+                  multiLine
+                  border="none"
+                  placeholder="문구 입력..."
+                ></Input>
+                <FileBtn
+                  style={{
+                    width: '55%',
+                    height: '28px',
+                    padding: '2x',
+                  }}
+                  className={!active ? 'activeBtn' : 'unActiveBtn'}
+                  disabled={active}
+                  onClick={write}
+                >
+                  작성하기
+                </FileBtn>
+              </Grid>
             </Grid>
+            {/* ----------------------------------------------- */}
           </Grid>
-          {/* ----------------------------------------------- */}
-        </Grid>
+        </Container>
       </Modal>
     </React.Fragment>
   );

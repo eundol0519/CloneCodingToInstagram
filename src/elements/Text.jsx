@@ -26,12 +26,19 @@ const P = styled.p`
   ${props => (props.margin ? `margin: ${props.margin};` : '')}
   ${props => (props.margin ? `line-height: ${props.lineHeight};` : '')}
 
+  width: ${props => props.width};
+  height: ${props => props.height};
+
   // 텍스트를 마우스로 드래그하는 것을 방지하는 CSS
   -ms-user-select: none;
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: clip;
 `;
 
 export default Text;
