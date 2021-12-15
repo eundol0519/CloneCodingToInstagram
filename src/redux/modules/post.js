@@ -10,6 +10,7 @@ const GET_MYPOST = 'GET_MYPOST';
 
 const ADD_IMAGE = 'ADD_POST';
 const ADD_POST = 'ADD_POST';
+
 //const LOADING = "LOADING";
 
 // Action Creator
@@ -87,6 +88,24 @@ const initialState = {
     content: '글내용',
     imageUrl: 'uploads/posts/1639370169898_myPhoto.jpg',
   },
+=======
+const GET_POST = 'GET_POST';
+
+const initialState = {
+  cards: [
+    {
+      status: 200,
+    },
+    {
+      content: '글내용',
+      likeCount: '24',
+      nickname: '뚱이',
+      imageUrl:
+        'https://blog.kakaocdn.net/dn/EicxP/btq2z0ELlLb/4DzUVhKcnWurHt8VoJGWJ1/img.png',
+      createdAt: '2021-12-13',
+    },
+  ],
+
 };
 
 // middleware
@@ -97,8 +116,13 @@ const getPostDB = () => {
       const response = await apis.getPost();
       console.log(response);
 
+
       const post_list = response.data;
       console.log(post_list);
+
+const getPost = createAction(GET_POST, postInfo => ({
+  postInfo,
+}));
 
       dispatch(getPosts(post_list));
     } catch (error) {
@@ -169,8 +193,8 @@ const postWriteDB = postInfo => {
       const response = await apis.postWrite(postInfo);
       console.log(response);
 
-      console.log(postInfo);
-      dispatch(addPost(postInfo));
+      dispatch(addPost(request));
+
     } catch (error) {
       console.log(error);
       window.alert(error);
@@ -178,11 +202,27 @@ const postWriteDB = postInfo => {
   };
 };
 
-// reducer
+const PostDetailLookUpFB = postId => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log('PostDetailLookUpFB try');
+      const response = await apis.getDetailPost(postId);
+      console.log('PostDetailLookUpFB response', response.data[1]);
+
+      dispatch(getPost(response.data[1]));
+    } catch (error) {
+      console.log('PostDetailLookUpFB error');
+    }
+  };
+};
+
+// Reducer
+
 export default handleActions(
   {
     [GET_POST]: (state, action) =>
       produce(state, draft => {
+
         draft.postList = action.payload.post_list; //[{},{}]
       }),
     [GET_MYINFO_POST]: (state, action) =>
@@ -201,9 +241,15 @@ export default handleActions(
       produce(state, draft => {
         draft.addPost = action.payload.post; //{}
       }),
+
+        draft.cards.push(action.payload.postInfo);
+      });
+    },
+
   },
   initialState
 );
+
 
 export const postActions = {
   getPostDB,
@@ -211,4 +257,9 @@ export const postActions = {
   getMyPostDB,
   uploadPostImageDB,
   postWriteDB,
+=======
+const actionCreators = {
+  PostWriteFB,
+  PostDetailLookUpFB,
+
 };

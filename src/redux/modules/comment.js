@@ -1,36 +1,97 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
+import apis from '../../shared/apis';
 
 // Actions
 
-const INSTAGRAMADD = 'INSTAGRAMADD';
+const GET_COMMENT = 'GET_COMMENT';
 
 const initialState = {
-  cards: [],
+  cards: [
+    {
+      status: 200,
+    },
+    [
+      {
+        nickname: 'abcdefghijklmnopqrstuvwxyz',
+        commentId: 1,
+        content: 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz',
+        createdAt: '2021-12-13',
+      },
+      {
+        nickname: '뚱이',
+        commentId: 2,
+        content: '댓글내용2',
+        createdAt: '2021-12-14',
+      },
+      {
+        nickname: '뚱이',
+        commentId: 2,
+        content: '댓글내용2',
+        createdAt: '2021-12-14',
+      },
+      {
+        nickname: '뚱이',
+        commentId: 2,
+        content: '댓글내용2',
+        createdAt: '2021-12-14',
+      },
+      {
+        nickname: '뚱이',
+        commentId: 2,
+        content: '댓글내용2',
+        createdAt: '2021-12-14',
+      },
+      {
+        nickname: '뚱이',
+        commentId: 2,
+        content: '댓글내용2',
+        createdAt: '2021-12-14',
+      },
+      {
+        nickname: '뚱이',
+        commentId: 2,
+        content: '댓글내용2',
+        createdAt: '2021-12-14',
+      },
+    ],
+  ],
 };
 
 // Action Creators
 
-const instaAction = createAction(INSTAGRAMADD, (id, pid) => ({
-  id,
-  pid,
+const getComment = createAction(GET_COMMENT, commentInfo => ({
+  commentInfo,
 }));
 
 //미들웨이
-const todoAddDB = (pid, todoText) => {
-  return async function (dispatch, getstate, { history }) {};
+const CommentLookUpFB = postId => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      console.log('CommentLookUpFB try');
+      const response = await apis.getComment(postId);
+      console.log('CommentLookUpFB response', response.data[1]);
+
+      dispatch(getComment(response.data[1]));
+    } catch (error) {
+      console.log('CommentLookUpFB error');
+    }
+  };
 };
 
 // Reducer
 export default handleActions(
   {
-    [INSTAGRAMADD]: (state, action) => produce(state, draft => {}),
+    [GET_COMMENT]: (state, action) =>
+      produce(state, draft => {
+        draft.cards = [...action.payload.commentInfo];
+      }),
   },
   initialState
 );
 
 const actionCreators = {
-  instaAction,
+  CommentLookUpFB,
 };
 
 export { actionCreators };
