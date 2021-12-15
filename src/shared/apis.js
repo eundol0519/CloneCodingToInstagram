@@ -45,7 +45,7 @@ const apis = {
   deleteComment: commentId => instance.delete(`/api/comments/${commentId}`), // 댓글 삭제
 
   //마이페이지
-  getMyPost: nickname => instance.get(`/api/mypage/posts/${nickname}`), // 마이페이지 리스트
+  getMyPost: userId => instance.get(`/api/users/${userId}/posts`), // 마이페이지 리스트
 
   //프로필 수정페이지
   uploadMyImage: (userId, url) => instance.post(`/api/users/${userId}`, url), // 프로필 이미지업로드

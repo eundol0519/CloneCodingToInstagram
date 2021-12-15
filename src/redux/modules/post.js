@@ -13,17 +13,39 @@ const initialState = {
   postList: [
     {
       postId: 1,
-      content: '카카오프렌즈',
+      userId: 1,
+      content: '카카오프렌즈는 사랑입니다.',
       likeCount: '2',
       userNickname: '초콜렛',
       imageUrl:
-        'https://www.google.com/imgres?imgurl=https%3A%2F%2Ft1.kakaocdn.net%2Fkakaocorp%2Fkakaocorp%2Fadmin%2Fservice%2Fa85d0594017900001.jpg&imgrefurl=https%3A%2F%2Fwww.kakaocorp.com%2Fpage%2Fdetail%2F580&tbnid=1bXXZ3LxWNcp9M&vet=12ahUKEwjFtYH4j-H0AhWVCt4KHb9ZAXsQMygAegUIARDSAQ..i&docid=1F2bVLbF5-kfJM&w=1920&h=1079&itg=1&q=%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%94%84%EB%A0%8C%EC%A6%88&ved=2ahUKEwjFtYH4j-H0AhWVCt4KHb9ZAXsQMygAegUIARDSAQ',
+        'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
+      createdAt: '2021-12-13',
+    },
+    {
+      postId: 1,
+      userId: 1,
+      content: '카카오프렌즈는 사랑입니다.',
+      likeCount: '2',
+      userNickname: '초콜렛',
+      imageUrl:
+        'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
+      createdAt: '2021-12-13',
+    },
+    {
+      postId: 1,
+      userId: 1,
+      content: '카카오프렌즈는 사랑입니다.',
+      likeCount: '2',
+      userNickname: '초콜렛',
+      imageUrl:
+        'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
       createdAt: '2021-12-13',
     },
   ],
 
   post: {
     postId: 4,
+    userId: 4,
     content: '글내용',
     likeCount: '2',
     userNickname: '스펀지밥',
@@ -44,12 +66,11 @@ const initialState = {
   ],
 
   mypage: {
-    userEmail: 'test@test.com',
-    userName: '홍길동',
-    nickname: '스펀지밥',
-    imageUrl_profile: 'uploads/profiles/1639343163898_myPhoto.jpg',
-    introduce: '내소개',
-    phoneNumber: '010-1234-5678',
+    postId: 4,
+    content: '글내용',
+    likeCount: '2',
+    imageUrl: 'uploads/posts/1639370169898_myPhoto.jpg',
+    createdAt: '2021-12-13',
   },
 
   cards: [
@@ -84,6 +105,8 @@ const getPostDB = () => {
       const response = await apis.getPost();
 
       const post_list = response.data;
+      console.log(post_list);
+
       dispatch(getPosts(post_list));
     } catch (error) {
       console.log(error);
@@ -92,11 +115,11 @@ const getPostDB = () => {
   };
 };
 
-const getMyPostDB = nickname => {
+const getMyPostDB = userId => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('getMyPostDB try!!');
-      const response = await apis.getMyPost(nickname);
+      const response = await apis.getMyPost(userId);
       console.log(response);
 
       const myPostInfo = response.data;
@@ -194,7 +217,6 @@ export default handleActions(
     [GET_MYPOST]: (state, action) =>
       produce(state, draft => {
         draft.myPageList = action.payload.myPostInfo;
-        draft.postList = action.payload.post_list;
       }),
     [SET_LIKE]: (state, action) =>
       produce(state, draft => {
