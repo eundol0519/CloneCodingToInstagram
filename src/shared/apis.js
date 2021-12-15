@@ -26,6 +26,7 @@ const apis = {
   signin: userInfo => instance.post('/api/users/login', userInfo), // 로그인
   signup: userInfo => instance.post('/api/users/Signup', userInfo), // 회원가입
   getUserInfo: () => instance.get('/api/users/me'), //로그인 시 유저정보 가지고 오는 api
+
   //전체 게시글 조회 페이지
   getPost: () => instance.get('/api/posts'), // 전체 게시글 조회
 
