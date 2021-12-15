@@ -110,30 +110,32 @@ const PostWrtie = props => {
           },
           content: {
             position: 'absolute',
-            top: '10%',
-            left: '23%',
-            right: '23%',
-            bottom: '10%',
-            border: '1px solid #ccc',
-            background: '#fff',
+            inset: '10% 20%',
+            border: '1px solid rgb(204, 204, 204)',
+            background: 'rgb(255, 255, 255)',
             overflow: 'auto',
-            WebkitOverflowScrolling: 'touch',
             borderRadius: '5px',
             outline: 'none',
-            padding: '20px 0px 20px 0px',
+            width: '935px',
+            padding: '20px 0px',
+            // transform: 'translate(-50%, -50%)',
           },
         }}
       >
         {/* ---------------------게시물 작성하기 text 부분--------------------- */}
-        <Grid width="100vw" borderBottom="solid rgba(188, 191, 187, 0.93) 1px">
-          <Text margin="0px 0px 1% 25%" bold>
+        <Grid
+          width="100%"
+          center
+          borderBottom="solid rgba(188, 191, 187, 0.93) 1px"
+        >
+          <Text lineHeight="10px" bold>
             게시물 작성하기
           </Text>
         </Grid>
         {/* ---------------------이미지 업로드 부분--------------------- */}
-        <Grid is_flex is_fix>
-          <Grid width="130vw" margin="5% 0px 0px 0px">
-            <Grid margin="1% 0px 0px 0px" center>
+        <Grid is_flex>
+          <Grid width="70%">
+            <Grid center>
               <label htmlFor="file">
                 {preview ? (
                   <Image
@@ -168,7 +170,7 @@ const PostWrtie = props => {
             </Grid>
           </Grid>
           {/* ---------------------게시물 내용 작성하는 부분--------------------- */}
-          <Grid width="68vw" margin="2% 1% 0px 2%">
+          <Grid width="30%">
             <Grid is_flex justifyContent>
               <Image shape="circle"></Image>
               <Text bold>eundol</Text>
@@ -190,8 +192,7 @@ const PostWrtie = props => {
                   width: '55%',
                   height: '28px',
                   padding: '5px',
-                  margin: '11% 0px 0px 22%',
-                  lineHeight: '16px',
+                  ilneHeight: '16px',
                 }}
                 className={!active ? 'activeBtn' : 'unActiveBtn'}
                 disabled={active}
