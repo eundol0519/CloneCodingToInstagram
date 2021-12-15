@@ -4,23 +4,15 @@ import apis from '../../shared/apis';
 
 // Action Type
 
-const GET_POST = 'GET_POST';
-const GET_MYINFO_POST = 'GET_MYINFO_POST';
-const GET_MYPOST = 'GET_MYPOST';
-
-const ADD_IMAGE = 'ADD_POST';
-const ADD_POST = 'ADD_POST';
+const GET_POST = 'GET_POST'; //항민
+const GET_MYPOST = 'GET_MYPOST'; //항민
 
 //const LOADING = "LOADING";
 
 // Action Creator
 
-const getPosts = createAction(GET_POST, post_list => ({ post_list }));
-const getMyInfoPost = createAction(GET_MYINFO_POST, myInfo => ({ myInfo }));
-const getMyPost = createAction(GET_MYPOST, myPostInfo => ({ myPostInfo }));
-
-const addImage = createAction(ADD_IMAGE, image => ({ image }));
-const addPost = createAction(ADD_POST, post => ({ post }));
+const getPosts = createAction(GET_POST, post_list => ({ post_list })); //항민
+const getMyPost = createAction(GET_MYPOST, myPostInfo => ({ myPostInfo })); //항민
 
 //const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
 
@@ -48,15 +40,6 @@ const initialState = {
     createdAt: '2021-12-13',
   },
 
-  mypageInfo: {
-    userEmail: 'test@test.com',
-    userName: '홍길동',
-    nickname: '스펀지밥',
-    imageUrl_profile: 'uploads/profiles/1639343163898_myPhoto.jpg',
-    introduce: '내소개',
-    phoneNumber: '010-1234-5678',
-  },
-
   myPageList: [
     {
       userEmail: 'test@test.com',
@@ -77,37 +60,7 @@ const initialState = {
     introduce: '내소개',
     phoneNumber: '010-1234-5678',
   },
-
-  addImage: {
-    succes: true,
-    url: 'uploads/posts/1639370169898_myPhoto.jpg',
-    fileName: '1639370169898_myPhoto.jpg',
-  },
-
-  addPost: {
-    content: '글내용',
-    imageUrl: 'uploads/posts/1639370169898_myPhoto.jpg',
-  },
-=======
-const GET_POST = 'GET_POST';
-
-const initialState = {
-  cards: [
-    {
-      status: 200,
-    },
-    {
-      content: '글내용',
-      likeCount: '24',
-      nickname: '뚱이',
-      imageUrl:
-        'https://blog.kakaocdn.net/dn/EicxP/btq2z0ELlLb/4DzUVhKcnWurHt8VoJGWJ1/img.png',
-      createdAt: '2021-12-13',
-    },
-  ],
-
 };
-
 // middleware
 const getPostDB = () => {
   return async (dispatch, getState, { history }) => {
@@ -116,33 +69,14 @@ const getPostDB = () => {
       const response = await apis.getPost();
       console.log(response);
 
-
       const post_list = response.data;
       console.log(post_list);
 
-const getPost = createAction(GET_POST, postInfo => ({
-  postInfo,
-}));
+      const getPost = createAction(GET_POST, postInfo => ({
+        postInfo,
+      }));
 
       dispatch(getPosts(post_list));
-    } catch (error) {
-      console.log(error);
-      window.alert(error);
-    }
-  };
-};
-
-const getMyInfoPostDB = nickname => {
-  return async (dispatch, getState, { history }) => {
-    try {
-      console.log('getMyInfoPostDB try!!');
-      const response = await apis.getPost();
-      console.log(response);
-
-      const myInfo = response.data;
-      console.log(myInfo);
-
-      dispatch(getMyInfoPost(myInfo));
     } catch (error) {
       console.log(error);
       window.alert(error);
@@ -168,98 +102,23 @@ const getMyPostDB = nickname => {
   };
 };
 
-const uploadPostImageDB = image => {
-  return async (dispatch, getState, { history }) => {
-    try {
-      console.log('addImageDB try!!');
-      const response = await apis.uploadPostImage(image);
-      console.log(response);
-
-      const image_data = response.data;
-      console.log(image_data);
-
-      dispatch(addImage(image_data));
-    } catch (error) {
-      console.log(error);
-      window.alert(error);
-    }
-  };
-};
-
-const postWriteDB = postInfo => {
-  return async (dispatch, getState, { history }) => {
-    try {
-      console.log('postWriteDB try!!');
-      const response = await apis.postWrite(postInfo);
-      console.log(response);
-
-      dispatch(addPost(request));
-
-    } catch (error) {
-      console.log(error);
-      window.alert(error);
-    }
-  };
-};
-
-const PostDetailLookUpFB = postId => {
-  return async function (dispatch, getState, { history }) {
-    try {
-      console.log('PostDetailLookUpFB try');
-      const response = await apis.getDetailPost(postId);
-      console.log('PostDetailLookUpFB response', response.data[1]);
-
-      dispatch(getPost(response.data[1]));
-    } catch (error) {
-      console.log('PostDetailLookUpFB error');
-    }
-  };
-};
-
 // Reducer
 
 export default handleActions(
   {
     [GET_POST]: (state, action) =>
       produce(state, draft => {
-
         draft.postList = action.payload.post_list; //[{},{}]
-      }),
-    [GET_MYINFO_POST]: (state, action) =>
-      produce(state, draft => {
-        draft.mypageInfo = action.payload.myInfo; //{}
       }),
     [GET_MYPOST]: (state, action) =>
       produce(state, draft => {
         draft.myPageList = action.payload.myPostInfo; //[{},{}]
       }),
-    [ADD_IMAGE]: (state, action) =>
-      produce(state, draft => {
-        draft.addImage = action.payload.image; //{}
-      }),
-    [ADD_POST]: (state, action) =>
-      produce(state, draft => {
-        draft.addPost = action.payload.post; //{}
-      }),
-
-        draft.cards.push(action.payload.postInfo);
-      });
-    },
-
   },
   initialState
 );
 
-
 export const postActions = {
   getPostDB,
-  getMyInfoPostDB,
   getMyPostDB,
-  uploadPostImageDB,
-  postWriteDB,
-=======
-const actionCreators = {
-  PostWriteFB,
-  PostDetailLookUpFB,
-
 };

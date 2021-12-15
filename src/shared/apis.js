@@ -45,7 +45,6 @@ const apis = {
   deleteComment: commentId => instance.delete(`/api/comments/${commentId}`), // 댓글 삭제
 
   //마이페이지
-  getMyInfoPost: nickname => instance.get(`/api/mypage/${nickname}`), // 마이페이지 정보 조회
   getMyPost: nickname => instance.get(`/api/mypage/posts/${nickname}`), // 마이페이지 리스트
 
   //프로필 수정페이지
