@@ -9,16 +9,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 import { actionCreators as commentActions } from '../redux/modules/comment';
 
-const PostDetail = props => {
-  const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
-  const [active, setActive] = React.useState(true); // 버튼 활성화 유무
-  const [commentBox, setCommentBox] = React.useState(false); // 댓글창 활성화 유무
-  const [content, setContent] = React.useState('');
+// mui icons import
+import CardActions from '@mui/material/CardActions';
+import IconButton from '@mui/material/IconButton';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ClearIcon from '@mui/icons-material/Clear';
 
+const PostDetail = props => {
   const postId = useParams(); // 파라미터로 넘어온 postId
   const dispatch = useDispatch();
   const postInfo = useSelector(state => state.post.cards[1]);
   const commentInfo = useSelector(state => state.comment.cards[1]);
+
+  const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
+  const [active, setActive] = React.useState(true); // 버튼 활성화 유무
+  const [commentBox, setCommentBox] = React.useState(false); // 댓글창 활성화 유무
+  const [content, setContent] = React.useState('');
+  const [like, setLike] = React.useState(postInfo.myLike ? true : false); // 사용자별 좋아요 유무
 
   // 모달창을 닫으면 state도 false로 바꾸기
   const modalOff = () => {
@@ -27,12 +36,16 @@ const PostDetail = props => {
   };
 
   React.useEffect(() => {
-    // dispatch(postActions.PostDetailLookUpFB(postId));
+    dispatch(postActions.PostDetailLookUpFB(postId));
   }, []);
 
   const commentList = () => {
-    setCommentBox(true);
-    // dispatch(commentActions.CommentLookUpFB(postId));
+    if (!commentBox) {
+      dispatch(commentActions.CommentLookUpFB(postId));
+      setCommentBox(true);
+    } else {
+      setCommentBox(false);
+    }
   };
 
   const back = () => {
@@ -44,6 +57,51 @@ const PostDetail = props => {
       setActive(true);
     } else {
       setActive(false);
+    }
+  };
+
+  const commentWrite = () => {
+    if (content === undefined || content === '') {
+      window.alert('댓글을 입력 해주세요');
+      return;
+    }
+
+    dispatch(commentActions.CommentAddFB(props.postId, content));
+    setContent(''); // 댓글을 입력하면 input의 value를 날려준다.
+  };
+
+  const commentDelete = commentId => {
+    const deleteConfirm = window.confirm('댓글을 삭제 하시겠습니까?');
+
+    if (deleteConfirm) {
+      dispatch(commentActions.CommentDeleteFB(commentId, props.postId));
+    }
+  };
+
+  const postDelete = () => {
+    const deleteConfirm = window.confirm('게시물을 삭제 하시겠습니까?');
+
+    if (deleteConfirm) {
+      dispatch(postActions.PostDeleteFB(props.postId))
+        .then(response => {
+          setModal(false);
+          props.setPostDetailModal(false);
+        })
+        .catch(error => {
+          console.log('PostDetail.jsx PostDeleteFB error', error);
+        });
+    }
+  };
+
+  const postLike = () => {
+    if (!like) {
+      // 좋아요 갯수 +1
+      setLike(true);
+      dispatch(postActions.PostLikeFB(props.postId, 'plus'));
+    } else {
+      // 좋아요 갯수 -1
+      setLike(false);
+      dispatch(postActions.PostLikeFB(props.postId, 'minus'));
     }
   };
 
@@ -98,100 +156,113 @@ const PostDetail = props => {
                 <Image shape="circle" src={`${postInfo.imageUrl}`}></Image>
                 <Text bold>{postInfo.nickname}</Text>
               </Grid>
-              <Grid width="20%" center _onClick={back}>
-                뒤로가기
-              </Grid>
+              <ArrowBackIosIcon onClick={back}></ArrowBackIosIcon>
             </Grid>
             <Grid height="60%" overflow margin="1% 2% 1% 2%">
               {commentInfo.map(c => {
                 return (
                   <>
                     <Grid key={c.commentId}>
-                      <Text bold margin="0px 0px 2% 0px">
+                      <Text bold margin="0px 0px 2% 3%">
                         {c.nickname}
                       </Text>
-                      <Text width="95%" margin="0px 0px 2% 0px">
+                      <Text width="90%" margin="0px 0px 2% 3%">
                         {c.content}
                       </Text>
-                      <Grid is_flex gap="35%" margin="3%">
+                      <Grid is_flex gap="55%" margin="3%">
                         <Text>{c.createdAt}</Text>
                         <Grid
                           width="50%"
                           _onClick={() => {
-                            window.alert('삭제');
+                            commentDelete(c.commentId);
                           }}
                         >
-                          삭제
+                          <ClearIcon></ClearIcon>
                         </Grid>
                       </Grid>
-                      <hr width="93%" align="left"></hr>
+                      <hr width="98%" align="left"></hr>
                     </Grid>
                   </>
                 );
               })}
             </Grid>
-            <Grid height="15%" is_flex>
-              <Grid
-                width="30%"
-                _onClick={() => {
-                  window.alert('좋아요를 눌렀습니다.');
-                }}
-              >
-                ♡
-              </Grid>
-              <Grid width="30%" _onClick={commentList}>
-                댓글
-              </Grid>
-              <Grid width="30%">{postInfo.likeCount}개</Grid>
-              <Grid width="30%">{postInfo.createdAt}</Grid>
-            </Grid>
           </>
         ) : (
           <>
-            <Grid height="10%" is_flex justifyContent>
+            <Grid height="10%" is_flex justifyContent margin="1% 1% 2% 1%">
               <Image shape="circle" src={`${postInfo.imageUrl}`}></Image>
               <Text bold>{postInfo.nickname}</Text>
             </Grid>
-            <Grid height="60%" margin="0px 0px 2% 2%">
+            <Grid height="60%" overflow margin="1% 2% 1% 2%">
               {postInfo.content}
-            </Grid>
-            <Grid height="15%" is_flex>
-              <Grid
-                width="30%"
-                _onClick={() => {
-                  window.alert('좋아요를 눌렀습니다.');
-                }}
-              >
-                ♡
-              </Grid>
-              <Grid width="30%" _onClick={commentList} margin="1% 2% 1% 2%">
-                댓글
-              </Grid>
-              <Grid width="30%">{postInfo.likeCount}개</Grid>
-              <Grid width="30%">{postInfo.createdAt}</Grid>
             </Grid>
           </>
         )}
-        <Grid height="10%" gap="0px" is_flex margin="1% 1% 1% 1%">
-          <Input
-            width="100%"
+        <Grid height="15%" is_flex>
+          <CardActions disableSpacing>
+            <Grid is_flex>
+              <Grid>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteBorderIcon
+                    style={{ color: like && 'pink' }}
+                    onClick={postLike}
+                  />
+                </IconButton>
+                <IconButton aria-label="comment">
+                  <ChatBubbleOutlineIcon
+                    onClick={commentList}
+                  ></ChatBubbleOutlineIcon>
+                </IconButton>
+                <IconButton aria-label="delete">
+                  <ClearIcon onClick={postDelete}></ClearIcon>
+                </IconButton>
+              </Grid>
+            </Grid>
+          </CardActions>
+          <Grid width="30%">{postInfo.likeCount}개</Grid>
+          <Grid width="30%">{postInfo.createdAt}</Grid>
+        </Grid>
+        <Grid is_flex>
+          <input
+            placeholder="😀 댓글달기..."
+            style={{
+              margin: '0',
+              border: 'none',
+              width: '520px',
+              height: '40px',
+              backgroundColor: 'rgba(0,0,0,0)',
+            }}
             value={content}
-            _onChange={e => {
+            onChange={e => {
               setContent(e.target.value);
             }}
-            _onKeyUp={checkActive}
-            placeholder="댓글 입력..."
-          ></Input>
-          <Button
-            width="5%"
-            padding="5%"
-            margin="0px 5% 0px 0%"
-            className={!active ? 'activeBtn' : 'unActiveBtn'}
-          ></Button>
+            onKeyUp={checkActive}
+            onKeyPress={e => {
+              if (e.key === 'Enter') {
+                commentWrite(e);
+              }
+            }}
+          />
+          <button
+            style={{
+              border: 'none',
+              width: '94px',
+              height: '46px',
+              backgroundColor: 'rgba(0,0,0,0)',
+              color: active ? '#B2DFFC' : '#0095f6',
+              cursor: 'pointer',
+            }}
+            onClick={commentWrite}
+            value={content}
+          >
+            게시
+          </button>
         </Grid>
       </Grid>
     </Modal>
   );
 };
+
+<span style={{ fontWeight: 20 }}>좋아요 개</span>;
 
 export default PostDetail;

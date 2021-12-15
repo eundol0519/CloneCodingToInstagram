@@ -11,7 +11,7 @@ import Grid from '../elements/Grid';
 const MyPage = props => {
   return (
     <React.Fragment>
-      <Header></Header>
+      <Grid margin="5%"></Grid>
       <Container>
         <Items1>
           <Grid is_flex>

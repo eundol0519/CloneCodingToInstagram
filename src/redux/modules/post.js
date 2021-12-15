@@ -5,24 +5,47 @@ import apis from '../../shared/apis';
 // Action Type
 
 const GET_ONE_POST = 'GET_ONE_POST';
-const GET_POST = 'GET_POST'; // 항민
-const GET_MYPOST = 'GET_MYPOST'; // 항민
+const GET_POST = 'GET_POST';
+const GET_MYPOST = 'GET_MYPOST';
+const SET_LIKE = 'SET_LIKE';
 
 const initialState = {
   postList: [
     {
       postId: 1,
-      content: '카카오프렌즈',
+      userId: 1,
+      content: '카카오프렌즈는 사랑입니다.',
       likeCount: '2',
       userNickname: '초콜렛',
       imageUrl:
-        'https://www.google.com/imgres?imgurl=https%3A%2F%2Ft1.kakaocdn.net%2Fkakaocorp%2Fkakaocorp%2Fadmin%2Fservice%2Fa85d0594017900001.jpg&imgrefurl=https%3A%2F%2Fwww.kakaocorp.com%2Fpage%2Fdetail%2F580&tbnid=1bXXZ3LxWNcp9M&vet=12ahUKEwjFtYH4j-H0AhWVCt4KHb9ZAXsQMygAegUIARDSAQ..i&docid=1F2bVLbF5-kfJM&w=1920&h=1079&itg=1&q=%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%94%84%EB%A0%8C%EC%A6%88&ved=2ahUKEwjFtYH4j-H0AhWVCt4KHb9ZAXsQMygAegUIARDSAQ',
+        'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
+      createdAt: '2021-12-13',
+    },
+    {
+      postId: 1,
+      userId: 1,
+      content: '카카오프렌즈는 사랑입니다.',
+      likeCount: '2',
+      userNickname: '초콜렛',
+      imageUrl:
+        'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
+      createdAt: '2021-12-13',
+    },
+    {
+      postId: 1,
+      userId: 1,
+      content: '카카오프렌즈는 사랑입니다.',
+      likeCount: '2',
+      userNickname: '초콜렛',
+      imageUrl:
+        'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
       createdAt: '2021-12-13',
     },
   ],
 
   post: {
     postId: 4,
+    userId: 4,
     content: '글내용',
     likeCount: '2',
     userNickname: '스펀지밥',
@@ -43,12 +66,11 @@ const initialState = {
   ],
 
   mypage: {
-    userEmail: 'test@test.com',
-    userName: '홍길동',
-    nickname: '스펀지밥',
-    imageUrl_profile: 'uploads/profiles/1639343163898_myPhoto.jpg',
-    introduce: '내소개',
-    phoneNumber: '010-1234-5678',
+    postId: 4,
+    content: '글내용',
+    likeCount: '2',
+    imageUrl: 'uploads/posts/1639370169898_myPhoto.jpg',
+    createdAt: '2021-12-13',
   },
 
   cards: [
@@ -71,8 +93,9 @@ const initialState = {
 const getOnePost = createAction(GET_POST, postInfo => ({
   postInfo,
 }));
-const getPosts = createAction(GET_POST, post_list => ({ post_list })); //항민
-const getMyPost = createAction(GET_MYPOST, myPostInfo => ({ myPostInfo })); //항민
+const getPosts = createAction(GET_POST, post_list => ({ post_list }));
+const getMyPost = createAction(GET_MYPOST, myPostInfo => ({ myPostInfo }));
+const setLike = createAction(SET_LIKE, postInfo => ({ postInfo }));
 
 // middleware
 const getPostDB = () => {
@@ -80,14 +103,9 @@ const getPostDB = () => {
     try {
       console.log('getPostDB try!!');
       const response = await apis.getPost();
-      console.log(response);
 
       const post_list = response.data;
       console.log(post_list);
-
-      const getPost = createAction(GET_POST, postInfo => ({
-        postInfo,
-      }));
 
       dispatch(getPosts(post_list));
     } catch (error) {
@@ -97,11 +115,11 @@ const getPostDB = () => {
   };
 };
 
-const getMyPostDB = nickname => {
+const getMyPostDB = userId => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('getMyPostDB try!!');
-      const response = await apis.getMyPost(nickname);
+      const response = await apis.getMyPost(userId);
       console.log(response);
 
       const myPostInfo = response.data;
@@ -143,6 +161,46 @@ const PostDetailLookUpFB = postId => {
   };
 };
 
+const PostDeleteFB = postId => {
+  return async (dispatch, getState, { history }) => {
+    try {
+      console.log('PostDeleteFB try');
+      // const response = await apis.deletePost(postId);
+
+      // if (response.status === 204) {
+      //   window.alert('게시물이 삭제 되었습니다.');
+      // } else {
+      //   return;
+      // }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const PostLikeFB = (postId, likeStatus) => {
+  return async (dispatch, getState, { history }) => {
+    try {
+      console.log('PostLikeFB try');
+      // const response = await apis.postLikeCancel(postId);
+      let likeCount = parseInt(getState().post.cards[1].likeCount);
+
+      if (likeStatus === 'plus') {
+        console.log('좋아요 +1');
+        likeCount++;
+      } else if (likeStatus === 'minus') {
+        console.log('좋아요 -1');
+        likeCount--;
+      }
+
+      let postInfo = { ...getState().post.cards[1], likeCount: likeCount };
+      dispatch(setLike(postInfo));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 // Reducer
 
 export default handleActions(
@@ -159,7 +217,10 @@ export default handleActions(
     [GET_MYPOST]: (state, action) =>
       produce(state, draft => {
         draft.myPageList = action.payload.myPostInfo;
-        draft.postList = action.payload.post_list;
+      }),
+    [SET_LIKE]: (state, action) =>
+      produce(state, draft => {
+        draft.cards[1] = action.payload.postInfo;
       }),
   },
   initialState
@@ -170,4 +231,8 @@ const actionCreators = {
   PostDetailLookUpFB,
   getPostDB,
   getMyPostDB,
+  PostDeleteFB,
+  PostLikeFB,
 };
+
+export { actionCreators };
