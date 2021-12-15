@@ -6,7 +6,12 @@ import { Grid, Input, Button } from '../elements';
 import { actionCreators as userActions } from '../redux/modules/user';
 import logo from '../logo.png';
 import { useDispatch } from 'react-redux';
-import { isEmail } from '../shared/examine';
+import {
+  isEmail,
+  isNameCheck,
+  isNickNameCheck,
+  isPwCheck,
+} from '../shared/examine';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import { history } from '../redux/configureStore';
@@ -20,35 +25,51 @@ const SignBox = props => {
     signNickName: '',
     signPw: '',
   });
+  const [boo, setBoo] = React.useState({
+    succeed: false,
+    answer: true,
+    Span: {
+      check: false,
+      boo: false,
+      comment: '이메일 형식에 맞지 않습니다.',
+    },
+    namecheck: {
+      check: false,
+      boo: false,
+      comment: '이름이 형식에 맞지 않습니다.',
+    },
+    nicknamecheck: {
+      check: false,
+      boo: false,
+      comment: '닉네임이 형식에 맞지 않습니다.',
+    },
+    pwcheck: {
+      check: false,
+      boo: false,
+      comment: '비밀번호가 형식에 맞지 않습니다.',
+    },
+  });
 
   const { signEmail, signName, signNickName, signPw } = inputs;
-
-  const [Span, setSpan] = React.useState(false);
-  const [succeed, setSucceed] = React.useState(false);
-  const [answer, setAnswer] = React.useState(true);
+  const { Span, succeed, answer, namecheck, nicknamecheck, pwcheck } = boo;
 
   const ClickEvent = () => {
-    if (isEmail(signEmail)) {
-      if (
-        signEmail !== '' &&
-        signName !== '' &&
-        signNickName !== '' &&
-        signPw !== ''
-      ) {
-        const userInfo = {
-          email: signEmail,
-          name: signName,
-          nickname: signNickName,
-          pw: signPw,
-        };
-        localStorage.setItem('userInfo', JSON.stringify(userInfo));
-        // dispatch(userActions.signUpPostDB(userInfo));
-        setSpan(true);
-      } else {
-        setSucceed(true);
-      }
+    if (
+      isNickNameCheck(signNickName).boo &&
+      isPwCheck(signPw).boo &&
+      isNameCheck(signName).boo &&
+      isEmail(signEmail).boo
+    ) {
+      const userInfo = {
+        email: signEmail,
+        name: signName,
+        nickname: signNickName,
+        pw: signPw,
+      };
+      localStorage.setItem('userInfo', JSON.stringify(userInfo));
+      // dispatch(userActions.signUpPostDB(userInfo));
     } else {
-      setSpan(false);
+      setBoo({ ...boo, succeed: true });
     }
   };
   const OnChange = e => {
@@ -56,19 +77,110 @@ const SignBox = props => {
       ...inputs,
       [e.target.name]: e.target.value,
     });
-
-    setAnswer(false);
-
-    if (isEmail(signEmail)) {
-      setSpan(true);
-      if (
-        signEmail !== '' &&
-        signName !== '' &&
-        signNickName !== '' &&
-        signPw !== ''
-      ) {
-        setSucceed(true);
+    if (signEmail !== '') {
+      setBoo({
+        ...boo,
+        Span: { check: true, ...Span },
+      });
+      if (isEmail(signEmail).boo) {
+        setBoo({
+          ...boo,
+          Span: { check: true, boo: true, comment: '이메일 형식에 맞습니다.' },
+        });
+      } else {
+        setBoo({
+          ...boo,
+          Span: {
+            check: true,
+            boo: false,
+            comment: '이메일 형식에 맞지 않습니다.',
+          },
+        });
       }
+    }
+    if (signName !== '') {
+      setBoo({
+        ...boo,
+        namecheck: { check: true, ...namecheck },
+      });
+      if (isNameCheck(signName).boo) {
+        setBoo({
+          ...boo,
+          namecheck: {
+            check: true,
+            boo: true,
+            comment: '이름 형식에 맞습니다.',
+          },
+        });
+      } else {
+        setBoo({
+          ...boo,
+          namecheck: {
+            check: true,
+            boo: false,
+            comment: '이름 형식에 맞지 않습니다.',
+          },
+        });
+      }
+    }
+    if (signNickName !== '') {
+      setBoo({
+        ...boo,
+        nicknamecheck: { check: true, ...nicknamecheck },
+      });
+      if (isNickNameCheck(signNickName).boo) {
+        setBoo({
+          ...boo,
+          nicknamecheck: {
+            check: true,
+            boo: true,
+            comment: '닉네임 형식에 맞습니다.',
+          },
+        });
+      } else {
+        setBoo({
+          ...boo,
+          nicknamecheck: {
+            check: true,
+            boo: false,
+            comment: '닉네임 형식에 맞지 않습니다.',
+          },
+        });
+      }
+    }
+    if (signPw !== '') {
+      setBoo({
+        ...boo,
+        pwcheck: { check: true, ...pwcheck },
+      });
+      if (isPwCheck(signPw).boo) {
+        setBoo({
+          ...boo,
+          pwcheck: {
+            check: true,
+            boo: true,
+            comment: '비밀번호 형식에 맞습니다.',
+          },
+        });
+      } else {
+        setBoo({
+          ...boo,
+          pwcheck: {
+            check: true,
+            boo: false,
+            comment: '비밀번호 형식에 맞지 않습니다.',
+          },
+        });
+      }
+    }
+    console.log(boo);
+    if (
+      isNickNameCheck(signNickName).boo &&
+      isPwCheck(signPw).boo &&
+      isNameCheck(signName).boo &&
+      isEmail(signEmail).boo
+    ) {
+      return setBoo({ ...boo, succeed: true });
     }
   };
   const ClickMove = () => {
@@ -91,50 +203,127 @@ const SignBox = props => {
               margin="0px"
               _onChange={OnChange}
             ></Input>
-            {answer ? (
-              ''
-            ) : Span ? (
-              <Dot className="green">
-                <CheckCircleOutlinedIcon />
-              </Dot>
+            {Span.check ? (
+              Span.boo ? (
+                <Dot className="green">
+                  <CheckCircleOutlinedIcon />
+                </Dot>
+              ) : (
+                <Dot className="red">
+                  <CancelOutlinedIcon />
+                </Dot>
+              )
             ) : (
-              <Dot className="red">
-                <CancelOutlinedIcon />
-              </Dot>
+              ''
             )}
-            {answer ? (
-              ''
-            ) : Span ? (
-              ''
+            {Span.check ? (
+              Span.boo ? (
+                <SpanTxt className="green">{Span.comment}</SpanTxt>
+              ) : (
+                <SpanTxt className="red">{Span.comment}</SpanTxt>
+              )
             ) : (
-              <SpanTxt>이메일 형식에 맞지 않습니다.</SpanTxt>
+              ''
             )}
           </InputBox>
-          <Input
-            placeholder="성명"
-            width="100%"
-            name="signName"
-            value={signName}
-            margin="0px"
-            _onChange={OnChange}
-          ></Input>
-          <Input
-            placeholder="사용자 이름"
-            width="100%"
-            name="signNickName"
-            value={signNickName}
-            margin="0px"
-            _onChange={OnChange}
-          ></Input>
-          <Input
-            placeholder="비밀번호"
-            width="100%"
-            name="signPw"
-            value={signPw}
-            margin="0px"
-            type="password"
-            _onChange={OnChange}
-          ></Input>
+          <InputBox>
+            <Input
+              placeholder="성명"
+              width="100%"
+              name="signName"
+              value={signName}
+              margin="0px"
+              _onChange={OnChange}
+            ></Input>
+            {namecheck.check ? (
+              namecheck.boo ? (
+                <Dot className="green">
+                  <CheckCircleOutlinedIcon />
+                </Dot>
+              ) : (
+                <Dot className="red">
+                  <CancelOutlinedIcon />
+                </Dot>
+              )
+            ) : (
+              ''
+            )}
+            {namecheck.check ? (
+              namecheck.boo ? (
+                <SpanTxt className="green">{namecheck.comment}</SpanTxt>
+              ) : (
+                <SpanTxt className="red">{namecheck.comment}</SpanTxt>
+              )
+            ) : (
+              ''
+            )}
+          </InputBox>
+          <InputBox>
+            <Input
+              placeholder="사용자 이름"
+              width="100%"
+              name="signNickName"
+              value={signNickName}
+              margin="0px"
+              _onChange={OnChange}
+            ></Input>
+            {nicknamecheck.check ? (
+              nicknamecheck.boo ? (
+                <Dot className="green">
+                  <CheckCircleOutlinedIcon />
+                </Dot>
+              ) : (
+                <Dot className="red">
+                  <CancelOutlinedIcon />
+                </Dot>
+              )
+            ) : (
+              ''
+            )}
+            {nicknamecheck.check ? (
+              nicknamecheck.boo ? (
+                <SpanTxt className="green">{nicknamecheck.comment}</SpanTxt>
+              ) : (
+                <SpanTxt className="red">{nicknamecheck.comment}</SpanTxt>
+              )
+            ) : (
+              ''
+            )}
+          </InputBox>
+          <InputBox>
+            <Input
+              placeholder="비밀번호"
+              width="100%"
+              name="signPw"
+              value={signPw}
+              margin="0px"
+              type="password"
+              _onChange={OnChange}
+            ></Input>
+            {pwcheck.check ? (
+              pwcheck.boo ? (
+                <Dot className="green">
+                  <CheckCircleOutlinedIcon />
+                </Dot>
+              ) : (
+                <Dot className="red">
+                  <CancelOutlinedIcon />
+                </Dot>
+              )
+            ) : (
+              ''
+            )}
+            {pwcheck.check ? (
+              pwcheck.boo ? (
+                <SpanTxt className="green">{pwcheck.comment}</SpanTxt>
+              ) : (
+                <SpanTxt className="red">{pwcheck.comment}</SpanTxt>
+              )
+            ) : (
+              ''
+            )}
+          </InputBox>
+
           <Button
             margin="10px 0px 0px"
             className={succeed === false ? 'unActiveBtn' : ''}
@@ -186,10 +375,15 @@ const Dot = styled.div`
   }
 `;
 const SpanTxt = styled.p`
-  color: red;
   font-size: 12px;
   line-height: 30px;
   padding-left: 10px;
+  &.red {
+    color: red;
+  }
+  &.green {
+    color: green;
+  }
 `;
 const InputBox = styled.div`
   position: relative;

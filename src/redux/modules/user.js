@@ -20,16 +20,15 @@ const LoginGet = createAction(LOGIN, user => ({
 const signInGetDB = user_info => {
   return async function (dispatch, getstate, { history }) {
     console.log(user_info);
-    // const LoginInfo = await apis.signin(user_info);
-    // setToken('authorization', LoginInfo.token);
-    // localStorage.setItem('userInfo',JSON.stringify( LoginInfo.user));
+    const LoginInfo = await apis.signin(user_info);
+    setToken('authorization', LoginInfo.token);
+    localStorage.setItem('userInfo', JSON.stringify(LoginInfo.user));
     history.push('/');
   };
 };
 const signUpPostDB = userInfo => {
   return async function (dispatch, getstate, { history }) {
-    // const LoginInfo = await apis.signup(userInfo);
-    localStorage.setItem('json', JSON.stringify({ a: 1, b: 2 }));
+    const LoginInfo = await apis.signup(userInfo);
     history.push('/in/signin');
   };
 };

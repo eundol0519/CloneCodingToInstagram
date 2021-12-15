@@ -15,7 +15,7 @@ const SignBox = props => {
   const [succeed, setSucceed] = React.useState(false);
   const [noneDate, setnoneDate] = React.useState(false);
   const ClickEvent = () => {
-    history.push('/signUp');
+    history.push('/in/signUp');
   };
   const LoginClickEvent = () => {
     if (isEmail(idref.current.value)) {
