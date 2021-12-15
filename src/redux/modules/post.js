@@ -85,10 +85,6 @@ const getPostDB = () => {
       const post_list = response.data;
       console.log(post_list);
 
-      const getPost = createAction(GET_POST, postInfo => ({
-        postInfo,
-      }));
-
       dispatch(getPosts(post_list));
     } catch (error) {
       console.log(error);
@@ -97,11 +93,11 @@ const getPostDB = () => {
   };
 };
 
-const getMyPostDB = nickname => {
+const getMyPostDB = userId => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('getMyPostDB try!!');
-      const response = await apis.getMyPost(nickname);
+      const response = await apis.getMyPost(userId);
       console.log(response);
 
       const myPostInfo = response.data;
@@ -159,7 +155,6 @@ export default handleActions(
     [GET_MYPOST]: (state, action) =>
       produce(state, draft => {
         draft.myPageList = action.payload.myPostInfo;
-        draft.postList = action.payload.post_list;
       }),
   },
   initialState
