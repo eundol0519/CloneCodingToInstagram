@@ -30,7 +30,7 @@ const signUpPostDB = userInfo => {
   return async function (dispatch, getstate, { history }) {
     // const LoginInfo = await apis.signup(userInfo);
     localStorage.setItem('json', JSON.stringify({ a: 1, b: 2 }));
-    history.push('/signin');
+    history.push('/in/signin');
   };
 };
 const ProfileModification = userInfoNew => {
