@@ -13,26 +13,33 @@ import { history } from '../redux/configureStore';
 
 const SignBox = props => {
   const dispatch = useDispatch();
-  const emailRef = React.useRef('');
-  const nameRef = React.useRef('');
-  const nicknameRef = React.useRef('');
-  const pwRef = React.useRef('');
+
+  const [inputs, setInputs] = React.useState({
+    signEmail: '',
+    signName: '',
+    signNickName: '',
+    signPw: '',
+  });
+
+  const { signEmail, signName, signNickName, signPw } = inputs;
+
   const [Span, setSpan] = React.useState(false);
   const [succeed, setSucceed] = React.useState(false);
   const [answer, setAnswer] = React.useState(true);
 
   const ClickEvent = () => {
-    const email = emailRef.current.value;
-    const name = nameRef.current.value;
-    const nickname = nicknameRef.current.value;
-    const pw = pwRef.current.value;
-    if (isEmail(email)) {
-      if (email !== '' && name !== '' && nickname !== '' && pw !== '') {
+    if (isEmail(signEmail)) {
+      if (
+        signEmail !== '' &&
+        signName !== '' &&
+        signNickName !== '' &&
+        signPw !== ''
+      ) {
         const userInfo = {
-          email: emailRef.current.value,
-          name: nameRef.current.value,
-          nickname: nicknameRef.current.value,
-          pw: pwRef.current.value,
+          email: signEmail,
+          name: signName,
+          nickname: signNickName,
+          pw: signPw,
         };
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
         // dispatch(userActions.signUpPostDB(userInfo));
@@ -44,16 +51,22 @@ const SignBox = props => {
       setSpan(false);
     }
   };
-  const OnChange = () => {
-    const email = emailRef.current.value;
-    const name = nameRef.current.value;
-    const nickname = nicknameRef.current.value;
-    const pw = pwRef.current.value;
+  const OnChange = e => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    });
+
     setAnswer(false);
 
-    if (isEmail(email)) {
+    if (isEmail(signEmail)) {
       setSpan(true);
-      if (email !== '' && name !== '' && nickname !== '' && pw !== '') {
+      if (
+        signEmail !== '' &&
+        signName !== '' &&
+        signNickName !== '' &&
+        signPw !== ''
+      ) {
         setSucceed(true);
       }
     }
@@ -71,8 +84,9 @@ const SignBox = props => {
         <Grid is_flex padding="34px 42px" column="column" gap="10px">
           <InputBox>
             <Input
-              _ref={emailRef}
               placeholder="이메일 주소"
+              name="signEmail"
+              value={signEmail}
               width="100%"
               margin="0px"
               _onChange={OnChange}
@@ -97,23 +111,26 @@ const SignBox = props => {
             )}
           </InputBox>
           <Input
-            _ref={nameRef}
             placeholder="성명"
             width="100%"
+            name="signName"
+            value={signName}
             margin="0px"
             _onChange={OnChange}
           ></Input>
           <Input
-            _ref={nicknameRef}
             placeholder="사용자 이름"
             width="100%"
+            name="signNickName"
+            value={signNickName}
             margin="0px"
             _onChange={OnChange}
           ></Input>
           <Input
-            _ref={pwRef}
             placeholder="비밀번호"
             width="100%"
+            name="signPw"
+            value={signPw}
             margin="0px"
             type="password"
             _onChange={OnChange}

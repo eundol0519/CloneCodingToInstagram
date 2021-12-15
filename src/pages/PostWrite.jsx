@@ -6,7 +6,7 @@ import apis from '../shared/apis';
 import { Grid, Text, Image, Button, Input } from '../elements/index';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { actionCreators as postActions } from '../redux/modules/post';
+//import { actionCreators as postActions } from '../redux/modules/post';
 import { Container } from '../elements';
 
 const PostWrtie = props => {
@@ -90,7 +90,7 @@ const PostWrtie = props => {
 
   // 게시글 작성
   const write = () => {
-    postActions.PostWriteFB(content, imgFile);
+    // postActions.PostWriteFB(content, imgFile);
   };
 
   return (
