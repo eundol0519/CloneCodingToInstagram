@@ -90,28 +90,33 @@ const PostDetail = props => {
           alt="게시물 사진"
         ></img>
       </Grid>
-      <Grid width="40%" height="100%" float="left">
+      <Grid width="39%" height="100%" float="left">
         {commentBox ? (
           <>
-            <Grid height="10%" is_flex margin="0px 0px 0px 2%">
+            <Grid height="10%" is_flex margin="1% 1% 2% 1%">
               <Grid is_flex justifyContent>
                 <Image shape="circle" src={`${postInfo.imageUrl}`}></Image>
                 <Text bold>{postInfo.nickname}</Text>
               </Grid>
-              <Grid width="30%" center _onClick={back}>
+              <Grid width="20%" center _onClick={back}>
                 뒤로가기
               </Grid>
             </Grid>
-            <Grid height="60%" overflow>
+            <Grid height="60%" overflow margin="1% 2% 1% 2%">
               {commentInfo.map(c => {
                 return (
                   <>
-                    <Grid margin="0px 0px 2% 1%" key={c.commentId}>
-                      <Grid margin="2% 0%">{c.nickname}</Grid>
-                      <Text margin="2% 0%">{c.content}</Text>
-                      <Grid is_flex>
-                        <Grid>{c.createdAt}</Grid>
+                    <Grid key={c.commentId}>
+                      <Text bold margin="0px 0px 2% 0px">
+                        {c.nickname}
+                      </Text>
+                      <Text width="95%" margin="0px 0px 2% 0px">
+                        {c.content}
+                      </Text>
+                      <Grid is_flex gap="35%" margin="3%">
+                        <Text>{c.createdAt}</Text>
                         <Grid
+                          width="50%"
                           _onClick={() => {
                             window.alert('삭제');
                           }}
@@ -119,7 +124,7 @@ const PostDetail = props => {
                           삭제
                         </Grid>
                       </Grid>
-                      <hr></hr>
+                      <hr width="93%" align="left"></hr>
                     </Grid>
                   </>
                 );
@@ -140,30 +145,16 @@ const PostDetail = props => {
               <Grid width="30%">{postInfo.likeCount}개</Grid>
               <Grid width="30%">{postInfo.createdAt}</Grid>
             </Grid>
-            <Grid height="15%" is_flex>
-              <Input
-                width="100%"
-                value={content}
-                _onChange={e => {
-                  setContent(e.target.value);
-                }}
-                _onKeyUp={checkActive}
-                placeholder="댓글 입력..."
-              ></Input>
-              <Button
-                width="10%"
-                padding="5%"
-                className={!active ? 'activeBtn' : 'unActiveBtn'}
-              ></Button>
-            </Grid>
           </>
         ) : (
           <>
-            <Grid height="10%" is_flex justifyContent margin="0px 0px 0px 2%">
+            <Grid height="10%" is_flex justifyContent>
               <Image shape="circle" src={`${postInfo.imageUrl}`}></Image>
               <Text bold>{postInfo.nickname}</Text>
             </Grid>
-            <Grid height="60%">{postInfo.content}</Grid>
+            <Grid height="60%" margin="0px 0px 2% 2%">
+              {postInfo.content}
+            </Grid>
             <Grid height="15%" is_flex>
               <Grid
                 width="30%"
@@ -173,30 +164,31 @@ const PostDetail = props => {
               >
                 ♡
               </Grid>
-              <Grid width="30%" _onClick={commentList}>
+              <Grid width="30%" _onClick={commentList} margin="1% 2% 1% 2%">
                 댓글
               </Grid>
               <Grid width="30%">{postInfo.likeCount}개</Grid>
               <Grid width="30%">{postInfo.createdAt}</Grid>
             </Grid>
-            <Grid height="15%" is_flex>
-              <Input
-                width="100%"
-                value={content}
-                _onChange={e => {
-                  setContent(e.target.value);
-                }}
-                _onKeyUp={checkActive}
-                placeholder="댓글 입력..."
-              ></Input>
-              <Button
-                width="10%"
-                padding="5%"
-                className={!active ? 'activeBtn' : 'unActiveBtn'}
-              ></Button>
-            </Grid>
           </>
         )}
+        <Grid height="10%" gap="0px" is_flex margin="1% 1% 1% 1%">
+          <Input
+            width="100%"
+            value={content}
+            _onChange={e => {
+              setContent(e.target.value);
+            }}
+            _onKeyUp={checkActive}
+            placeholder="댓글 입력..."
+          ></Input>
+          <Button
+            width="5%"
+            padding="5%"
+            margin="0px 5% 0px 0%"
+            className={!active ? 'activeBtn' : 'unActiveBtn'}
+          ></Button>
+        </Grid>
       </Grid>
     </Modal>
   );

@@ -15,7 +15,8 @@ const initialState = {
       {
         nickname: 'abcdefghijklmnopqrstuvwxyz',
         commentId: 1,
-        content: 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz',
+        content:
+          'abcdefghijklmnopqrstsdasdasdasdkajsdkajsdkajsdkuvwxyzabcdefghijklmnopqrstuvwxyz',
         createdAt: '2021-12-13',
       },
       {
