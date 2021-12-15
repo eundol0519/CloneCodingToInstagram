@@ -6,9 +6,8 @@ import apis from '../shared/apis';
 import { Grid, Text, Image, Button, Input } from '../elements/index';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { actionCreators as postActions } from '../redux/modules/post';
+//import { actionCreators as postActions } from '../redux/modules/post';
 import { Container } from '../elements';
-
 
 const PostWrtie = props => {
   const dispatch = useDispatch();
