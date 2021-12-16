@@ -7,7 +7,7 @@ const instanceMulti = axios.create({
   timeout: 1000,
   baseURL: 'http://13.125.45.147',
   headers: {
-    'content-type': 'multipart/form-data',
+    'Content-Type': 'multipart/form-data',
     Accept: 'application/json',
     authorization: USER_TOKEN,
   }, //폼데이터

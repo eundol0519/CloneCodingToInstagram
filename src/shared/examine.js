@@ -45,7 +45,7 @@ export const isPwCheck = pw => {
 };
 
 export const isPhoneNumber = num => {
-  if (num.length >= 9 && num.length <= 12) {
+  if (num == null || (num.length >= 9 && num.length <= 12)) {
     return { check: true, boo: true, comment: '전화 번호가 알맞습니다.' };
   } else {
     return {
@@ -57,7 +57,7 @@ export const isPhoneNumber = num => {
 };
 
 export const isIntro = intro => {
-  if (intro.length <= 200) {
+  if (intro == null || intro.length <= 200) {
     return { check: true, boo: true, comment: '소개문이 알맞습니다.' };
   } else {
     return {

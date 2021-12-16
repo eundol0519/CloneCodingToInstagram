@@ -13,7 +13,7 @@ const Main = props => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(postAtions.getPostDB());
+    // dispatch(postAtions.getPostDB());
   }, []);
 
   const postList = useSelector(state => state.post.postList);

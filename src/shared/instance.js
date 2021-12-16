@@ -2,11 +2,10 @@ import axios from 'axios';
 import { getToken } from './token';
 
 const USER_TOKEN = `Bearer ${getToken('authorization')}`;
-
+console.log(USER_TOKEN);
 const instance = axios.create({
   timeout: 1000,
   baseURL: 'http://13.125.45.147',
-  withCredentials: true, // 쿠키를 자동으로 가지고 가게 설정
   headers: {
     'Content-Type': 'application/json; charset=utf-8',
     'X-Requested-With': 'XMLHttpRequest',

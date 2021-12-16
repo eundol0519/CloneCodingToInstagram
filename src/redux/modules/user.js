@@ -44,6 +44,7 @@ const signInGetDB = userInfo => {
       },
     })
       .then(async res => {
+        console.log(res.data.token);
         setToken('authorization', res.data.token);
 
         axios({
@@ -94,10 +95,11 @@ const signUpPostDB = userInfo => {
       });
   };
 };
-const ProfileModification = userInfoNew => {
+const ProfileModification = (userId, userInfoNew) => {
   return async function (dispatch, getstate, { history }) {
-    // const Info = await apis.editMyProfile(userInfoNew);
     console.log(userInfoNew);
+    await apis.editMyProfile(userId, userInfoNew);
+    localStorage.setItem('userInfo', JSON.stringify(userInfoNew));
     history.push('/');
   };
 };
