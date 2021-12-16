@@ -4,7 +4,7 @@ import axios from 'axios';
 import { getToken } from './token';
 
 const instance = axios.create({
-  baseURL: 'http://13.125.45.147/',
+  baseURL: 'http://13.125.45.147',
   withCredentials: true, // 쿠키를 자동으로 가지고 가게 설정
 });
 

@@ -113,7 +113,9 @@ const GridBox = styled.div`
   ${props => (props.baseline ? `align-items: baseline;` : '')}
   ${props => (props.overflow ? `overflow:scroll;` : '')}
   ${props =>
-    props.Reaction ? '@media (max-width: 935px) { width: 100%;}' : ''}
+    props.Reaction
+      ? '@media (max-width: 935px) { width: 100%;padding: 3%}'
+      : ''}
 `;
 
 const NoWrap = styled.div`

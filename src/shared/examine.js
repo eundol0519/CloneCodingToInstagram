@@ -43,3 +43,27 @@ export const isPwCheck = pw => {
     };
   }
 };
+
+export const isPhoneNumber = num => {
+  if (num.length >= 9 && num.length <= 12) {
+    return { check: true, boo: true, comment: '전화 번호가 알맞습니다.' };
+  } else {
+    return {
+      check: true,
+      boo: false,
+      comment: '전화번호는 9자이상 12자이하 입니다 ',
+    };
+  }
+};
+
+export const isIntro = intro => {
+  if (intro.length <= 200) {
+    return { check: true, boo: true, comment: '소개문이 알맞습니다.' };
+  } else {
+    return {
+      check: true,
+      boo: false,
+      comment: '소개문은 200자 이내 여야 합니다.',
+    };
+  }
+};
