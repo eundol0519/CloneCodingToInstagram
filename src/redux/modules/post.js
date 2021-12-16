@@ -15,31 +15,43 @@ const initialState = {
       postId: 1,
       userId: 1,
       content: '카카오프렌즈는 사랑입니다.',
-      likeCount: '2',
+      commentCount: 3,
+      likeCount: 3,
       userNickname: '초콜렛',
       imageUrl:
         'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
+      imageUrl_profile:
+        'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
       createdAt: '2021-12-13',
+      myLike: false,
     },
     {
       postId: 1,
       userId: 1,
       content: '카카오프렌즈는 사랑입니다.',
-      likeCount: '2',
+      commentCount: 3,
+      likeCount: 3,
       userNickname: '초콜렛',
       imageUrl:
         'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
+      imageUrl_profile:
+        'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
       createdAt: '2021-12-13',
+      myLike: false,
     },
     {
       postId: 1,
       userId: 1,
       content: '카카오프렌즈는 사랑입니다.',
-      likeCount: '2',
+      commentCount: 3,
+      likeCount: 3,
       userNickname: '초콜렛',
       imageUrl:
-        'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
+        'https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg',
+      imageUrl_profile:
+        'https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg',
       createdAt: '2021-12-13',
+      myLike: false,
     },
   ],
 
@@ -47,30 +59,43 @@ const initialState = {
     postId: 4,
     userId: 4,
     content: '글내용',
+    commentCount: '3',
     likeCount: '2',
-    userNickname: '스펀지밥',
+    nickname: '스펀지밥',
     imageUrl: 'uploads/posts/1639370169898_myPhoto.jpg',
     createdAt: '2021-12-13',
+    imageUrl_profile: 'uploads/profiles/165555_myPhoto.jpg',
+    myLike: false,
   },
 
   myPageList: [
     {
-      userEmail: 'test@test.com',
-      userName: '라이언',
-      nickname: '라이언일병구하기',
-      imageUrl_profile:
-        'https://www.google.com/imgres?imgurl=https%3A%2F%2Fitem.kakaocdn.net%2Fdo%2F30cef086c8778d80e1487385bd5efe7b82f3bd8c9735553d03f6f982e10ebe70&imgrefurl=https%3A%2F%2Fe.kakao.com%2Ft%2Fhello-kakao-friends&tbnid=5m-6mpSjEHrZLM&vet=12ahUKEwjFtYH4j-H0AhWVCt4KHb9ZAXsQMygPegUIARDxAQ..i&docid=G_LuMlbZBAamHM&w=210&h=210&itg=1&q=%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%94%84%EB%A0%8C%EC%A6%88&ved=2ahUKEwjFtYH4j-H0AhWVCt4KHb9ZAXsQMygPegUIARDxAQ',
-      introduce: '안녕!!',
-      phoneNumber: '010-1234-5678',
+      postId: 1,
+      content: '글내용1',
+      likeCount: 2,
+      imageUrl:
+        'https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg',
+      createdAt: '2021-12-13',
+    },
+    {
+      postId: 2,
+      content: '글내용2',
+      likeCount: 24,
+      imageUrl:
+        'https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg',
+      createdAt: '2021-12-13',
     },
   ],
 
-  mypage: {
-    postId: 4,
-    content: '글내용',
-    likeCount: '2',
-    imageUrl: 'uploads/posts/1639370169898_myPhoto.jpg',
-    createdAt: '2021-12-13',
+  users: {
+    userId: 1,
+    userEmail: 'test@test.com',
+    userName: 'Olivi',
+    nickname: '스펀지밥',
+    imageUrl_profile:
+      'https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg',
+    introduce: ' Olivia 개인레슨 문의주세요 ❤️🧡💛💚💙💜❤️🧡💛💚💙💜😎😎',
+    phoneNumber: '010-1234-5678',
   },
 
   cards: [
@@ -216,7 +241,8 @@ export default handleActions(
     },
     [GET_MYPOST]: (state, action) =>
       produce(state, draft => {
-        draft.myPageList = action.payload.myPostInfo;
+        draft.myPageList = action.payload.myPostInfo.posts;
+        draft.users = action.payload.myPostInfo.users;
       }),
     [SET_LIKE]: (state, action) =>
       produce(state, draft => {

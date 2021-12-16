@@ -8,16 +8,8 @@ import Typography from '@mui/material/Typography';
 
 import Grid from '../elements/Grid';
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
-
 const MiniCard = props => {
+  const users = props.users;
   return (
     <Card sx={{ minWidth: 614 }}>
       <CardContent>
@@ -27,15 +19,15 @@ const MiniCard = props => {
             color="text.secondary"
             gutterBottom
           >
-            user_nickname
+            {users.nickname}
           </Typography>
         </Grid>
         <Typography variant="h7" component="div" sx={{ mb: 3 }}>
-          게시물{bull}팔로워{bull}팔로우{bull}
+          게시물 • 팔로워 • 팔로우 •
         </Typography>
 
         <Typography variant="body2">
-          Olivia 개인레슨 문의주세요 ❤️🧡💛💚💙💜❤️🧡💛💚💙💜
+          {users.introduce}
           <br />
           {/* {'"개인레슨"'} */}
         </Typography>
