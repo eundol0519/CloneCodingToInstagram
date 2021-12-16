@@ -36,7 +36,7 @@ const PostDetail = props => {
   };
 
   React.useEffect(() => {
-    dispatch(postActions.PostDetailLookUpFB(postId));
+    dispatch(postActions.PostDetailLookUpFB(props.postId));
   }, []);
 
   const commentList = () => {

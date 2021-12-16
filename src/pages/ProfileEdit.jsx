@@ -106,7 +106,7 @@ const ProfileEdit = props => {
 
     if (response.data.status === 201) {
       alert('프로필 이미지가 변경 되었습니다.');
-      setPreview(`http://3.37.36.119${response.data.url}`);
+      setPreview(`http://13.125.45.147/${response.data.url}`);
     } else {
       alert('프로필 이미지가 변경 되지 않았습니다.');
     }

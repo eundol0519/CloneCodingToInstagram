@@ -10,20 +10,13 @@ import ProfileEdit from '../pages/ProfileEdit';
 import MyPage from '../pages/MyPage';
 import NotFound from '../pages/NotFound';
 import { Container } from '../elements';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
 import Header from '../components/Header';
 import noneHeader from '../components/noneHeader';
-import { ThemeProvider } from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { actionCreators as userAction } from '../redux/modules/user';
 
 function App() {
-  const dispatch = useDispatch();
-  React.useEffect(() => {
-    // dispatch(userAction);
-  }, []);
   const AppRoute = ({ Component, Layout, ...rest }) => (
     <Route
       {...rest}

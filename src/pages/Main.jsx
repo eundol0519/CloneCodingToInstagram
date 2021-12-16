@@ -13,7 +13,7 @@ const Main = props => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    // dispatch(postAtions.getPostDB());
+    dispatch(postAtions.getPostDB());
   }, []);
 
   const postList = useSelector(state => state.post.postList);
@@ -32,7 +32,7 @@ const Main = props => {
         <PostDetail
           modal={postDetailModal}
           setPostDetailModal={setPostDetailModal}
-          postId="0" // postId 넘겨 주시면 됩니다.
+          postId="8" // postId 넘겨 주시면 됩니다.
         ></PostDetail>
       )}
       <Container>
