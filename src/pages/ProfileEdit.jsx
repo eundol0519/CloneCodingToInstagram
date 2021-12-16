@@ -102,7 +102,10 @@ const ProfileEdit = props => {
     formData.append('file', imgfile);
     // 이미지 백엔드 서버 전송
     console.log(imgfile);
-    const response = await apis.uploadMyImage(formData);
+    const response = await apis.uploadMyImage(
+      String(userInfo.userId),
+      formData
+    );
 
     if (response.data.status === 201) {
       alert('프로필 이미지가 변경 되었습니다.');
