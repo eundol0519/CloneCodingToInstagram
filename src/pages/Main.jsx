@@ -38,8 +38,8 @@ const Main = props => {
       <Container>
         {postList.map((p, idx) => {
           return (
-            <Item>
-              <Post key={p.postId} p={p} />
+            <Item key={idx}>
+              <Post p={p} />
             </Item>
           );
         })}

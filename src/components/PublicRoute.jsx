@@ -6,3 +6,15 @@ const PublicRoute = props => {
 };
 
 export default PublicRoute;
+
+const AppRoute = ({ Component, Layout, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (
+      <Layout>
+        <Container margin="0px">
+          <Component {...props}></Component>
+        </Container>
+      </Layout>
+    )}
+  ></Route>
