@@ -44,7 +44,7 @@ const Main = props => {
           );
         })}
       </Container>
-      <ItemBox />
+      {/* <ItemBox /> */}
     </React.Fragment>
   );
 };
@@ -63,13 +63,13 @@ const Item = styled.div`
   margin-bottom: 120px;
 `;
 
-const ItemBox = styled.div`
-  position: fixed;
-  width: 293px;
-  height: 600px;
-  /* background-color: black; */
-  top: 100px;
-  right: 100px;
-`;
+// const ItemBox = styled.div`
+//   position: fixed;
+//   width: 293px;
+//   height: 600px;
+//   /* background-color: black; */
+//   top: 100px;
+//   right: 100px;
+// `;
 
 export default Main;

@@ -1,4 +1,10 @@
 import * as React from 'react';
+import { history } from '../redux/configureStore';
+import { actionCreators as postAtions } from '../redux/modules/post';
+import { actionCreators as commentActions } from '../redux/modules/comment';
+import { useDispatch, useSelector } from 'react-redux';
+import Grid from '../elements/Grid';
+// mui icons import
 // import styled from 'styled-components';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -15,14 +21,43 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 
-import Grid from '../elements/Grid';
-import { history } from '../redux/configureStore';
-import { actionCreators as postAtions } from '../redux/modules/post';
-import { useDispatch, useSelector } from 'react-redux';
-
 function PostCard(props) {
   const p = props.p;
-  console.log(p.userId);
+  const dispatch = useDispatch();
+  const postInfo = useSelector(state => state.post.cards[1]);
+
+  const [content, setContent] = React.useState('');
+  const [like, setLike] = React.useState(postInfo.myLike ? true : false); // 사용자별 좋아요 유무
+  const [active, setActive] = React.useState(true); // 버튼 활성화 유무
+
+  const postLike = () => {
+    if (!like) {
+      //!like = false일때만,
+      // 좋아요 갯수 +1
+      setLike(true);
+      dispatch(postAtions.PostLikeFB(p.postId, 'plus'));
+    } else {
+      // 좋아요 갯수 -1
+      setLike(false);
+      dispatch(postAtions.PostLikeFB(p.postId, 'minus'));
+    }
+  };
+
+  const commentWrite = () => {
+    if (content === undefined || content === '') {
+      window.alert('댓글을 입력 해주세요');
+      return;
+    }
+    dispatch(commentActions.CommentAddFB(p.postId, content));
+    setContent(''); // 댓글을 입력하면 input의 value를 날려준다.
+  };
+  const checkActive = () => {
+    if (content === '') {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  };
   return (
     <Card sx={{ maxWidth: 614 }}>
       <CardHeader
@@ -55,9 +90,8 @@ function PostCard(props) {
           <Grid>
             <IconButton aria-label="add to favorites">
               <FavoriteBorderIcon
-                onClick={() => {
-                  console.log('1');
-                }}
+                style={{ color: like && 'pink' }}
+                onClick={postLike}
               />
             </IconButton>
             <IconButton aria-label="comment">
@@ -112,25 +146,32 @@ function PostCard(props) {
             height: '40px',
             backgroundColor: 'rgba(0,0,0,0)',
           }}
-          onClick={() => {
-            console.log('5');
+          value={content}
+          onChange={e => {
+            setContent(e.target.value);
+          }}
+          onKeyUp={checkActive}
+          onKeyPress={e => {
+            if (e.key === 'Enter') {
+              commentWrite(e);
+            }
           }}
         />
-        <button
-          style={{
-            border: 'none',
-            width: '94px',
-            height: '46px',
-            color: 'skyblue',
-            backgroundColor: 'rgba(0,0,0,0)',
-            cursor: 'pointer',
-          }}
-          onClick={() => {
-            console.log('6');
-          }}
-        >
-          게시
-        </button>
+        <IconButton aria-label="save">
+          <button
+            style={{
+              border: 'none',
+              width: '94px',
+              height: '46px',
+              color: active ? '#B2DFFC' : '#0095f6',
+              backgroundColor: 'rgba(0,0,0,0)',
+            }}
+            onClick={commentWrite}
+            value={content}
+          >
+            게시
+          </button>
+        </IconButton>
       </Grid>
     </Card>
   );
