@@ -103,7 +103,7 @@ const initialState = {
       status: 200,
     },
     {
-      postId: 1,
+      postId: 8,
       content: '카카오프렌즈',
       likeCount: '2',
       nickname: '뚱이2',
@@ -161,12 +161,11 @@ const PostWriteFB = (content, imageUrl) => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('PostWriteFB try!!');
-      const postInfo = { contnet: content, imageurl: imageUrl };
+      const postInfo = { contnet: content, imageUrl: imageUrl };
       const response = await apis.postWrite(postInfo);
+      console.log(response);
 
-      if (response === 201) {
-        dispatch(getPosts());
-      }
+      dispatch(getPostDB());
     } catch (error) {
       console.log(error);
     }

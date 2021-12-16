@@ -22,55 +22,27 @@ const PostWrtie = props => {
 
   // 글 내용
   const changeContent = e => {
-    console.log(e.target.value);
     setContent(e.target.value);
   };
 
   // 이미지 업로드
-  const fileInput = React.useRef();
-  const [files, setFiles] = React.useState('');
   const [imgFile, setImgFile] = React.useState('');
   const [preview, setPreview] = React.useState('');
 
-  const selectFile = e => {
-    console.log(e.target.files[0]); //파일 선택했을때 파일 값 둘이 같아야함
-    console.log(fileInput.current.files[0]); //ref값으로 가져와 지는지
-    setFiles(e.target.files[0]);
+  const upload = async e => {
+    try {
+      const files = e.target.files[0];
+      const formData = new FormData();
+      formData.append('img', files);
 
-    upload();
-  };
+      const response = await apis.uploadPostImage(formData);
+      console.log(response.data.url);
 
-  const upload = async () => {
-    const state = true;
-
-    if (state) {
-      setImgFile('https://i.ytimg.com/vi/Ct1Pp_4FEIY/maxresdefault.jpg');
-      setPreview('https://i.ytimg.com/vi/Ct1Pp_4FEIY/maxresdefault.jpg');
-
-      checkActive(); // 글, 이미지 모두 삽입 되었는 지 확인
-    } else {
-      setImgFile(
-        'https://img.insight.co.kr/static/2021/01/10/700/img_20210110130830_kue82l80.webp'
-      );
-      setPreview(
-        'https://img.insight.co.kr/static/2021/01/10/700/img_20210110130830_kue82l80.webp'
-      );
-    }
-
-    const formData = new FormData();
-    formData.append('file', files);
-
-    const response = await apis.uploadPostImage(formData);
-
-    if (response.data.status === 201) {
       window.alert('사진이 업로드 되었습니다.');
       setImgFile(response.data.url); // 서버에서 받아온 이미지 url
-      setPreview(`${response.data.url}`); // 이미지 url 변수에 저장
-      checkActive(); // 글, 이미지 모두 삽입 되었는 지 확인
-    } else {
-      window.alert('파일을 업로드 하지 못했습니다.');
-      setImgFile('');
-      setPreview('');
+      setPreview(`http://13.125.45.147/${response.data.url}`); // 이미지 url 변수에 저장
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -154,19 +126,18 @@ const PostWrtie = props => {
               id="file"
               name="img"
               encType="multipart/form-data"
-              onChange={selectFile}
-              ref={fileInput}
+              onChange={upload}
               margin="5% 0px 0px 0px"
             ></FileInput>
           </Grid>
-          <Grid height="10%" center>
+          {/* <Grid height="10%" center>
             <FileBtn
               onClick={upload}
               className={imgFile !== '' ? 'activeBtn' : 'unActiveBtn'}
             >
               업로드
             </FileBtn>
-          </Grid>
+          </Grid> */}
         </Grid>
         <Grid width="40%" height="90%" float="left" is_fix>
           <Grid height="10%" is_flex jusifyContent>
