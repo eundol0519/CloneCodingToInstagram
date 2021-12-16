@@ -1,14 +1,25 @@
 // *** MyPage.jsx ***
 
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { actionCreators as postAtions } from '../redux/modules/post';
+import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
 import styled from 'styled-components';
-import Header from '../components/Header';
 import Mypost from '../components/Mypost';
 import Minicard from '../components/Minicard';
 import Grid from '../elements/Grid';
 
 const MyPage = props => {
+  const params = useParams();
+  const userId = params.userId;
+  console.log(userId);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(postAtions.getMyPostDB(userId));
+  }, []);
+  const users = useSelector(state => state.post.users);
   return (
     <React.Fragment>
       <Grid margin="5%"></Grid>
@@ -18,12 +29,12 @@ const MyPage = props => {
             <Items2>
               <Avatar
                 alt="hello"
-                src="http://image.yes24.com/goods/70874453/XL"
+                src={users.imageUrl_profile}
                 sx={{ width: 200, height: 200, margin: 'auto' }}
               />
             </Items2>
             <Items3>
-              <Minicard />
+              <Minicard users={users} />
             </Items3>
           </Grid>
         </Items1>

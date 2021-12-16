@@ -3,17 +3,10 @@ import styled from 'styled-components';
 import logo from '../logo.png';
 import Mypostcard from './Mypostcard';
 const MyPost = props => {
+  console.log(props.p);
   return (
     <React.Fragment>
       <Container>
-        <Mypostcard />
-        <Mypostcard />
-        <Mypostcard />
-        <Mypostcard />
-        <Mypostcard />
-        <Mypostcard />
-        <Mypostcard />
-        <Mypostcard />
         <Mypostcard />
       </Container>
     </React.Fragment>

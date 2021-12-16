@@ -38,7 +38,11 @@ function App() {
                     exact
                     component={ProfileEdit}
                   ></Route>
-                  <Route path="/myPage/:id" exact component={MyPage}></Route>
+                  <Route
+                    path="/myPage/:userId"
+                    exact
+                    component={MyPage}
+                  ></Route>
                 </Switch>
               </Container>
             </Header>
