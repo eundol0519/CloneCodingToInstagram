@@ -9,6 +9,7 @@ const Grid = props => {
     overflow,
     Reaction,
     is_flex,
+    is_fix,
     gap,
     width,
     height,

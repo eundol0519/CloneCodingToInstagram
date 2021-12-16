@@ -138,13 +138,12 @@ const PostDetail = props => {
       }}
     >
       <Grid width="60%" height="100%" float="left">
-        {/* <img src={`서버 주소/${postInfo.imageUrl}`} alt="게시물 사진"></img> */}
         <img
           style={{
             width: '100%',
             height: '500px',
           }}
-          src="https://blog.kakaocdn.net/dn/EicxP/btq2z0ELlLb/4DzUVhKcnWurHt8VoJGWJ1/img.png"
+          src={`${postInfo.imageUrl}`}
           alt="게시물 사진"
         ></img>
       </Grid>
@@ -154,7 +153,9 @@ const PostDetail = props => {
             <Grid height="10%" is_flex margin="1% 1% 2% 1%">
               <Grid is_flex justifyContent>
                 <Image shape="circle" src={`${postInfo.imageUrl}`}></Image>
-                <Text bold>{postInfo.nickname}</Text>
+                <Text width="85%" bold>
+                  {postInfo.nickname}
+                </Text>
               </Grid>
               <ArrowBackIosIcon onClick={back}></ArrowBackIosIcon>
             </Grid>
@@ -190,8 +191,13 @@ const PostDetail = props => {
         ) : (
           <>
             <Grid height="10%" is_flex justifyContent margin="1% 1% 2% 1%">
-              <Image shape="circle" src={`${postInfo.imageUrl}`}></Image>
-              <Text bold>{postInfo.nickname}</Text>
+              <Image
+                shape="circle"
+                src={`${postInfo.imageUrl_profile}`}
+              ></Image>
+              <Text width="85%" bold>
+                {postInfo.nickname}
+              </Text>
             </Grid>
             <Grid height="60%" overflow margin="1% 2% 1% 2%">
               {postInfo.content}

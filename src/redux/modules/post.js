@@ -110,7 +110,6 @@ const getPostDB = () => {
       dispatch(getPosts(post_list));
     } catch (error) {
       console.log(error);
-      window.alert(error);
     }
   };
 };
@@ -165,7 +164,8 @@ const PostDeleteFB = postId => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('PostDeleteFB try');
-      // const response = await apis.deletePost(postId);
+      const response = await apis.deletePost(postId);
+      console.log(response.data.status);
 
       // if (response.status === 204) {
       //   window.alert('게시물이 삭제 되었습니다.');
@@ -182,7 +182,8 @@ const PostLikeFB = (postId, likeStatus) => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('PostLikeFB try');
-      // const response = await apis.postLikeCancel(postId);
+      const response = await apis.postLikeCancel(postId);
+      console.log(response);
       let likeCount = parseInt(getState().post.cards[1].likeCount);
 
       if (likeStatus === 'plus') {
