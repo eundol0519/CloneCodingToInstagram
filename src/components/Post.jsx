@@ -126,7 +126,6 @@ function PostCard(props) {
           <br />
           <br />
           <span style={{ fontWeight: 20 }}>{p.content}</span>
-          {p.content}
           <br />
           <br />
           <spaon style={{ fontWeight: 20, opacity: 0.5 }}>
