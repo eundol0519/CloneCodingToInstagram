@@ -28,7 +28,7 @@ function PostCard(props) {
 
   const [content, setContent] = React.useState('');
   const [like, setLike] = React.useState(postInfo.myLike ? true : false); // 사용자별 좋아요 유무
-  const [active, setActive] = React.useState(true); // 버튼 활성화 유무
+  const [active, setActive] = React.useState(false); // 버튼 활성화 유무
 
   const postLike = () => {
     if (!like) {
@@ -53,9 +53,9 @@ function PostCard(props) {
   };
   const checkActive = () => {
     if (content === '') {
-      setActive(true);
-    } else {
       setActive(false);
+    } else {
+      setActive(true);
     }
   };
   return (
@@ -121,10 +121,11 @@ function PostCard(props) {
       <CardContent>
         <Typography variant="body2" color="Heading3">
           <span style={{ fontWeight: 20, fontWeight: 'bold' }}>
-            좋아요 {p.likeCount} 개
+            좋아요 {postInfo.likeCount} 개
           </span>
           <br />
           <br />
+          onKeyUp={checkActive}
           <span style={{ fontWeight: 20 }}>{p.content}</span>
           <br />
           <br />
@@ -162,7 +163,7 @@ function PostCard(props) {
               border: 'none',
               width: '94px',
               height: '46px',
-              color: active ? '#B2DFFC' : '#0095f6',
+              color: active ? '#0095f6' : '#B2DFFC',
               backgroundColor: 'rgba(0,0,0,0)',
             }}
             onClick={commentWrite}
