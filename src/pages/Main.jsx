@@ -17,6 +17,7 @@ const Main = props => {
   }, []);
 
   const postList = useSelector(state => state.post.postList);
+  console.log(postList);
 
   return (
     <React.Fragment>
@@ -31,21 +32,17 @@ const Main = props => {
         <PostDetail
           modal={postDetailModal}
           setPostDetailModal={setPostDetailModal}
-          postId="8" // postId 넘겨 주시면 됩니다.
+          postId="0" // postId 넘겨 주시면 됩니다.
         ></PostDetail>
       )}
       <Container>
-        {postList ? (
-          <>
-            {postList.map((p, idx) => {
-              return (
-                <Item key={idx}>
-                  <Post p={p} />
-                </Item>
-              );
-            })}
-          </>
-        ) : null}
+        {postList.map((p, idx) => {
+          return (
+            <Item key={idx}>
+              <Post p={p} />
+            </Item>
+          );
+        })}
       </Container>
       {/* <ItemBox /> */}
     </React.Fragment>
