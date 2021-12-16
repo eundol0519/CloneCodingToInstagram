@@ -2,12 +2,26 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import apis from '../../shared/apis';
 import { setToken } from '../../shared/token';
+import axios from 'axios';
 // Actions
 
 const LOGIN = 'LOGIN';
 
 const initialState = {
-  users: [],
+  users: [
+    {
+      status: 200,
+    },
+    {
+      userId: 1,
+      userEmail: 'test@test.com',
+      userName: '홍길동',
+      nickname: '뚱이',
+      imageUrl_profile: 'uploads/profiles/1639343163898_myPhoto.jpg',
+      introduce: '내소개',
+      phoneNumber: '010-1234-5678',
+    },
+  ],
 };
 
 // Action Creators
@@ -17,20 +31,47 @@ const LoginGet = createAction(LOGIN, user => ({
 }));
 
 //미들웨이
-const signInGetDB = user_info => {
+const signInGetDB = userInfo => {
   return async function (dispatch, getstate, { history }) {
-    console.log(user_info);
-    // const LoginInfo = await apis.signin(user_info);
-    // setToken('authorization', LoginInfo.token);
-    // localStorage.setItem('userInfo',JSON.stringify( LoginInfo.user));
-    history.push('/');
+    console.log(userInfo);
+    await axios({
+      method: 'POST',
+      url: 'http://13.125.45.147/api/users/login',
+      data: {
+        userEmail: userInfo.userEmail,
+        password: userInfo.password,
+      },
+    })
+      .then(res => {
+        setToken('authorization', res.headers.authorization);
+        history.push('/');
+      })
+      .catch(error => {
+        alert('로그인에 실패 했습니다.');
+        console.log('로그인 DB ERROR', error);
+      });
   };
 };
 const signUpPostDB = userInfo => {
   return async function (dispatch, getstate, { history }) {
-    // const LoginInfo = await apis.signup(userInfo);
-    localStorage.setItem('json', JSON.stringify({ a: 1, b: 2 }));
-    history.push('/signin');
+    console.log(userInfo);
+    await axios({
+      method: 'POST',
+      url: 'http://13.125.45.147/api/users',
+      data: {
+        userEmail: userInfo.email,
+        userName: userInfo.name,
+        nickname: userInfo.nickname,
+        password: userInfo.pw,
+      },
+    })
+      .then(res => {
+        history.push('/in/signin');
+      })
+      .catch(error => {
+        alert('회원가입에 실패 했습니다.');
+        console.log('회원가입 DB ERROR', error);
+      });
   };
 };
 const ProfileModification = userInfoNew => {

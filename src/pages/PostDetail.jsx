@@ -2,8 +2,7 @@
 
 import React from 'react';
 import Modal from 'react-modal';
-import { Grid, Image, Text, Input, Button } from '../elements/index';
-import { Container } from '../elements';
+import { Grid, Image, Text } from '../elements/index';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
@@ -21,6 +20,7 @@ const PostDetail = props => {
   const postId = useParams(); // 파라미터로 넘어온 postId
   const dispatch = useDispatch();
   const postInfo = useSelector(state => state.post.cards[1]);
+  const userInfo = useSelector(state => state.user.users[1]);
   const commentInfo = useSelector(state => state.comment.cards[1]);
 
   const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
@@ -138,13 +138,12 @@ const PostDetail = props => {
       }}
     >
       <Grid width="60%" height="100%" float="left">
-        {/* <img src={`서버 주소/${postInfo.imageUrl}`} alt="게시물 사진"></img> */}
         <img
           style={{
             width: '100%',
             height: '500px',
           }}
-          src="https://blog.kakaocdn.net/dn/EicxP/btq2z0ELlLb/4DzUVhKcnWurHt8VoJGWJ1/img.png"
+          src={`${postInfo.imageUrl}`}
           alt="게시물 사진"
         ></img>
       </Grid>
@@ -154,7 +153,9 @@ const PostDetail = props => {
             <Grid height="10%" is_flex margin="1% 1% 2% 1%">
               <Grid is_flex justifyContent>
                 <Image shape="circle" src={`${postInfo.imageUrl}`}></Image>
-                <Text bold>{postInfo.nickname}</Text>
+                <Text width="85%" bold>
+                  {postInfo.nickname}
+                </Text>
               </Grid>
               <ArrowBackIosIcon onClick={back}></ArrowBackIosIcon>
             </Grid>
@@ -171,14 +172,16 @@ const PostDetail = props => {
                       </Text>
                       <Grid is_flex gap="55%" margin="3%">
                         <Text>{c.createdAt}</Text>
-                        <Grid
-                          width="50%"
-                          _onClick={() => {
-                            commentDelete(c.commentId);
-                          }}
-                        >
-                          <ClearIcon></ClearIcon>
-                        </Grid>
+                        {userInfo.nickname === c.nickname ? (
+                          <Grid
+                            width="50%"
+                            _onClick={() => {
+                              commentDelete(c.commentId);
+                            }}
+                          >
+                            <ClearIcon></ClearIcon>
+                          </Grid>
+                        ) : null}
                       </Grid>
                       <hr width="98%" align="left"></hr>
                     </Grid>
@@ -190,8 +193,13 @@ const PostDetail = props => {
         ) : (
           <>
             <Grid height="10%" is_flex justifyContent margin="1% 1% 2% 1%">
-              <Image shape="circle" src={`${postInfo.imageUrl}`}></Image>
-              <Text bold>{postInfo.nickname}</Text>
+              <Image
+                shape="circle"
+                src={`${postInfo.imageUrl_profile}`}
+              ></Image>
+              <Text width="85%" bold>
+                {postInfo.nickname}
+              </Text>
             </Grid>
             <Grid height="60%" overflow margin="1% 2% 1% 2%">
               {postInfo.content}
@@ -213,9 +221,11 @@ const PostDetail = props => {
                     onClick={commentList}
                   ></ChatBubbleOutlineIcon>
                 </IconButton>
-                <IconButton aria-label="delete">
-                  <ClearIcon onClick={postDelete}></ClearIcon>
-                </IconButton>
+                {userInfo.nickname === postInfo.nickname ? (
+                  <IconButton aria-label="delete">
+                    <ClearIcon onClick={postDelete}></ClearIcon>
+                  </IconButton>
+                ) : null}
               </Grid>
             </Grid>
           </CardActions>
@@ -262,7 +272,5 @@ const PostDetail = props => {
     </Modal>
   );
 };
-
-<span style={{ fontWeight: 20 }}>좋아요 개</span>;
 
 export default PostDetail;

@@ -106,7 +106,7 @@ const initialState = {
       postId: 1,
       content: '카카오프렌즈',
       likeCount: '2',
-      nickname: '초콜렛',
+      nickname: '뚱이2',
       imageUrl:
         'https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg',
       createdAt: '2021-12-13',
@@ -135,7 +135,6 @@ const getPostDB = () => {
       dispatch(getPosts(post_list));
     } catch (error) {
       console.log(error);
-      window.alert(error);
     }
   };
 };
@@ -190,13 +189,14 @@ const PostDeleteFB = postId => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('PostDeleteFB try');
-      // const response = await apis.deletePost(postId);
+      const response = await apis.deletePost(postId);
+      console.log(response.data.status);
 
-      // if (response.status === 204) {
-      //   window.alert('게시물이 삭제 되었습니다.');
-      // } else {
-      //   return;
-      // }
+      if (response.status === 204) {
+        window.alert('게시물이 삭제 되었습니다.');
+      } else {
+        return;
+      }
     } catch (error) {
       console.log(error);
     }
@@ -207,7 +207,7 @@ const PostLikeFB = (postId, likeStatus) => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('PostLikeFB try');
-      // const response = await apis.postLikeCancel(postId);
+      const response = await apis.postLikeCancel(postId);
       let likeCount = parseInt(getState().post.cards[1].likeCount);
 
       if (likeStatus === 'plus') {

@@ -9,6 +9,7 @@ const Grid = props => {
     overflow,
     Reaction,
     is_flex,
+    is_fix,
     gap,
     width,
     height,
@@ -86,7 +87,7 @@ Grid.defaultProps = {
   border: '0px',
   baseline: false,
   borderBottom: false,
-  overflow: false,
+  overflow: 'auto',
 };
 
 const GridBox = styled.div`

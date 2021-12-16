@@ -13,7 +13,7 @@ const initialState = {
     },
     [
       {
-        nickname: 'abcdefghijklmnopqrstuvwxyz',
+        nickname: '스펀지밥',
         commentId: 1,
         content:
           'abcdefghijklmnopqrstsdasdasdasdkajsdkajsdkajsdkuvwxyzabcdefghijklmnopqrstuvwxyz',
@@ -27,31 +27,31 @@ const initialState = {
       },
       {
         nickname: '뚱이',
-        commentId: 2,
+        commentId: 3,
         content: '댓글내용2',
         createdAt: '2021-12-14',
       },
       {
         nickname: '뚱이',
-        commentId: 2,
+        commentId: 4,
         content: '댓글내용2',
         createdAt: '2021-12-14',
       },
       {
         nickname: '뚱이',
-        commentId: 2,
+        commentId: 5,
         content: '댓글내용2',
         createdAt: '2021-12-14',
       },
       {
         nickname: '뚱이',
-        commentId: 2,
+        commentId: 6,
         content: '댓글내용2',
         createdAt: '2021-12-14',
       },
       {
         nickname: '뚱이',
-        commentId: 2,
+        commentId: 7,
         content: '댓글내용2',
         createdAt: '2021-12-14',
       },

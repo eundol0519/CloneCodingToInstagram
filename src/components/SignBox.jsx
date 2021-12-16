@@ -10,18 +10,22 @@ import { useDispatch } from 'react-redux';
 import { isEmail } from '../shared/examine';
 const SignBox = props => {
   const dispatch = useDispatch();
-  const idref = React.useRef('');
-  const pwref = React.useRef('');
   const [succeed, setSucceed] = React.useState(false);
   const [noneDate, setnoneDate] = React.useState(false);
+  const [State, setState] = React.useState({
+    IdState: '',
+    PwState: '',
+  });
+
+  const { IdState, PwState } = State;
   const ClickEvent = () => {
-    history.push('/signUp');
+    history.push('/in/signUp');
   };
   const LoginClickEvent = () => {
-    if (isEmail(idref.current.value)) {
+    if (isEmail(IdState)) {
       const user_info = {
-        userEmail: idref.current.value,
-        password: pwref.current.value,
+        userEmail: IdState,
+        password: PwState,
       };
       dispatch(userActions.signInGetDB(user_info));
       setnoneDate(false);
@@ -29,8 +33,13 @@ const SignBox = props => {
       setnoneDate(true);
     }
   };
-  const OnChanges = () => {
-    if (isEmail(idref.current.value)) {
+  const OnChanges = e => {
+    console.log(e.target.value);
+    setState({
+      ...State,
+      [e.target.name]: e.target.value,
+    });
+    if (isEmail(IdState)) {
       setSucceed(true);
     }
   };
@@ -42,16 +51,18 @@ const SignBox = props => {
         </Grid>
         <Grid is_flex padding="34px 42px" column="column" gap="10px">
           <Input
-            _ref={idref}
             placeholder="이메일"
             width="100%"
+            name="IdState"
+            value={IdState}
             _onChange={OnChanges}
           ></Input>
           <Input
-            _ref={pwref}
             placeholder="비밀번호"
             width="100%"
+            name="PwState"
             type="password"
+            value={PwState}
             _onChange={OnChanges}
           ></Input>
           <Button

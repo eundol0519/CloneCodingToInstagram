@@ -7,7 +7,6 @@ import { Grid, Text, Image, Button, Input } from '../elements/index';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
-import { Container } from '../elements';
 
 const PostWrtie = props => {
   const dispatch = useDispatch();
@@ -66,7 +65,7 @@ const PostWrtie = props => {
     if (response.data.status === 201) {
       window.alert('사진이 업로드 되었습니다.');
       setImgFile(response.data.url); // 서버에서 받아온 이미지 url
-      setPreview(`http://3.37.36.119${response.data.url}`); // 이미지 url 변수에 저장
+      setPreview(`${response.data.url}`); // 이미지 url 변수에 저장
       checkActive(); // 글, 이미지 모두 삽입 되었는 지 확인
     } else {
       window.alert('파일을 업로드 하지 못했습니다.');
@@ -110,102 +109,98 @@ const PostWrtie = props => {
           },
           content: {
             position: 'absolute',
-            top: '50%',
+            top: '70%',
             left: '50%',
             width: '50%',
-            height: '60%',
-            // width: '60%',
+            height: '70%',
             border: 'none',
-            background: 'rgb(255, 255, 255)',
+            background: '#fff',
             overflow: 'auto',
-            borderRadius: '5px',
+            WebkitOverflowScrolling: 'touch',
+            borderRadius: '3px',
             outline: 'none',
-            padding: '20px 0px',
             transform: 'translate(-50%, -50%)',
+            padding: '0px',
+            margin: 'auto',
           },
         }}
       >
-        {/* ---------------------게시물 작성하기 text 부분--------------------- */}
-        <Grid
-          width="100%"
-          center
-          borderBottom="solid rgba(188, 191, 187, 0.93) 1px"
-        >
-          <Text lineHeight="10px" bold>
+        <Grid width="100%" height="10%" float="left" center>
+          <Text bold margin="2% 0px 0px 0px">
             게시물 작성하기
           </Text>
         </Grid>
-        {/* ---------------------이미지 업로드 부분--------------------- */}
-        <Grid is_flex>
-          <Grid width="70%">
-            <Grid center margin="-6% 0px 0px 0px">
-              <label htmlFor="file">
-                {preview ? (
-                  <Image
-                    src={preview}
-                    alt="게시물 사진"
-                    shape="rectangle"
-                    size="20"
-                  ></Image>
-                ) : (
-                  <Image
-                    src="https://lh3.googleusercontent.com/proxy/eN7kqAaYEdN961JDil-W2VAIs0C9ly0deQQg2l2aFqNwECL08FoT4ltpSGQJpILDP_AhPFoKBQyN0l-rU3mlTEYE"
-                    alt="게시물 사진"
-                    shape="rectangle"
-                    size="20"
-                  ></Image>
-                )}
-              </label>
-              <FileInput
-                type="file"
-                id="file"
-                name="img"
-                encType="multipart/form-data"
-                onChange={selectFile}
-                ref={fileInput}
-                margin="5% 0px 0px 0px"
-              ></FileInput>
-              <FileBtn
-                onClick={upload}
-                className={imgFile !== '' ? 'activeBtn' : 'unActiveBtn'}
-              >
-                업로드
-              </FileBtn>
-            </Grid>
+        <Grid width="60%" height="90%" float="left">
+          <Grid height="90%">
+            <label htmlFor="file">
+              {preview ? (
+                <Image
+                  src={preview}
+                  alt="게시물 사진"
+                  shape="rectangle"
+                  size="20"
+                ></Image>
+              ) : (
+                <Image
+                  src="https://image.freepik.com/free-vector/the-robot-can-not-find-your-page-error-page-404-not-found_138353-32.jpg"
+                  alt="게시물 사진"
+                  shape="rectangle"
+                  size="20"
+                ></Image>
+              )}
+            </label>
+            <FileInput
+              type="file"
+              id="file"
+              name="img"
+              encType="multipart/form-data"
+              onChange={selectFile}
+              ref={fileInput}
+              margin="5% 0px 0px 0px"
+            ></FileInput>
           </Grid>
-          {/* ---------------------게시물 내용 작성하는 부분--------------------- */}
-          <Grid width="30%">
-            <Grid is_flex justifyContent>
-              <Image shape="circle"></Image>
-              <Text bold>eundol</Text>
-            </Grid>
-            <Grid>
-              <Input
-                rows="15"
-                width="100%"
-                wrap="on"
-                value={content}
-                _onChange={changeContent}
-                _onKeyUp={checkActive}
-                multiLine
-                border="none"
-                placeholder="문구 입력..."
-              ></Input>
-              <FileBtn
-                style={{
-                  width: '55%',
-                  height: '28px',
-                  padding: '2x',
-                }}
-                className={!active ? 'activeBtn' : 'unActiveBtn'}
-                disabled={active}
-                onClick={write}
-              >
-                작성하기
-              </FileBtn>
-            </Grid>
+          <Grid height="10%" center>
+            <FileBtn
+              onClick={upload}
+              className={imgFile !== '' ? 'activeBtn' : 'unActiveBtn'}
+            >
+              업로드
+            </FileBtn>
           </Grid>
-          {/* ----------------------------------------------- */}
+        </Grid>
+        <Grid width="40%" height="90%" float="left" is_fix>
+          <Grid height="10%" is_flex jusifyContent>
+            <Image padding="10px" shape="circle"></Image>
+            <Text width="85%" bold>
+              eundol
+            </Text>
+          </Grid>
+          <Grid height="80%">
+            <Input
+              rows="20"
+              width="100%"
+              wrap="on"
+              value={content}
+              _onChange={changeContent}
+              _onKeyUp={checkActive}
+              multiLine
+              border="none"
+              placeholder="문구 입력..."
+            ></Input>
+          </Grid>
+          <Grid height="10%" center>
+            <FileBtn
+              style={{
+                width: '55%',
+                height: '28px',
+              }}
+              className={!active ? 'activeBtn' : 'unActiveBtn'}
+              disabled={active}
+              onClick={write}
+            >
+              작성하기
+            </FileBtn>
+          </Grid>
         </Grid>
       </Modal>
     </React.Fragment>
@@ -226,7 +221,6 @@ const FileBtn = styled.button`
   text-align: center;
   line-height: 27px;
   font-size: 14px;
-  margin-top: 3%;
 }`;
 
 const FileInput = styled.input`
