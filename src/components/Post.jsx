@@ -31,7 +31,7 @@ function PostCard(props) {
             alt="라이언"
             src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201906/11/ed4c23f1-8ffa-4275-82a7-c6f358b44a27.jpg"
             onClick={() => {
-              history.push('/myPage');
+              history.push(`/myPage/${p.userId}`);
             }}
           />
         }

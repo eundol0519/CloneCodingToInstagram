@@ -19,39 +19,16 @@ import { history } from '../redux/configureStore';
 const SignBox = props => {
   const dispatch = useDispatch();
 
-  const [inputs, setInputs] = React.useState({
-    signEmail: '',
-    signName: '',
-    signNickName: '',
-    signPw: '',
-  });
-  const [boo, setBoo] = React.useState({
-    succeed: false,
-    answer: true,
-    Span: {
-      check: false,
-      boo: false,
-      comment: '이메일 형식에 맞지 않습니다.',
-    },
-    namecheck: {
-      check: false,
-      boo: false,
-      comment: '이름이 형식에 맞지 않습니다.',
-    },
-    nicknamecheck: {
-      check: false,
-      boo: false,
-      comment: '닉네임이 형식에 맞지 않습니다.',
-    },
-    pwcheck: {
-      check: false,
-      boo: false,
-      comment: '비밀번호가 형식에 맞지 않습니다.',
-    },
-  });
-
-  const { signEmail, signName, signNickName, signPw } = inputs;
-  const { Span, succeed, answer, namecheck, nicknamecheck, pwcheck } = boo;
+  const [signEmail, setsignEmail] = React.useState('');
+  const [signName, setsignName] = React.useState('');
+  const [signNickName, setsignNickName] = React.useState('');
+  const [signPw, setsignPw] = React.useState('');
+  const [Email, setEmail] = React.useState({});
+  const [Namecheck, setNamecheck] = React.useState({});
+  const [Nicknamecheck, setNicknamecheck] = React.useState({});
+  const [Pwcheck, setPwcheck] = React.useState({});
+  const [succeed, setsucceed] = React.useState(false);
+  const [answer, setanswer] = React.useState(false);
 
   const ClickEvent = () => {
     if (
@@ -66,123 +43,59 @@ const SignBox = props => {
         nickname: signNickName,
         pw: signPw,
       };
-      localStorage.setItem('userInfo', JSON.stringify(userInfo));
-      // dispatch(userActions.signUpPostDB(userInfo));
+      // localStorage.setItem('userInfo', JSON.stringify(userInfo));
+      dispatch(userActions.signUpPostDB(userInfo));
+      setsucceed(true);
+      setanswer(false);
     } else {
-      setBoo({ ...boo, succeed: true });
+      setanswer(true);
+    }
+  };
+
+  const CheckInputData = (SETSTATE, Checkfuc, Value) => {
+    if (Value !== '') {
+      SETSTATE({ check: true });
+      console.log(Value);
+      console.log(Checkfuc(Value));
+      if (Checkfuc(Value).boo) {
+        SETSTATE(Checkfuc(Value));
+      } else {
+        SETSTATE(Checkfuc(Value));
+      }
     }
   };
   const OnChange = e => {
-    setInputs({
-      ...inputs,
-      [e.target.name]: e.target.value,
-    });
-    if (signEmail !== '') {
-      setBoo({
-        ...boo,
-        Span: { check: true, ...Span },
-      });
-      if (isEmail(signEmail).boo) {
-        setBoo({
-          ...boo,
-          Span: { check: true, boo: true, comment: '이메일 형식에 맞습니다.' },
-        });
-      } else {
-        setBoo({
-          ...boo,
-          Span: {
-            check: true,
-            boo: false,
-            comment: '이메일 형식에 맞지 않습니다.',
-          },
-        });
-      }
-    }
-    if (signName !== '') {
-      setBoo({
-        ...boo,
-        namecheck: { check: true, ...namecheck },
-      });
-      if (isNameCheck(signName).boo) {
-        setBoo({
-          ...boo,
-          namecheck: {
-            check: true,
-            boo: true,
-            comment: '이름 형식에 맞습니다.',
-          },
-        });
-      } else {
-        setBoo({
-          ...boo,
-          namecheck: {
-            check: true,
-            boo: false,
-            comment: '이름 형식에 맞지 않습니다.',
-          },
-        });
-      }
-    }
-    if (signNickName !== '') {
-      setBoo({
-        ...boo,
-        nicknamecheck: { check: true, ...nicknamecheck },
-      });
-      if (isNickNameCheck(signNickName).boo) {
-        setBoo({
-          ...boo,
-          nicknamecheck: {
-            check: true,
-            boo: true,
-            comment: '닉네임 형식에 맞습니다.',
-          },
-        });
-      } else {
-        setBoo({
-          ...boo,
-          nicknamecheck: {
-            check: true,
-            boo: false,
-            comment: '닉네임 형식에 맞지 않습니다.',
-          },
-        });
-      }
-    }
-    if (signPw !== '') {
-      setBoo({
-        ...boo,
-        pwcheck: { check: true, ...pwcheck },
-      });
-      if (isPwCheck(signPw).boo) {
-        setBoo({
-          ...boo,
-          pwcheck: {
-            check: true,
-            boo: true,
-            comment: '비밀번호 형식에 맞습니다.',
-          },
-        });
-      } else {
-        setBoo({
-          ...boo,
-          pwcheck: {
-            check: true,
-            boo: false,
-            comment: '비밀번호 형식에 맞지 않습니다.',
-          },
-        });
-      }
-    }
-    console.log(boo);
     if (
       isNickNameCheck(signNickName).boo &&
       isPwCheck(signPw).boo &&
       isNameCheck(signName).boo &&
       isEmail(signEmail).boo
     ) {
-      return setBoo({ ...boo, succeed: true });
+      return setsucceed(true);
     }
   };
+
+  const EmailCheckfuc = e => {
+    setsignEmail(e.target.value);
+    CheckInputData(setEmail, isEmail, signEmail);
+    OnChange();
+  };
+  const NameCheckfuc = e => {
+    setsignName(e.target.value);
+    CheckInputData(setNamecheck, isNameCheck, signName);
+    OnChange();
+  };
+  const NickNameCheckfuc = e => {
+    setsignNickName(e.target.value);
+    CheckInputData(setNicknamecheck, isNickNameCheck, signNickName);
+    OnChange();
+  };
+  const PwCheckfuc = e => {
+    setsignPw(e.target.value);
+    CheckInputData(setPwcheck, isPwCheck, signPw);
+    OnChange();
+  };
+
   const ClickMove = () => {
     history.push('/in/signin');
   };
@@ -201,10 +114,10 @@ const SignBox = props => {
               value={signEmail}
               width="100%"
               margin="0px"
-              _onChange={OnChange}
+              _onChange={EmailCheckfuc}
             ></Input>
-            {Span.check ? (
-              Span.boo ? (
+            {Email.check ? (
+              Email.boo ? (
                 <Dot className="green">
                   <CheckCircleOutlinedIcon />
                 </Dot>
@@ -216,11 +129,11 @@ const SignBox = props => {
             ) : (
               ''
             )}
-            {Span.check ? (
-              Span.boo ? (
-                <SpanTxt className="green">{Span.comment}</SpanTxt>
+            {Email.check ? (
+              Email.boo ? (
+                <SpanTxt className="green">{Email.comment}</SpanTxt>
               ) : (
-                <SpanTxt className="red">{Span.comment}</SpanTxt>
+                <SpanTxt className="red">{Email.comment}</SpanTxt>
               )
             ) : (
               ''
@@ -233,10 +146,10 @@ const SignBox = props => {
               name="signName"
               value={signName}
               margin="0px"
-              _onChange={OnChange}
+              _onChange={NameCheckfuc}
             ></Input>
-            {namecheck.check ? (
-              namecheck.boo ? (
+            {Namecheck.check ? (
+              Namecheck.boo ? (
                 <Dot className="green">
                   <CheckCircleOutlinedIcon />
                 </Dot>
@@ -248,11 +161,11 @@ const SignBox = props => {
             ) : (
               ''
             )}
-            {namecheck.check ? (
-              namecheck.boo ? (
-                <SpanTxt className="green">{namecheck.comment}</SpanTxt>
+            {Namecheck.check ? (
+              Namecheck.boo ? (
+                <SpanTxt className="green">{Namecheck.comment}</SpanTxt>
               ) : (
-                <SpanTxt className="red">{namecheck.comment}</SpanTxt>
+                <SpanTxt className="red">{Namecheck.comment}</SpanTxt>
               )
             ) : (
               ''
@@ -265,10 +178,10 @@ const SignBox = props => {
               name="signNickName"
               value={signNickName}
               margin="0px"
-              _onChange={OnChange}
+              _onChange={NickNameCheckfuc}
             ></Input>
-            {nicknamecheck.check ? (
-              nicknamecheck.boo ? (
+            {Nicknamecheck.check ? (
+              Nicknamecheck.boo ? (
                 <Dot className="green">
                   <CheckCircleOutlinedIcon />
                 </Dot>
@@ -280,11 +193,11 @@ const SignBox = props => {
             ) : (
               ''
             )}
-            {nicknamecheck.check ? (
-              nicknamecheck.boo ? (
-                <SpanTxt className="green">{nicknamecheck.comment}</SpanTxt>
+            {Nicknamecheck.check ? (
+              Nicknamecheck.boo ? (
+                <SpanTxt className="green">{Nicknamecheck.comment}</SpanTxt>
               ) : (
-                <SpanTxt className="red">{nicknamecheck.comment}</SpanTxt>
+                <SpanTxt className="red">{Nicknamecheck.comment}</SpanTxt>
               )
             ) : (
               ''
@@ -298,10 +211,10 @@ const SignBox = props => {
               value={signPw}
               margin="0px"
               type="password"
-              _onChange={OnChange}
+              _onChange={PwCheckfuc}
             ></Input>
-            {pwcheck.check ? (
-              pwcheck.boo ? (
+            {Pwcheck.check ? (
+              Pwcheck.boo ? (
                 <Dot className="green">
                   <CheckCircleOutlinedIcon />
                 </Dot>
@@ -313,11 +226,11 @@ const SignBox = props => {
             ) : (
               ''
             )}
-            {pwcheck.check ? (
-              pwcheck.boo ? (
-                <SpanTxt className="green">{pwcheck.comment}</SpanTxt>
+            {Pwcheck.check ? (
+              Pwcheck.boo ? (
+                <SpanTxt className="green">{Pwcheck.comment}</SpanTxt>
               ) : (
-                <SpanTxt className="red">{pwcheck.comment}</SpanTxt>
+                <SpanTxt className="red">{Pwcheck.comment}</SpanTxt>
               )
             ) : (
               ''
@@ -332,11 +245,9 @@ const SignBox = props => {
             가입
           </Button>
           {answer ? (
-            ''
-          ) : succeed ? (
-            ''
+            <SpanTxt className="red">정보를 다 입력하지 않았습니다.</SpanTxt>
           ) : (
-            <SpanTxt>정보를 다 입력하지 않았습니다.</SpanTxt>
+            ''
           )}
         </Grid>
       </Grid>
