@@ -8,7 +8,20 @@ import axios from 'axios';
 const LOGIN = 'LOGIN';
 
 const initialState = {
-  users: [],
+  users: [
+    {
+      status: 200,
+    },
+    {
+      userId: 1,
+      userEmail: 'test@test.com',
+      userName: '홍길동',
+      nickname: '뚱이',
+      imageUrl_profile: 'uploads/profiles/1639343163898_myPhoto.jpg',
+      introduce: '내소개',
+      phoneNumber: '010-1234-5678',
+    },
+  ],
 };
 
 // Action Creators

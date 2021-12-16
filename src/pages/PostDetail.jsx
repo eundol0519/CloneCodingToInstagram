@@ -21,6 +21,7 @@ const PostDetail = props => {
   const postId = useParams(); // 파라미터로 넘어온 postId
   const dispatch = useDispatch();
   const postInfo = useSelector(state => state.post.cards[1]);
+  const userInfo = useSelector(state => state.user.users[1]);
   const commentInfo = useSelector(state => state.comment.cards[1]);
 
   const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
@@ -172,14 +173,16 @@ const PostDetail = props => {
                       </Text>
                       <Grid is_flex gap="55%" margin="3%">
                         <Text>{c.createdAt}</Text>
-                        <Grid
-                          width="50%"
-                          _onClick={() => {
-                            commentDelete(c.commentId);
-                          }}
-                        >
-                          <ClearIcon></ClearIcon>
-                        </Grid>
+                        {userInfo.nickname === c.nickname ? (
+                          <Grid
+                            width="50%"
+                            _onClick={() => {
+                              commentDelete(c.commentId);
+                            }}
+                          >
+                            <ClearIcon></ClearIcon>
+                          </Grid>
+                        ) : null}
                       </Grid>
                       <hr width="98%" align="left"></hr>
                     </Grid>

@@ -13,7 +13,7 @@ const initialState = {
     },
     [
       {
-        nickname: 'abcdefghijklmnopqrstuvwxyz',
+        nickname: '스펀지밥',
         commentId: 1,
         content:
           'abcdefghijklmnopqrstsdasdasdasdkajsdkajsdkajsdkuvwxyzabcdefghijklmnopqrstuvwxyz',
