@@ -19,9 +19,9 @@ import ClearIcon from '@mui/icons-material/Clear';
 const PostDetail = props => {
   const postId = useParams(); // 파라미터로 넘어온 postId
   const dispatch = useDispatch();
-  const postInfo = useSelector(state => state.post.cards[1]);
-  const userInfo = useSelector(state => state.user.users[1]);
-  const commentInfo = useSelector(state => state.comment.cards[1]);
+  const postInfo = useSelector(state => state.post.cards);
+  const userInfo = useSelector(state => state.user.users);
+  const commentInfo = useSelector(state => state.comment.cards);
 
   const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
   const [active, setActive] = React.useState(true); // 버튼 활성화 유무
@@ -36,12 +36,12 @@ const PostDetail = props => {
   };
 
   React.useEffect(() => {
-    dispatch(postActions.PostDetailLookUpFB(props.postId));
+    dispatch(postActions.PostDetailLookUpFB(8));
   }, []);
 
   const commentList = () => {
     if (!commentBox) {
-      dispatch(commentActions.CommentLookUpFB(postId));
+      dispatch(commentActions.CommentLookUpFB(8));
       setCommentBox(true);
     } else {
       setCommentBox(false);
@@ -66,7 +66,7 @@ const PostDetail = props => {
       return;
     }
 
-    dispatch(commentActions.CommentAddFB(props.postId, content));
+    dispatch(commentActions.CommentAddFB(8, content));
     setContent(''); // 댓글을 입력하면 input의 value를 날려준다.
   };
 
@@ -74,7 +74,7 @@ const PostDetail = props => {
     const deleteConfirm = window.confirm('댓글을 삭제 하시겠습니까?');
 
     if (deleteConfirm) {
-      dispatch(commentActions.CommentDeleteFB(commentId, props.postId));
+      dispatch(commentActions.CommentDeleteFB(commentId, 8));
     }
   };
 
@@ -160,34 +160,38 @@ const PostDetail = props => {
               <ArrowBackIosIcon onClick={back}></ArrowBackIosIcon>
             </Grid>
             <Grid height="60%" overflow margin="1% 2% 1% 2%">
-              {commentInfo.map(c => {
-                return (
-                  <>
-                    <Grid key={c.commentId}>
-                      <Text bold margin="0px 0px 2% 3%">
-                        {c.nickname}
-                      </Text>
-                      <Text width="90%" margin="0px 0px 2% 3%">
-                        {c.content}
-                      </Text>
-                      <Grid is_flex gap="55%" margin="3%">
-                        <Text>{c.createdAt}</Text>
-                        {userInfo.nickname === c.nickname ? (
-                          <Grid
-                            width="50%"
-                            _onClick={() => {
-                              commentDelete(c.commentId);
-                            }}
-                          >
-                            <ClearIcon></ClearIcon>
+              {commentInfo.length === 0 ? (
+                <>
+                  {commentInfo.map(c => {
+                    return (
+                      <>
+                        <Grid key={c.commentId}>
+                          <Text bold margin="0px 0px 2% 3%">
+                            {c.nickname}
+                          </Text>
+                          <Text width="90%" margin="0px 0px 2% 3%">
+                            {c.content}
+                          </Text>
+                          <Grid is_flex gap="55%" margin="3%">
+                            <Text>{c.createdAt}</Text>
+                            {userInfo.nickname === c.nickname ? (
+                              <Grid
+                                width="50%"
+                                _onClick={() => {
+                                  commentDelete(c.commentId);
+                                }}
+                              >
+                                <ClearIcon></ClearIcon>
+                              </Grid>
+                            ) : null}
                           </Grid>
-                        ) : null}
-                      </Grid>
-                      <hr width="98%" align="left"></hr>
-                    </Grid>
-                  </>
-                );
-              })}
+                          <hr width="98%" align="left"></hr>
+                        </Grid>
+                      </>
+                    );
+                  })}
+                </>
+              ) : null}
             </Grid>
           </>
         ) : (

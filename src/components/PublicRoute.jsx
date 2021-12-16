@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import Container from '../elements/Container';
 
 const PublicRoute = props => {
   return null;
@@ -18,3 +19,4 @@ const AppRoute = ({ Component, Layout, ...rest }) => (
       </Layout>
     )}
   ></Route>
+);

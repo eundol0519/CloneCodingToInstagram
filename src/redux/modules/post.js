@@ -98,24 +98,11 @@ const initialState = {
     phoneNumber: '010-1234-5678',
   },
 
-  cards: [
-    {
-      status: 200,
-    },
-    {
-      postId: 8,
-      content: '카카오프렌즈',
-      likeCount: '2',
-      nickname: '뚱이2',
-      imageUrl:
-        'https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg',
-      createdAt: '2021-12-13',
-    },
-  ],
+  cards: {},
 };
 
 // action creators
-const getOnePost = createAction(GET_POST, postInfo => ({
+const getOnePost = createAction(GET_ONE_POST, postInfo => ({
   postInfo,
 }));
 const getPosts = createAction(GET_POST, post_list => ({ post_list }));
@@ -162,7 +149,6 @@ const PostWriteFB = (content, imageUrl) => {
       console.log('PostWriteFB try!!');
       const postInfo = { contnet: content, imageUrl: imageUrl };
       const response = await apis.postWrite(postInfo);
-      console.log(response);
 
       dispatch(getPostDB());
     } catch (error) {
@@ -176,7 +162,8 @@ const PostDetailLookUpFB = postId => {
     try {
       console.log('PostDetailLookUpFB try!!');
       const response = await apis.getDetailPost(postId);
-      dispatch(getOnePost(response.data[1]));
+      console.log(response.data);
+      dispatch(getOnePost(response.data));
     } catch (error) {
       console.log(error);
     }
@@ -190,11 +177,7 @@ const PostDeleteFB = postId => {
       const response = await apis.deletePost(postId);
       console.log(response.data.status);
 
-      if (response.status === 204) {
-        window.alert('게시물이 삭제 되었습니다.');
-      } else {
-        return;
-      }
+      window.alert('게시물이 삭제 되었습니다.');
     } catch (error) {
       console.log(error);
     }
@@ -206,7 +189,7 @@ const PostLikeFB = (postId, likeStatus) => {
     try {
       console.log('PostLikeFB try');
       const response = await apis.postLikeCancel(postId);
-      let likeCount = parseInt(getState().post.cards[1].likeCount);
+      let likeCount = parseInt(getState().post.cards.likeCount);
 
       if (likeStatus === 'plus') {
         console.log('좋아요 +1');
@@ -216,7 +199,7 @@ const PostLikeFB = (postId, likeStatus) => {
         likeCount--;
       }
 
-      let postInfo = { ...getState().post.cards[1], likeCount: likeCount };
+      let postInfo = { ...getState().post.cards, likeCount: likeCount };
       dispatch(setLike(postInfo));
     } catch (error) {
       console.log(error);
@@ -233,8 +216,19 @@ export default handleActions(
         draft.postList = action.payload.post_list;
       }),
     [GET_ONE_POST]: (state, action) => {
-      produce(state, draft => {
-        draft.cards.push(action.payload.postInfo);
+      return produce(state, draft => {
+        const postInfo = action.payload.postInfo;
+
+        draft.cards.postId = postInfo.postId;
+        draft.cards.userId = postInfo.userId;
+        draft.cards.content = postInfo.content;
+        draft.cards.commentCount = postInfo.commentCount;
+        draft.cards.likeCount = postInfo.likeCount;
+        draft.cards.nickname = postInfo.nickname;
+        draft.cards.imageUrl = postInfo.imageUrl;
+        draft.cards.createdAt = postInfo.createdAt;
+        draft.cards.imageUrl_profile = postInfo.imageUrl_profile;
+        draft.cards.myLike = postInfo.myLike;
       });
     },
     [GET_MYPOST]: (state, action) =>
@@ -244,7 +238,7 @@ export default handleActions(
       }),
     [SET_LIKE]: (state, action) =>
       produce(state, draft => {
-        draft.cards[1] = action.payload.postInfo;
+        draft.cards = action.payload.postInfo;
       }),
   },
   initialState

@@ -17,7 +17,6 @@ const Main = props => {
   }, []);
 
   const postList = useSelector(state => state.post.postList);
-  console.log(postList);
 
   return (
     <React.Fragment>
@@ -36,13 +35,17 @@ const Main = props => {
         ></PostDetail>
       )}
       <Container>
-        {postList.map((p, idx) => {
-          return (
-            <Item key={idx}>
-              <Post p={p} />
-            </Item>
-          );
-        })}
+        {postList ? (
+          <>
+            {postList.map((p, idx) => {
+              return (
+                <Item key={idx}>
+                  <Post p={p} />
+                </Item>
+              );
+            })}
+          </>
+        ) : null}
       </Container>
       {/* <ItemBox /> */}
     </React.Fragment>

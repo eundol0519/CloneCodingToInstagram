@@ -42,6 +42,7 @@ const PostWrtie = props => {
       setImgFile(response.data.url); // 서버에서 받아온 이미지 url
       setPreview(`http://13.125.45.147/${response.data.url}`); // 이미지 url 변수에 저장
     } catch (error) {
+      window.alert('사진 업로드에 실패 했습니다.');
       console.log(error);
     }
   };

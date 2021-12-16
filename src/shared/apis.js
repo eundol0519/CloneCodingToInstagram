@@ -26,7 +26,7 @@ const apis = {
   getDetailPost: postId =>
     instance.get(`http://13.125.45.147/api/posts/${postId}`), // 게시글 상세페이지 조회
   postLikeCancel: postId =>
-    instance.post(`http://13.125.45.147/api/posts/like/${postId}`), // 좋아요 / 취소
+    instance.post(`http://13.125.45.147/api/posts/${postId}/like`), // 좋아요 / 취소
   deletePost: postId =>
     instance.delete(`http://13.125.45.147/api/posts/${postId}`), // 게시글 삭제
 
@@ -34,7 +34,8 @@ const apis = {
     instance.get(`http://13.125.45.147/api/comments/${postId}`), // 댓글 조회
   writeComment: (postId, content) =>
     instance.post(`http://13.125.45.147/api/comments/${postId}`, content), // 댓글 작성
-  deleteComment: commentId => instance.delete(`/api/comments/${commentId}`), // 댓글 삭제
+  deleteComment: commentId =>
+    instance.delete(`http://13.125.45.147/api/comments/${commentId}`), // 댓글 삭제
 
   //마이페이지
   getMyPost: userId =>

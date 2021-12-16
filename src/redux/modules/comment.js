@@ -8,9 +8,6 @@ const GET_COMMENT = 'GET_COMMENT';
 
 const initialState = {
   cards: [
-    {
-      status: 200,
-    },
     [
       {
         nickname: '스펀지밥',
@@ -71,9 +68,9 @@ const CommentLookUpFB = postId => {
     try {
       console.log('CommentLookUpFB try');
       const response = await apis.getComment(postId);
-      console.log('CommentLookUpFB response', response.data[1]);
+      console.log('CommentLookUpFB response', response.data);
 
-      dispatch(getComment(response.data[1]));
+      dispatch(getComment(response.data));
     } catch (error) {
       console.log('CommentLookUpFB error');
     }
@@ -86,9 +83,7 @@ const CommentAddFB = (postId, content) => {
       console.log('AddCommentFB try');
       const response = await apis.writeComment(postId, content);
 
-      if (response.status === 204) {
-        dispatch(CommentLookUpFB(postId)); // 댓글 목록 다시 요청
-      }
+      dispatch(CommentLookUpFB(postId)); // 댓글 목록 다시 요청
     } catch (error) {
       console.log('AddCommentFB error');
     }
@@ -101,12 +96,8 @@ const CommentDeleteFB = (commentId, postId) => {
       console.log('CommentDeleteFB try');
       const response = await apis.deleteComment(commentId);
 
-      if (response.status === 204) {
-        window.alert('댓글이 삭제 되었습니다.');
-        dispatch(CommentLookUpFB(postId));
-      } else {
-        return;
-      }
+      window.alert('댓글이 삭제 되었습니다.');
+      dispatch(CommentLookUpFB(postId));
     } catch (error) {
       console.log(error);
     }
@@ -118,7 +109,7 @@ export default handleActions(
   {
     [GET_COMMENT]: (state, action) =>
       produce(state, draft => {
-        draft.cards = [...action.payload.commentInfo];
+        draft.cards = action.payload.commentInfo;
       }),
   },
   initialState

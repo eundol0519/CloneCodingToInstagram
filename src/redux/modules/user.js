@@ -10,9 +10,6 @@ const LOGIN = 'LOGIN';
 const initialState = {
   users: [
     {
-      status: 200,
-    },
-    {
       userId: 1,
       userEmail: 'test@test.com',
       userName: '홍길동',
