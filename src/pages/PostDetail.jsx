@@ -262,8 +262,6 @@ const PostDetail = props => {
               color: active ? '#B2DFFC' : '#0095f6',
               cursor: 'pointer',
             }}
-            onClick={commentWrite}
-            value={content}
           >
             게시
           </button>

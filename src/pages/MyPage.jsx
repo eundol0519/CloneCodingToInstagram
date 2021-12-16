@@ -22,7 +22,7 @@ const MyPage = props => {
   const users = useSelector(state => state.post.users);
   return (
     <React.Fragment>
-      <Grid margin="5%"></Grid>
+      <Grid margin="1%"></Grid>
       <Container>
         <Items1>
           <Grid is_flex>
