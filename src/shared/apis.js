@@ -36,9 +36,9 @@ const apis = {
     instance.post(`http://13.125.45.147/api/comments/${postId}`, content), // 댓글 작성
   deleteComment: commentId => instance.delete(`/api/comments/${commentId}`), // 댓글 삭제
 
-  //마이페이지
+  //다른 유저 페이지
   getMyPost: userId =>
-    instance.get(`http://13.125.45.147/api/users/${userId}/posts`), // 마이페이지 리스트
+    instance.get(`http://13.125.45.147/api/users/posts/${userId}`), // 다른 유저 페이지 리스트
 
   //프로필 수정페이지
   uploadMyImage: (userId, url) =>
