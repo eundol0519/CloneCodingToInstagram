@@ -2,8 +2,7 @@
 
 import React from 'react';
 import Modal from 'react-modal';
-import { Grid, Image, Text, Input, Button } from '../elements/index';
-import { Container } from '../elements';
+import { Grid, Image, Text } from '../elements/index';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
@@ -222,9 +221,11 @@ const PostDetail = props => {
                     onClick={commentList}
                   ></ChatBubbleOutlineIcon>
                 </IconButton>
-                <IconButton aria-label="delete">
-                  <ClearIcon onClick={postDelete}></ClearIcon>
-                </IconButton>
+                {userInfo.nickname === postInfo.nickname ? (
+                  <IconButton aria-label="delete">
+                    <ClearIcon onClick={postDelete}></ClearIcon>
+                  </IconButton>
+                ) : null}
               </Grid>
             </Grid>
           </CardActions>
@@ -271,7 +272,5 @@ const PostDetail = props => {
     </Modal>
   );
 };
-
-<span style={{ fontWeight: 20 }}>좋아요 개</span>;
 
 export default PostDetail;
