@@ -12,14 +12,20 @@ import Grid from '../elements/Grid';
 
 const MyPage = props => {
   const params = useParams();
-  const userId = params.userId;
-  console.log(userId);
+  const userId = params.id;
+  console.log(params);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(postAtions.getMyPostDB(userId));
   }, []);
+
+  const myPageList = useSelector(state => state.post.myPageList);
+  console.log(myPageList);
+
   const users = useSelector(state => state.post.users);
+  console.log(users);
+
   return (
     <React.Fragment>
       <Grid margin="1%"></Grid>

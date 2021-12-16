@@ -23,6 +23,7 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 
 function PostCard(props) {
   const p = props.p;
+  console.log(p);
   const dispatch = useDispatch();
   const postInfo = useSelector(state => state.post.cards);
 
@@ -88,33 +89,38 @@ function PostCard(props) {
       <CardActions disableSpacing>
         <Grid is_flex>
           <Grid>
-            <IconButton aria-label="add to favorites">
-              <FavoriteBorderIcon
-                style={{ color: like && 'pink' }}
-                onClick={postLike}
-              />
+            <IconButton
+              aria-label="add to favorites"
+              onClick={() => {
+                postLike();
+              }}
+            >
+              <FavoriteBorderIcon style={{ color: like && 'pink' }} />
             </IconButton>
-            <IconButton aria-label="comment">
-              <ChatBubbleOutlineIcon
-                onClick={() => {
-                  console.log('2');
-                }}
-              />
+            <IconButton
+              aria-label="comment"
+              onClick={() => {
+                console.log('2');
+              }}
+            >
+              <ChatBubbleOutlineIcon />
             </IconButton>
-            <IconButton aria-label="send">
-              <SendOutlinedIcon
-                onClick={() => {
-                  console.log('3');
-                }}
-              />
+            <IconButton
+              aria-label="send"
+              onClick={() => {
+                console.log('3');
+              }}
+            >
+              <SendOutlinedIcon />
             </IconButton>
           </Grid>
-          <IconButton aria-label="save">
-            <BookmarkBorderOutlinedIcon
-              onClick={() => {
-                console.log('4');
-              }}
-            />
+          <IconButton
+            aria-label="save"
+            onClick={() => {
+              console.log('4');
+            }}
+          >
+            <BookmarkBorderOutlinedIcon />
           </IconButton>
         </Grid>
       </CardActions>
@@ -128,11 +134,11 @@ function PostCard(props) {
           <span style={{ fontWeight: 20 }}>{p.content}</span>
           <br />
           <br />
-          <spaon style={{ fontWeight: 20, opacity: 0.5 }}>
+          <span style={{ fontWeight: 20, opacity: 0.5 }}>
             댓글 {p.commentCount}개 모두보기
-          </spaon>
+          </span>
           <br />
-          <spaon style={{ fontWeight: 20, opacity: 0.5 }}>{p.createdAt}</spaon>
+          <span style={{ fontWeight: 20, opacity: 0.5 }}>{p.createdAt}</span>
         </Typography>
       </CardContent>
       <Grid is_flex>
@@ -156,21 +162,20 @@ function PostCard(props) {
             }
           }}
         />
-        <IconButton aria-label="save">
-          <button
-            style={{
-              border: 'none',
-              width: '94px',
-              height: '46px',
-              color: active ? '#0095f6' : '#B2DFFC',
-              backgroundColor: 'rgba(0,0,0,0)',
-            }}
-            onClick={commentWrite}
-            value={content}
-          >
-            게시
-          </button>
-        </IconButton>
+        <button
+          style={{
+            border: 'none',
+            width: '94px',
+            height: '46px',
+            color: active ? '#0095f6' : '#B2DFFC',
+            backgroundColor: 'rgba(0,0,0,0)',
+            cursor: 'pointer',
+          }}
+          onClick={commentWrite}
+          value={content}
+        >
+          게시
+        </button>
       </Grid>
     </Card>
   );

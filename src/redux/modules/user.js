@@ -1,24 +1,14 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-import apis from '../../shared/apis';
 import { setToken } from '../../shared/token';
 import axios from 'axios';
+import { editMyProfile } from '../../shared/api/myinto';
 // Actions
 
 const LOGIN = 'LOGIN';
 
 const initialState = {
-  users: [
-    {
-      userId: 1,
-      userEmail: 'test@test.com',
-      userName: '홍길동',
-      nickname: '뚱이',
-      imageUrl_profile: 'uploads/profiles/1639343163898_myPhoto.jpg',
-      introduce: '내소개',
-      phoneNumber: '010-1234-5678',
-    },
-  ],
+  users: [],
 };
 
 // Action Creators
@@ -29,10 +19,10 @@ const LoginGet = createAction(LOGIN, user => ({
 
 //미들웨이
 const signInGetDB = userInfo => {
-  return async function (dispatch, getstate, { history }) {
+  return function (dispatch, getstate, { history }) {
     console.log(userInfo);
 
-    await axios({
+    axios({
       method: 'POST',
       url: 'http://13.125.45.147/api/users/login',
       data: {
@@ -71,9 +61,9 @@ const signInGetDB = userInfo => {
   };
 };
 const signUpPostDB = userInfo => {
-  return async function (dispatch, getstate, { history }) {
+  return function (dispatch, getstate, { history }) {
     console.log(userInfo);
-    await axios({
+    axios({
       method: 'POST',
       url: 'http://13.125.45.147/api/users',
       data: {
@@ -84,7 +74,7 @@ const signUpPostDB = userInfo => {
       },
     })
       .then(res => {
-        history.push('/in/signin');
+        history.push('/in/signIn');
       })
       .catch(error => {
         alert('회원가입에 실패 했습니다.');
@@ -95,7 +85,7 @@ const signUpPostDB = userInfo => {
 const ProfileModification = (userId, userInfoNew) => {
   return async function (dispatch, getstate, { history }) {
     console.log(userInfoNew);
-    await apis.editMyProfile(userId, userInfoNew);
+    await editMyProfile(userId, userInfoNew);
     localStorage.setItem('userInfo', JSON.stringify(userInfoNew));
     history.push('/');
   };

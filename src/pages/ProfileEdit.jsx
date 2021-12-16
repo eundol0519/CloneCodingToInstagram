@@ -5,7 +5,7 @@ import { Grid, Input, Button, Image, Text } from '../elements/';
 import styled from 'styled-components';
 import { actionCreators as userActions } from '../redux/modules/user';
 import { useDispatch } from 'react-redux';
-import apis from '../shared/apis';
+import { uploadMyImage } from '../shared/api/myinto';
 import {
   isNameCheck,
   isNickNameCheck,
@@ -18,7 +18,11 @@ const ProfileEdit = props => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
   const [succeed, setSucceed] = React.useState(false);
-  const [preview, setPreview] = React.useState(userInfo.imageUrl_profile);
+  const [preview, setPreview] = React.useState(
+    userInfo.imageUrl_profile
+      ? userInfo.imageUrl_profile
+      : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+  );
   const [NameCheck, setNameCheck] = React.useState({});
   const [NickCheck, setNickCheck] = React.useState({});
   const [IntroCheck, setIntroCheck] = React.useState({});
@@ -83,6 +87,7 @@ const ProfileEdit = props => {
     ) {
       const userInfoNew = {
         ...userInfo,
+        imageUrl_profile: preview,
         userName: editName,
         nickname: editnickName,
         introduce: introduction,
@@ -96,21 +101,15 @@ const ProfileEdit = props => {
   };
 
   const selectFile = async e => {
-    const imgfile = e.target.files[0];
-    const formData = new FormData();
-    //formData에 file이라는 이름으로 files에 저장된 이미지을 집어 넣는다.
-    formData.append('file', imgfile);
-    // 이미지 백엔드 서버 전송
-    console.log(imgfile);
-    const response = await apis.uploadMyImage(
-      String(userInfo.userId),
-      formData
-    );
-
-    if (response.data.status === 201) {
+    try {
+      const imgfile = e.target.files[0];
+      const formData = new FormData();
+      formData.append('img', imgfile);
+      console.log(formData);
+      const response = await uploadMyImage(String(userInfo.userId), formData);
       alert('프로필 이미지가 변경 되었습니다.');
-      setPreview(`http://13.125.45.147/${response.data.url}`);
-    } else {
+      setPreview(response.data.url);
+    } catch (error) {
       alert('프로필 이미지가 변경 되지 않았습니다.');
     }
   };
@@ -127,7 +126,11 @@ const ProfileEdit = props => {
         <Grid is_flex column="column" gap="35px">
           <Grid is_flex padding="0px 0px 0px 10%" gap="3%">
             <div>
-              <Image src={preview} shape="circle" size="45"></Image>
+              <Image
+                src={`http://13.125.45.147/${preview}`}
+                shape="circle"
+                size="45"
+              ></Image>
             </div>
             <Grid is_flex column="column" baseline gap="10px">
               <Text bold size="18px">

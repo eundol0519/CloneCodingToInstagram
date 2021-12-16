@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import apis from '../../shared/apis';
+import api from '../../shared/api';
 
 // Action Type
 
@@ -10,50 +11,7 @@ const GET_MYPOST = 'GET_MYPOST';
 const SET_LIKE = 'SET_LIKE';
 
 const initialState = {
-  postList: [
-    {
-      postId: 1,
-      userId: 1,
-      content: '카카오프렌즈는 사랑입니다.',
-      commentCount: 3,
-      likeCount: 3,
-      userNickname: '초콜렛',
-      imageUrl:
-        'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
-      imageUrl_profile:
-        'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
-      createdAt: '2021-12-13',
-      myLike: false,
-    },
-    {
-      postId: 1,
-      userId: 1,
-      content: '카카오프렌즈는 사랑입니다.',
-      commentCount: 3,
-      likeCount: 3,
-      userNickname: '초콜렛',
-      imageUrl:
-        'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
-      imageUrl_profile:
-        'https://w.namu.la/s/b9052678c125bbdfe7d07ddfa9b3110a1f333e5b1a801d105ad66f9a078ca2eb35f56622ef12ee4f0962ef7f3a603059c6f0a98dda56b939170c2aa7290fe33faf58a73f448852832d8d5353837ca61c',
-      createdAt: '2021-12-13',
-      myLike: false,
-    },
-    {
-      postId: 1,
-      userId: 1,
-      content: '카카오프렌즈는 사랑입니다.',
-      commentCount: 3,
-      likeCount: 3,
-      userNickname: '초콜렛',
-      imageUrl:
-        'https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg',
-      imageUrl_profile:
-        'https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg',
-      createdAt: '2021-12-13',
-      myLike: false,
-    },
-  ],
+  postList: [],
 
   post: {
     postId: 4,
@@ -114,11 +72,8 @@ const getPostDB = () => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('getPostDB try!!');
-      const response = await apis.getPost();
-
+      const response = await getPostList();
       const post_list = response.data.posts;
-      console.log(post_list);
-
       dispatch(getPosts(post_list));
     } catch (error) {
       console.log(error);
@@ -130,6 +85,7 @@ const getMyPostDB = userId => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('getMyPostDB try!!');
+      console.log(userId);
       const response = await apis.getMyPost(userId);
       console.log(response.data);
 
@@ -148,8 +104,9 @@ const PostWriteFB = (content, imageUrl) => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('PostWriteFB try!!');
-      const postInfo = { contnet: content, imageUrl: imageUrl };
-      const response = await apis.postWrite(postInfo);
+      const postInfo = { content: content, imageUrl: imageUrl };
+      console.log(postInfo);
+      const response = await postWriteOn(postInfo);
 
       dispatch(getPostDB());
     } catch (error) {
@@ -162,7 +119,7 @@ const PostDetailLookUpFB = postId => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('PostDetailLookUpFB try!!');
-      const response = await apis.getDetailPost(postId);
+      const response = await getDetailPostList(postId);
       console.log(response.data);
       dispatch(getOnePost(response.data));
     } catch (error) {
@@ -175,7 +132,7 @@ const PostDeleteFB = postId => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('PostDeleteFB try');
-      const response = await apis.deletePost(postId);
+      const response = await deletePostList(postId);
       console.log(response.data.status);
 
       window.alert('게시물이 삭제 되었습니다.');
@@ -189,7 +146,7 @@ const PostLikeFB = (postId, likeStatus) => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('PostLikeFB try');
-      const response = await apis.postLikeCancel(postId);
+      const response = await postLikeCancel(postId);
       let likeCount = parseInt(getState().post.cards.likeCount);
 
       if (likeStatus === 'plus') {

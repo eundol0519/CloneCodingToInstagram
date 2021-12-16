@@ -4,7 +4,6 @@
 const getToken = name => {
   // 쿠키 값을 가져옵니다.
   let value = '; ' + document.cookie;
-
   let parts = value.split('; ' + name + '=');
   if (parts.length === 2) {
     return parts.pop().split(';').shift();

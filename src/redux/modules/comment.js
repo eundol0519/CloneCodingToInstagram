@@ -1,7 +1,10 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-import apis from '../../shared/apis';
-
+import {
+  getComment,
+  writeComment,
+  deleteComment,
+} from '../../shared/api/commnet';
 // Actions
 
 const GET_COMMENT = 'GET_COMMENT';
@@ -58,7 +61,7 @@ const initialState = {
 
 // Action Creators
 
-const getComment = createAction(GET_COMMENT, commentInfo => ({
+const get_Comment = createAction(GET_COMMENT, commentInfo => ({
   commentInfo,
 }));
 
@@ -67,10 +70,10 @@ const CommentLookUpFB = postId => {
   return async function (dispatch, getState, { history }) {
     try {
       console.log('CommentLookUpFB try');
-      const response = await apis.getComment(postId);
+      const response = await getComment(postId);
       console.log('CommentLookUpFB response', response.data);
 
-      dispatch(getComment(response.data));
+      dispatch(get_Comment(response.data));
     } catch (error) {
       console.log('CommentLookUpFB error');
     }
@@ -81,7 +84,7 @@ const CommentAddFB = (postId, content) => {
   return async function (dispatch, getState, { history }) {
     try {
       console.log('AddCommentFB try');
-      const response = await apis.writeComment(postId, content);
+      const response = await writeComment(postId, content);
 
       dispatch(CommentLookUpFB(postId)); // 댓글 목록 다시 요청
     } catch (error) {
@@ -94,7 +97,7 @@ const CommentDeleteFB = (commentId, postId) => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('CommentDeleteFB try');
-      const response = await apis.deleteComment(commentId);
+      const response = await deleteComment(commentId);
 
       window.alert('댓글이 삭제 되었습니다.');
       dispatch(CommentLookUpFB(postId));
