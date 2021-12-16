@@ -1,6 +1,6 @@
 import './App.css';
 
-import React from 'react';
+import React, { Component } from 'react';
 import Main from '../pages/Main';
 import SignUp from '../pages/SignUp';
 import SignIn from '../pages/SignIn';
@@ -10,48 +10,79 @@ import ProfileEdit from '../pages/ProfileEdit';
 import MyPage from '../pages/MyPage';
 import NotFound from '../pages/NotFound';
 import { Container } from '../elements';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
 import Header from '../components/Header';
+import noneHeader from '../components/noneHeader';
 import { ThemeProvider } from 'styled-components';
 
 function App() {
   console.log();
+  const AppRoute = ({ Component, Layout, ...rest }) => (
+    <Route
+      {...rest}
+      render={props => (
+        <Layout>
+          <Component {...props}></Component>
+        </Layout>
+      )}
+    ></Route>
+  );
   return (
     <div className="App">
       <ConnectedRouter history={history}>
         <Switch>
-          <Route path="/:path?/:id?" exact>
-            <Header>
-              <Container margin="0px">
-                <Switch>
-                  <Route path="/" exact component={Main}></Route>
-                  <Route path="/postWrite" exact component={PostWrite}></Route>
-                  <Route
-                    path="/postDetail/:postId"
-                    exact
-                    component={PostDetail}
-                  ></Route>
-                  <Route
-                    path="/profileEdit"
-                    exact
-                    component={ProfileEdit}
-                  ></Route>
-                  <Route path="/myPage/:id" exact component={MyPage}></Route>
-                </Switch>
-              </Container>
-            </Header>
-          </Route>
-          <Route path="/in/:path?" exact>
-            <Container margin="0px">
-              <Switch>
-                <Route path="/in/signIn" exact component={SignIn}></Route>
-                <Route path="/in/signUp" exact component={SignUp}></Route>
-              </Switch>
-            </Container>
-          </Route>
-          <Route component={NotFound}></Route>
+          <Container margin="0px">
+            <Switch>
+              <AppRoute
+                path="/"
+                exact
+                Layout={Header}
+                Component={Main}
+              ></AppRoute>
+              <AppRoute
+                path="/postWrite"
+                exact
+                Component={PostWrite}
+              ></AppRoute>
+              <AppRoute
+                exact
+                path="/postDetail/:id"
+                Layout={Header}
+                Component={PostDetail}
+              ></AppRoute>
+              <AppRoute
+                exact
+                path="/profileEdit"
+                Layout={Header}
+                Component={ProfileEdit}
+              ></AppRoute>
+              <AppRoute
+                exact
+                path="/myPage/:id"
+                Layout={Header}
+                Component={MyPage}
+              ></AppRoute>
+              <AppRoute
+                exact
+                path="/in/signIn"
+                Layout={noneHeader}
+                Component={SignIn}
+              ></AppRoute>
+              <AppRoute
+                exact
+                path="/in/signUp"
+                Layout={noneHeader}
+                Component={SignUp}
+              ></AppRoute>
+              <AppRoute
+                exact
+                Layout={noneHeader}
+                Component={NotFound}
+              ></AppRoute>
+            </Switch>
+          </Container>
         </Switch>
       </ConnectedRouter>
     </div>
