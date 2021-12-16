@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import apis from '../../shared/apis';
+import api from '../../shared/api';
 
 // Action Type
 
@@ -143,6 +144,7 @@ const getMyPostDB = userId => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('getMyPostDB try!!');
+      console.log(userId);
       const response = await apis.getMyPost(userId);
       console.log(response.data);
 
