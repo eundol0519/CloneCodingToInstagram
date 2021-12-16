@@ -129,7 +129,7 @@ const getPostDB = () => {
       console.log('getPostDB try!!');
       const response = await apis.getPost();
 
-      const post_list = response.data;
+      const post_list = response.data.posts;
       console.log(post_list);
 
       dispatch(getPosts(post_list));
@@ -144,7 +144,7 @@ const getMyPostDB = userId => {
     try {
       console.log('getMyPostDB try!!');
       const response = await apis.getMyPost(userId);
-      console.log(response);
+      console.log(response.data);
 
       const myPostInfo = response.data;
       console.log(myPostInfo);

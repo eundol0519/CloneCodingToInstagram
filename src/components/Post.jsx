@@ -125,7 +125,6 @@ function PostCard(props) {
           </span>
           <br />
           <br />
-          onKeyUp={checkActive}
           <span style={{ fontWeight: 20 }}>{p.content}</span>
           <br />
           <br />

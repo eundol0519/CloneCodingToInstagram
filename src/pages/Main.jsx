@@ -16,7 +16,7 @@ const Main = props => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    // dispatch(postAtions.getPostDB());
+    dispatch(postAtions.getPostDB());
   }, []);
 
   const postList = useSelector(state => state.post.postList);
@@ -208,18 +208,17 @@ const Main = props => {
           </ItemBoxIn>
         </ItemBox>
       </Box>
-
+      {/* 
       <Container>
         {postList.map((p, idx) => {
           return (
-            <Item key={idx}>
+            <ContainerItem key={idx}>
               <Post p={p} />
-            </Item>
+            </ContainerItem>
           );
         })}
       </Container>
-      {/* <ItemBox /> */}
-
+      <ItemBox /> */}
     </React.Fragment>
   );
 };
