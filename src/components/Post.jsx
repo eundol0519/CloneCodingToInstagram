@@ -22,14 +22,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function PostCard(props) {
   const p = props.p;
-  console.log(p.imageUrl);
+  console.log(p.userId);
   return (
     <Card sx={{ maxWidth: 614 }}>
       <CardHeader
         avatar={
           <Avatar
             alt="라이언"
-            src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201906/11/ed4c23f1-8ffa-4275-82a7-c6f358b44a27.jpg"
+            src={p.imageUrl_profile}
             onClick={() => {
               history.push(`/myPage/${p.userId}`);
             }}
@@ -91,8 +91,15 @@ function PostCard(props) {
           </span>
           <br />
           <br />
-          <br />
+          <span style={{ fontWeight: 20 }}>{p.content}</span>
           {p.content}
+          <br />
+          <br />
+          <spaon style={{ fontWeight: 20, opacity: 0.5 }}>
+            댓글 {p.commentCount}개 모두보기
+          </spaon>
+          <br />
+          <spaon style={{ fontWeight: 20, opacity: 0.5 }}>{p.createdAt}</spaon>
         </Typography>
       </CardContent>
       <Grid is_flex>
