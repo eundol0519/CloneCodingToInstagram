@@ -16,7 +16,7 @@ const Main = props => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(postAtions.getPostDB());
+    // dispatch(postAtions.getPostDB());
   }, []);
 
   const postList = useSelector(state => state.post.postList);
@@ -38,6 +38,7 @@ const Main = props => {
           postId="0" // postId 넘겨 주시면 됩니다.
         ></PostDetail>
       )}
+
       <Box>
         <Container>
           {postList.map((p, idx) => {
@@ -207,6 +208,18 @@ const Main = props => {
           </ItemBoxIn>
         </ItemBox>
       </Box>
+
+      <Container>
+        {postList.map((p, idx) => {
+          return (
+            <Item key={idx}>
+              <Post p={p} />
+            </Item>
+          );
+        })}
+      </Container>
+      {/* <ItemBox /> */}
+
     </React.Fragment>
   );
 };

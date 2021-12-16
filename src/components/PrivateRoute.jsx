@@ -6,3 +6,15 @@ const PrivateRoute = props => {
 };
 
 export default PrivateRoute;
+
+const AppRoute = ({ Component, Layout, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (
+      <Layout>
+        <Container margin="0px">
+          <Component {...props}></Component>
+        </Container>
+      </Layout>
+    )}
+  ></Route>

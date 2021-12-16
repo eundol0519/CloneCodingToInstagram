@@ -52,7 +52,7 @@ const Input = props => {
           ref={_ref}
           rows={rows}
           cols={cols}
-          value={value}
+          value={value ? value : ''}
           placeholder={placeholder}
           onKeyUp={_onKeyUp}
           onChange={_onChange}
@@ -79,7 +79,7 @@ const Input = props => {
             type={type}
             placeholder={placeholder}
             onChange={_onChange}
-            value={value}
+            value={value ? value : ''}
             onKeyPress={e => {
               if (e.key === 'Enter') {
                 onSubmit(e);
@@ -92,7 +92,7 @@ const Input = props => {
             name={name}
             ref={_ref}
             type={type}
-            value={value}
+            value={value ? value : ''}
             placeholder={placeholder}
             onChange={_onChange}
             onKeyUp={_onKeyUp}

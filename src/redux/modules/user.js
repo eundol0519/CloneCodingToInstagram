@@ -34,6 +34,7 @@ const LoginGet = createAction(LOGIN, user => ({
 const signInGetDB = userInfo => {
   return async function (dispatch, getstate, { history }) {
     console.log(userInfo);
+
     await axios({
       method: 'POST',
       url: 'http://13.125.45.147/api/users/login',
@@ -42,8 +43,28 @@ const signInGetDB = userInfo => {
         password: userInfo.password,
       },
     })
-      .then(res => {
-        setToken('authorization', res.headers.authorization);
+      .then(async res => {
+        console.log(res.data.token);
+        setToken('authorization', res.data.token);
+
+        axios({
+          method: 'GET',
+          url: 'http://13.125.45.147/api/users/me',
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'X-Requested-With': 'XMLHttpRequest',
+            authorization: `Bearer ${res.data.token}`,
+            Accept: 'application/json',
+          },
+          data: {},
+        })
+          .then(res => {
+            localStorage.setItem('userInfo', JSON.stringify(res.data));
+          })
+          .catch(error => {
+            alert('회원정보 GET에 실패 했습니다.');
+            console.log('회원정보 DB ERROR', error);
+          });
         history.push('/');
       })
       .catch(error => {
@@ -74,10 +95,11 @@ const signUpPostDB = userInfo => {
       });
   };
 };
-const ProfileModification = userInfoNew => {
+const ProfileModification = (userId, userInfoNew) => {
   return async function (dispatch, getstate, { history }) {
-    // const Info = await apis.editMyProfile(userInfoNew);
     console.log(userInfoNew);
+    await apis.editMyProfile(userId, userInfoNew);
+    localStorage.setItem('userInfo', JSON.stringify(userInfoNew));
     history.push('/');
   };
 };

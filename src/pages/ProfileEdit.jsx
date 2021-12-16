@@ -15,15 +15,7 @@ import {
 
 const ProfileEdit = props => {
   const dispatch = useDispatch();
-  // const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  const userInfo = {
-    nickname: 'hong',
-    userName: '홍길동',
-    imageUrl_profile:
-      'https://cdn.pixabay.com/photo/2018/05/26/18/06/dog-3431913_1280.jpg',
-    introduce: '내소개',
-    phoneNumber: '010-2234-5678',
-  };
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
   const [succeed, setSucceed] = React.useState(false);
   const [preview, setPreview] = React.useState(userInfo.imageUrl_profile);
@@ -40,8 +32,6 @@ const ProfileEdit = props => {
   const CheckInputData = (SETSTATE, Checkfuc, Value) => {
     if (Value !== '') {
       SETSTATE({ check: true });
-      console.log(Value);
-      console.log(Checkfuc(Value));
       if (Checkfuc(Value).boo) {
         SETSTATE(Checkfuc(Value));
       } else {
@@ -49,14 +39,14 @@ const ProfileEdit = props => {
       }
     }
   };
-  const Last_check =
-    isNameCheck(editName).boo &&
-    isNickNameCheck(editnickName).boo &&
-    isIntro(introduction).boo &&
-    isPhoneNumber(phone_num).boo;
 
   const OnChange = e => {
-    if (Last_check) {
+    if (
+      isNameCheck(editName).boo &&
+      isNickNameCheck(editnickName).boo &&
+      isIntro(introduction).boo &&
+      isPhoneNumber(phone_num).boo
+    ) {
       return setSucceed(true);
     } else {
       return setSucceed(false);
@@ -85,16 +75,23 @@ const ProfileEdit = props => {
   };
 
   const ClickEvent = () => {
-    console.log(editName, editnickName, introduction, phone_num);
-    if (Last_check) {
+    if (
+      isNameCheck(editName).boo &&
+      isNickNameCheck(editnickName).boo &&
+      isIntro(introduction).boo &&
+      isPhoneNumber(phone_num).boo
+    ) {
       const userInfoNew = {
         ...userInfo,
-        name: editName,
+        userName: editName,
         nickname: editnickName,
-        introduction: introduction,
-        phone_num: phone_num,
+        introduce: introduction,
+        phoneNumber: phone_num,
       };
-      dispatch(userActions.ProfileModification(userInfoNew));
+      console.log(String(userInfo.userId), userInfoNew);
+      dispatch(
+        userActions.ProfileModification(String(userInfo.userId), userInfoNew)
+      );
     }
   };
 

@@ -2,31 +2,8 @@
 
 import axios from 'axios';
 import { getToken } from './token';
-
-const instance = axios.create({
-  baseURL: 'http://13.125.45.147',
-  withCredentials: true, // 쿠키를 자동으로 가지고 가게 설정
-});
-
-instance.interceptors.request.use(config => {
-  config.headers['Content-Type'] = 'application/json; charset=utf-8';
-  config.headers['X-Requested-With'] = 'XMLHttpRequest';
-  config.headers['authorization'] = getToken() ? `${getToken()}` : '';
-  config.headers.Accept = 'application/json';
-  return config;
-});
-
-const instanceMulti = axios.create({
-  baseURL: 'url입력',
-  headers: { 'content-type': 'multipart/form-data' }, //폼데이터
-});
-
-instanceMulti.interceptors.request.use(config => {
-  config.headers['X-Requested-With'] = 'XMLHttpRequest';
-  config.headers['authorization'] = getToken() ? `${getToken()}` : '';
-  config.headers.Accept = 'application/json';
-  return config;
-});
+import instanceMulti from './instanceMulti';
+import instance from './instance';
 
 const apis = {
   // 로그인,회원가입
@@ -55,7 +32,8 @@ const apis = {
   getMyPost: userId => instance.get(`/api/users/${userId}/posts`), // 마이페이지 리스트
 
   //프로필 수정페이지
-  uploadMyImage: (userId, url) => instance.post(`/api/users/${userId}`, url), // 프로필 이미지업로드
+  uploadMyImage: (userId, url) =>
+    instanceMulti.post(`/api/users/${userId}`, url), // 프로필 이미지업로드
   editMyProfile: (userId, myPageInfo) =>
     instance.put(`/api/users/${userId}`, myPageInfo), // 마이페이지/내 정보 수정
 };
