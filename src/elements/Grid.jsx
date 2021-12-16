@@ -87,7 +87,7 @@ Grid.defaultProps = {
   border: '0px',
   baseline: false,
   borderBottom: false,
-  overflow: false,
+  overflow: 'auto',
 };
 
 const GridBox = styled.div`

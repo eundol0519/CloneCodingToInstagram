@@ -22,7 +22,7 @@ function App() {
     <div className="App">
       <ConnectedRouter history={history}>
         <Switch>
-          <Route path="/:path?" exact>
+          <Route path="/:path?/:id?" exact>
             <Header>
               <Container margin="0px">
                 <Switch>
@@ -38,7 +38,7 @@ function App() {
                     exact
                     component={ProfileEdit}
                   ></Route>
-                  <Route path="/myPage" exact component={MyPage}></Route>
+                  <Route path="/myPage/:id" exact component={MyPage}></Route>
                 </Switch>
               </Container>
             </Header>

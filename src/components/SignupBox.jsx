@@ -6,7 +6,12 @@ import { Grid, Input, Button } from '../elements';
 import { actionCreators as userActions } from '../redux/modules/user';
 import logo from '../logo.png';
 import { useDispatch } from 'react-redux';
-import { isEmail } from '../shared/examine';
+import {
+  isEmail,
+  isNameCheck,
+  isNickNameCheck,
+  isPwCheck,
+} from '../shared/examine';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import { history } from '../redux/configureStore';
@@ -14,65 +19,85 @@ import { history } from '../redux/configureStore';
 const SignBox = props => {
   const dispatch = useDispatch();
 
-  const [inputs, setInputs] = React.useState({
-    signEmail: '',
-    signName: '',
-    signNickName: '',
-    signPw: '',
-  });
-
-  const { signEmail, signName, signNickName, signPw } = inputs;
-
-  const [Span, setSpan] = React.useState(false);
-  const [succeed, setSucceed] = React.useState(false);
-  const [answer, setAnswer] = React.useState(true);
+  const [signEmail, setsignEmail] = React.useState('');
+  const [signName, setsignName] = React.useState('');
+  const [signNickName, setsignNickName] = React.useState('');
+  const [signPw, setsignPw] = React.useState('');
+  const [Email, setEmail] = React.useState({});
+  const [Namecheck, setNamecheck] = React.useState({});
+  const [Nicknamecheck, setNicknamecheck] = React.useState({});
+  const [Pwcheck, setPwcheck] = React.useState({});
+  const [succeed, setsucceed] = React.useState(false);
+  const [answer, setanswer] = React.useState(false);
 
   const ClickEvent = () => {
-    if (isEmail(signEmail)) {
-      if (
-        signEmail !== '' &&
-        signName !== '' &&
-        signNickName !== '' &&
-        signPw !== ''
-      ) {
-        const userInfo = {
-          email: signEmail,
-          name: signName,
-          nickname: signNickName,
-          pw: signPw,
-        };
-        localStorage.setItem('userInfo', JSON.stringify(userInfo));
-        // dispatch(userActions.signUpPostDB(userInfo));
-        setSpan(true);
-      } else {
-        setSucceed(true);
-      }
+    if (
+      isNickNameCheck(signNickName).boo &&
+      isPwCheck(signPw).boo &&
+      isNameCheck(signName).boo &&
+      isEmail(signEmail).boo
+    ) {
+      const userInfo = {
+        email: signEmail,
+        name: signName,
+        nickname: signNickName,
+        pw: signPw,
+      };
+      // localStorage.setItem('userInfo', JSON.stringify(userInfo));
+      dispatch(userActions.signUpPostDB(userInfo));
+      setsucceed(true);
+      setanswer(false);
     } else {
-      setSpan(false);
+      setanswer(true);
+    }
+  };
+
+  const CheckInputData = (SETSTATE, Checkfuc, Value) => {
+    if (Value !== '') {
+      SETSTATE({ check: true });
+      console.log(Value);
+      console.log(Checkfuc(Value));
+      if (Checkfuc(Value).boo) {
+        SETSTATE(Checkfuc(Value));
+      } else {
+        SETSTATE(Checkfuc(Value));
+      }
     }
   };
   const OnChange = e => {
-    setInputs({
-      ...inputs,
-      [e.target.name]: e.target.value,
-    });
-
-    setAnswer(false);
-
-    if (isEmail(signEmail)) {
-      setSpan(true);
-      if (
-        signEmail !== '' &&
-        signName !== '' &&
-        signNickName !== '' &&
-        signPw !== ''
-      ) {
-        setSucceed(true);
-      }
+    if (
+      isNickNameCheck(signNickName).boo &&
+      isPwCheck(signPw).boo &&
+      isNameCheck(signName).boo &&
+      isEmail(signEmail).boo
+    ) {
+      return setsucceed(true);
     }
   };
+
+  const EmailCheckfuc = e => {
+    setsignEmail(e.target.value);
+    CheckInputData(setEmail, isEmail, signEmail);
+    OnChange();
+  };
+  const NameCheckfuc = e => {
+    setsignName(e.target.value);
+    CheckInputData(setNamecheck, isNameCheck, signName);
+    OnChange();
+  };
+  const NickNameCheckfuc = e => {
+    setsignNickName(e.target.value);
+    CheckInputData(setNicknamecheck, isNickNameCheck, signNickName);
+    OnChange();
+  };
+  const PwCheckfuc = e => {
+    setsignPw(e.target.value);
+    CheckInputData(setPwcheck, isPwCheck, signPw);
+    OnChange();
+  };
+
   const ClickMove = () => {
-    history.push('/signin');
+    history.push('/in/signin');
   };
   return (
     <Grid width="375px">
@@ -89,52 +114,129 @@ const SignBox = props => {
               value={signEmail}
               width="100%"
               margin="0px"
-              _onChange={OnChange}
+              _onChange={EmailCheckfuc}
             ></Input>
-            {answer ? (
-              ''
-            ) : Span ? (
-              <Dot className="green">
-                <CheckCircleOutlinedIcon />
-              </Dot>
+            {Email.check ? (
+              Email.boo ? (
+                <Dot className="green">
+                  <CheckCircleOutlinedIcon />
+                </Dot>
+              ) : (
+                <Dot className="red">
+                  <CancelOutlinedIcon />
+                </Dot>
+              )
             ) : (
-              <Dot className="red">
-                <CancelOutlinedIcon />
-              </Dot>
+              ''
             )}
-            {answer ? (
-              ''
-            ) : Span ? (
-              ''
+            {Email.check ? (
+              Email.boo ? (
+                <SpanTxt className="green">{Email.comment}</SpanTxt>
+              ) : (
+                <SpanTxt className="red">{Email.comment}</SpanTxt>
+              )
             ) : (
-              <SpanTxt>이메일 형식에 맞지 않습니다.</SpanTxt>
+              ''
             )}
           </InputBox>
-          <Input
-            placeholder="성명"
-            width="100%"
-            name="signName"
-            value={signName}
-            margin="0px"
-            _onChange={OnChange}
-          ></Input>
-          <Input
-            placeholder="사용자 이름"
-            width="100%"
-            name="signNickName"
-            value={signNickName}
-            margin="0px"
-            _onChange={OnChange}
-          ></Input>
-          <Input
-            placeholder="비밀번호"
-            width="100%"
-            name="signPw"
-            value={signPw}
-            margin="0px"
-            type="password"
-            _onChange={OnChange}
-          ></Input>
+          <InputBox>
+            <Input
+              placeholder="성명"
+              width="100%"
+              name="signName"
+              value={signName}
+              margin="0px"
+              _onChange={NameCheckfuc}
+            ></Input>
+            {Namecheck.check ? (
+              Namecheck.boo ? (
+                <Dot className="green">
+                  <CheckCircleOutlinedIcon />
+                </Dot>
+              ) : (
+                <Dot className="red">
+                  <CancelOutlinedIcon />
+                </Dot>
+              )
+            ) : (
+              ''
+            )}
+            {Namecheck.check ? (
+              Namecheck.boo ? (
+                <SpanTxt className="green">{Namecheck.comment}</SpanTxt>
+              ) : (
+                <SpanTxt className="red">{Namecheck.comment}</SpanTxt>
+              )
+            ) : (
+              ''
+            )}
+          </InputBox>
+          <InputBox>
+            <Input
+              placeholder="사용자 이름"
+              width="100%"
+              name="signNickName"
+              value={signNickName}
+              margin="0px"
+              _onChange={NickNameCheckfuc}
+            ></Input>
+            {Nicknamecheck.check ? (
+              Nicknamecheck.boo ? (
+                <Dot className="green">
+                  <CheckCircleOutlinedIcon />
+                </Dot>
+              ) : (
+                <Dot className="red">
+                  <CancelOutlinedIcon />
+                </Dot>
+              )
+            ) : (
+              ''
+            )}
+            {Nicknamecheck.check ? (
+              Nicknamecheck.boo ? (
+                <SpanTxt className="green">{Nicknamecheck.comment}</SpanTxt>
+              ) : (
+                <SpanTxt className="red">{Nicknamecheck.comment}</SpanTxt>
+              )
+            ) : (
+              ''
+            )}
+          </InputBox>
+          <InputBox>
+            <Input
+              placeholder="비밀번호"
+              width="100%"
+              name="signPw"
+              value={signPw}
+              margin="0px"
+              type="password"
+              _onChange={PwCheckfuc}
+            ></Input>
+            {Pwcheck.check ? (
+              Pwcheck.boo ? (
+                <Dot className="green">
+                  <CheckCircleOutlinedIcon />
+                </Dot>
+              ) : (
+                <Dot className="red">
+                  <CancelOutlinedIcon />
+                </Dot>
+              )
+            ) : (
+              ''
+            )}
+            {Pwcheck.check ? (
+              Pwcheck.boo ? (
+                <SpanTxt className="green">{Pwcheck.comment}</SpanTxt>
+              ) : (
+                <SpanTxt className="red">{Pwcheck.comment}</SpanTxt>
+              )
+            ) : (
+              ''
+            )}
+          </InputBox>
+
           <Button
             margin="10px 0px 0px"
             className={succeed === false ? 'unActiveBtn' : ''}
@@ -143,11 +245,9 @@ const SignBox = props => {
             가입
           </Button>
           {answer ? (
-            ''
-          ) : succeed ? (
-            ''
+            <SpanTxt className="red">정보를 다 입력하지 않았습니다.</SpanTxt>
           ) : (
-            <SpanTxt>정보를 다 입력하지 않았습니다.</SpanTxt>
+            ''
           )}
         </Grid>
       </Grid>
@@ -186,10 +286,15 @@ const Dot = styled.div`
   }
 `;
 const SpanTxt = styled.p`
-  color: red;
   font-size: 12px;
   line-height: 30px;
   padding-left: 10px;
+  &.red {
+    color: red;
+  }
+  &.green {
+    color: green;
+  }
 `;
 const InputBox = styled.div`
   position: relative;
