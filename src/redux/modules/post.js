@@ -56,14 +56,6 @@ const initialState = {
         "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg",
       createdAt: "2021-12-13",
     },
-    {
-      postId: 2,
-      content: "글내용2",
-      likeCount: 24,
-      imageUrl:
-        "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg",
-      createdAt: "2021-12-13",
-    },
   ],
 
   users: {
