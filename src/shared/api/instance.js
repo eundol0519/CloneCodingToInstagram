@@ -3,7 +3,6 @@ import { getToken } from "../token";
 
 // const USER_TOKEN = `Bearer ${getToken("authorization")}`;
 const USER_TOKEN = "Bearer " + getToken("authorization");
-console.log(USER_TOKEN);
 
 const instance = axios.create({
   timeout: 3000,

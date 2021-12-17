@@ -16,10 +16,11 @@ import { delToken } from "../shared/token";
 const Header = props => {
   const { children } = props;
   const [postWrtieModal, setPostWriteModal] = React.useState(false);
+  const [Scroll, setScroll] = React.useState(false);
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  console.log(userInfo);
+
   return (
-    <div>
+    <div style={{ paddingTop: "76px" }}>
       <HeaderWeb>
         <Container>
           <Grid is_flex is_fix padding="0.5rem" bg="white">
@@ -69,6 +70,11 @@ const Header = props => {
 const HeaderWeb = styled.div`
   background-color: #fff;
   border-bottom: solid rgba(188, 191, 187, 0.93) 1px;
+  position: fixed;
+  width: 100%;
+  left: 0px;
+  z-index: 99;
+  top: 0px;
 `;
 const Logo = styled.img`
   width: 150px;

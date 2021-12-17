@@ -5,23 +5,51 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
 import Grid from "../elements/Grid";
-
+import Iamcheck from "../shared/Iamcheck";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { history } from "../redux/configureStore";
 const MiniCard = props => {
   const users = props.users;
-  console.log(users);
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
   return (
     <Card sx={{ minWidth: 614 }}>
       <CardContent>
-        <Grid is_flex>
+        <Grid is_flex margin="0px 0px 20px" gap="20px">
           <Typography
-            sx={{ fontSize: 30, mb: 3 }}
+            sx={{ fontSize: 30, marginBottom: 0 }}
             color="text.secondary"
             gutterBottom
           >
             {users.nickname}
           </Typography>
+          <Iamcheck userId={users.userId}>
+            <div
+              style={{
+                marginRight: "auto",
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+              <Button
+                sx={{
+                  border: "1px solid #cdcdcd",
+                  color: "#000",
+                  padding: "7px",
+                  lineHeight: 1,
+                }}
+                variant="outlined"
+                onClick={() => {
+                  history.push("/profileEdit");
+                }}
+              >
+                프로필 편집
+              </Button>
+              <SettingsIcon></SettingsIcon>
+            </div>
+          </Iamcheck>
         </Grid>
         <Typography variant="h7" component="div" sx={{ mb: 3 }}>
           게시물 • 팔로워 • 팔로우 •
