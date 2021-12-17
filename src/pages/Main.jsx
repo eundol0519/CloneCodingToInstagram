@@ -48,6 +48,7 @@ const Main = props => {
                 <ContainerItem key={p.postId}>
                   <Post p={p} detailOpen={detailOpen} postId={p.postId} />
                 </ContainerItem>
+
                 {postDetailModal && (
                   <PostDetail
                     modal={postDetailModal}

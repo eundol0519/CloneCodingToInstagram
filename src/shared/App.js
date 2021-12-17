@@ -15,6 +15,8 @@ import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 import Header from "../components/Header";
 import noneHeader from "../components/noneHeader";
+import PublicRoute from "../components/PublicRoute";
+import PrivateRoute from "../components/PrivateRoute";
 
 function App() {
   const AppRoute = ({ Component, Layout, ...rest }) => (
@@ -34,44 +36,34 @@ function App() {
       <ConnectedRouter history={history}>
         <Switch>
           <Switch>
-            <AppRoute
-              path="/"
-              exact
-              Layout={Header}
-              Component={Main}
-            ></AppRoute>
-            <AppRoute path="/postWrite" exact Component={PostWrite}></AppRoute>
-            <AppRoute
-              exact
-              path="/postDetail/:id"
-              Layout={Header}
-              Component={PostDetail}
-            ></AppRoute>
-            <AppRoute
+            <PrivateRoute Component={Main} path="/" exact></PrivateRoute>
+            <PrivateRoute
               exact
               path="/profileEdit"
-              Layout={Header}
               Component={ProfileEdit}
-            ></AppRoute>
-            <AppRoute
+            ></PrivateRoute>
+            <PrivateRoute
               exact
               path="/myPage/:id"
-              Layout={Header}
               Component={MyPage}
-            ></AppRoute>
-            <AppRoute
+            ></PrivateRoute>
+            <PublicRoute
               exact
+              restricted={true}
               path="/in/signIn"
-              Layout={noneHeader}
               Component={SignIn}
-            ></AppRoute>
-            <AppRoute
+            ></PublicRoute>
+            <PublicRoute
               exact
+              restricted={true}
               path="/in/signUp"
-              Layout={noneHeader}
               Component={SignUp}
-            ></AppRoute>
-            <AppRoute exact Layout={noneHeader} Component={NotFound}></AppRoute>
+            ></PublicRoute>
+            <PublicRoute
+              restricted={false}
+              exact
+              component={NotFound}
+            ></PublicRoute>
           </Switch>
         </Switch>
       </ConnectedRouter>
