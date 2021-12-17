@@ -1,29 +1,27 @@
 // *** Main.jsx ***
 
-
-import React from 'react';
-import styled from 'styled-components';
-import PostDetail from '../pages/PostDetail';
-import Post from '../components/Post';
-import { history } from '../redux/configureStore';
-import { actionCreators as postAtions } from '../redux/modules/post';
-import { useDispatch, useSelector } from 'react-redux';
-import Avatar from '@mui/material/Avatar';
-import Grid from '../elements/Grid';
-import unnamed from '../unnamed.jpg';
-import avata from '../avata.png';
-import 다운로드 from '../다운로드.jpg';
-import { getToken } from '../shared/token';
+import React from "react";
+import styled from "styled-components";
+import PostDetail from "../pages/PostDetail";
+import Post from "../components/Post";
+import { history } from "../redux/configureStore";
+import { actionCreators as postActions } from "../redux/modules/post";
+import { useDispatch, useSelector } from "react-redux";
+import Avatar from "@mui/material/Avatar";
+import Grid from "../elements/Grid";
+import unnamed from "../unnamed.jpg";
+import avata from "../avata.png";
+import 다운로드 from "../다운로드.jpg";
+import { getToken } from "../shared/token";
 
 const Main = props => {
   const [postDetailModal, setPostDetailModal] = React.useState(false);
   const dispatch = useDispatch();
-  const accessToken = document.cookie.split('=')[1];
+  const accessToken = document.cookie.split("=")[1];
   console.log(accessToken);
   React.useEffect(() => {
-
-     if (!accessToken) {
-      return history.push('/in/signIn');
+    if (!accessToken) {
+      return history.push("/in/signIn");
     }
     dispatch(postActions.getPostDB());
   }, [postDetailModal]);
@@ -139,7 +137,6 @@ const Main = props => {
               <ProfileOne>
                 <Avatar
                   alt="최주영"
-
                   src={
                     "https://ca.slack-edge.com/T01L2TNGW3T-U02K7HPA1BJ-163062d75326-512"
                   }
@@ -165,7 +162,6 @@ const Main = props => {
                 </Grid>
               </ProfileOne>
               <ProfileOne>
-
                 <Avatar alt="오은희" src={다운로드} />
 
                 <Grid is_flex>
