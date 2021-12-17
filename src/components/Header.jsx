@@ -47,6 +47,7 @@ const Header = props => {
                 src={myPage}
                 onClick={() => {
                   history.push(`/myPage/${userInfo.userId}`);
+                  window.location.reload();
                 }}
               ></Btn>
               <Btn
