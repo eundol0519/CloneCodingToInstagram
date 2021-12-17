@@ -23,11 +23,13 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 
 function PostCard(props) {
   const p = props.p;
+  const myLike = p.myLike;
+  console.log(p);
   const dispatch = useDispatch();
   const postInfo = useSelector(state => state.post.cards);
-
+  console.log(postInfo);
   const [content, setContent] = React.useState("");
-  const [like, setLike] = React.useState(postInfo.myLike ? true : false); // 사용자별 좋아요 유무
+  const [like, setLike] = React.useState(p.myLike ? true : false); // 사용자별 좋아요 유무
   const [active, setActive] = React.useState(false); // 버튼 활성화 유무
 
   const postLike = () => {
@@ -126,7 +128,7 @@ function PostCard(props) {
       <CardContent>
         <Typography variant="body2" color="Heading3">
           <span style={{ fontWeight: 20, fontWeight: "bold" }}>
-            좋아요 {p.likeCount} 개
+            좋아요 {postInfo.likeCount} 개
           </span>
           <br />
           <br />

@@ -19,22 +19,21 @@ const Main = props => {
   const [postDetailModal, setPostDetailModal] = React.useState(false);
   const dispatch = useDispatch();
 
-
   const accessToken = document.cookie.split("=")[1];
 
   console.log(accessToken);
   React.useEffect(() => {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     if (!accessToken) {
       return history.push("/in/signIn");
     }
-    dispatch(postAtions.getPostDB());
+    dispatch(postActions.getPostDB());
   }, [postDetailModal]);
 
   const postList = useSelector(state => state.post.postList);
 
   const detailOpen = async postId => {
-    await dispatch(postAtions.PostDetailLookUpFB(postId));
+    await dispatch(postActions.PostDetailLookUpFB(postId));
     // 동기 처리 -> 비동기 처리를 해줘야 상세 페이지 갔을 때 좋아요가 반영된다.
     setPostDetailModal(true);
   };
