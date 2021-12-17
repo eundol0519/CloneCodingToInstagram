@@ -11,17 +11,22 @@ import Avatar from '@mui/material/Avatar';
 import Grid from '../elements/Grid';
 import unnamed from '../unnamed.jpg';
 import avata from '../avata.png';
+import 다운로드 from '../다운로드.jpg';
 import { getToken } from '../shared/token';
 const Main = props => {
   const [postDetailModal, setPostDetailModal] = React.useState(false);
   const dispatch = useDispatch();
-
+  const accessToken = document.cookie.split('=')[1];
+  console.log(accessToken);
   React.useEffect(() => {
+    if (!accessToken) {
+      return history.push('/in/signIn');
+    }
     dispatch(postAtions.getPostDB());
   }, [postDetailModal]);
 
   const postList = useSelector(state => state.post.postList);
-
+  console.log(postList);
   return (
     <React.Fragment>
       <button
@@ -126,9 +131,7 @@ const Main = props => {
               <ProfileOne>
                 <Avatar
                   alt="최주영"
-                  src={
-                    'https://ca.slack-edge.com/T01L2TNGW3T-U02K7HPA1BJ-163062d75326-512'
-                  }
+                  src="https://ca.slack-edge.com/T01L2TNGW3T-U02K7HPA1BJ-163062d75326-512"
                 />
                 <Grid is_flex>
                   <span style={{ marginLeft: '10px', fontWeight: 'bold' }}>
@@ -151,12 +154,7 @@ const Main = props => {
                 </Grid>
               </ProfileOne>
               <ProfileOne>
-                <Avatar
-                  alt="오은희"
-                  src={
-                    'https://ca.slack-edge.com/T01L2TNGW3T-U02HZ6KKL3E-9ed765d12a93-512'
-                  }
-                />
+                <Avatar alt="오은희" src={다운로드} />
                 <Grid is_flex>
                   <span style={{ marginLeft: '10px', fontWeight: 'bold' }}>
                     eundol0519
