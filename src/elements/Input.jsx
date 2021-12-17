@@ -1,8 +1,8 @@
 // *** Input.jsx ***
 
-import React from 'react';
-import styled from 'styled-components';
-import { Text, Grid } from './index';
+import React from "react";
+import styled from "styled-components";
+import { Text, Grid } from "./index";
 
 const Input = props => {
   const {
@@ -52,7 +52,7 @@ const Input = props => {
           ref={_ref}
           rows={rows}
           cols={cols}
-          value={value ? value : ''}
+          value={value ? value : ""}
           placeholder={placeholder}
           onKeyUp={_onKeyUp}
           onChange={_onChange}
@@ -79,9 +79,9 @@ const Input = props => {
             type={type}
             placeholder={placeholder}
             onChange={_onChange}
-            value={value ? value : ''}
+            value={value ? value : ""}
             onKeyPress={e => {
-              if (e.key === 'Enter') {
+              if (e.key === "Enter") {
                 onSubmit(e);
               }
             }}
@@ -92,7 +92,7 @@ const Input = props => {
             name={name}
             ref={_ref}
             type={type}
-            value={value ? value : ''}
+            value={value ? value : ""}
             placeholder={placeholder}
             onChange={_onChange}
             onKeyUp={_onKeyUp}
@@ -106,16 +106,16 @@ const Input = props => {
 Input.defaultProps = {
   multiLine: false,
   label: false,
-  placeholder: '텍스트를 입력해주세요.',
-  type: 'text',
-  value: '',
+  placeholder: "텍스트를 입력해주세요.",
+  type: "text",
+  value: "",
   is_submit: false,
-  width: '20%',
-  size: '14px',
-  bg: '#fff',
-  border: '1px solid #fff',
-  margin: '4% 2% 4% 2%',
-  padding: '2% 2% 2% 2%',
+  width: "20%",
+  size: "14px",
+  bg: "#fff",
+  border: "1px solid #fff",
+  margin: "4% 2% 4% 2%",
+  padding: "2% 2% 2% 2%",
   onSubmit: () => {},
   _onChange: () => {},
 };

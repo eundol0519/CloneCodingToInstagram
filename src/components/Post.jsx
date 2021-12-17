@@ -1,32 +1,32 @@
-import * as React from 'react';
-import { history } from '../redux/configureStore';
-import { actionCreators as postAtions } from '../redux/modules/post';
-import { actionCreators as commentActions } from '../redux/modules/comment';
-import { useDispatch, useSelector } from 'react-redux';
-import Grid from '../elements/Grid';
+import * as React from "react";
+import { history } from "../redux/configureStore";
+import { actionCreators as postAtions } from "../redux/modules/post";
+import { actionCreators as commentActions } from "../redux/modules/comment";
+import { useDispatch, useSelector } from "react-redux";
+import Grid from "../elements/Grid";
 // mui icons import
 // import styled from 'styled-components';
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
+import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 
 function PostCard(props) {
   const p = props.p;
   const dispatch = useDispatch();
   const postInfo = useSelector(state => state.post.cards);
 
-  const [content, setContent] = React.useState('');
+  const [content, setContent] = React.useState("");
   const [like, setLike] = React.useState(postInfo.myLike ? true : false); // 사용자별 좋아요 유무
   const [active, setActive] = React.useState(false); // 버튼 활성화 유무
 
@@ -35,24 +35,24 @@ function PostCard(props) {
       //!like = false일때만,
       // 좋아요 갯수 +1
       setLike(true);
-      dispatch(postAtions.PostLikeFB(p.postId, 'plus'));
+      dispatch(postAtions.PostLikeFB(p.postId, "plus"));
     } else {
       // 좋아요 갯수 -1
       setLike(false);
-      dispatch(postAtions.PostLikeFB(p.postId, 'minus'));
+      dispatch(postAtions.PostLikeFB(p.postId, "minus"));
     }
   };
 
   const commentWrite = () => {
-    if (content === undefined || content === '') {
-      window.alert('댓글을 입력 해주세요');
+    if (content === undefined || content === "") {
+      window.alert("댓글을 입력 해주세요");
       return;
     }
     dispatch(commentActions.CommentAddFB(p.postId, content));
-    setContent(''); // 댓글을 입력하면 input의 value를 날려준다.
+    setContent(""); // 댓글을 입력하면 input의 value를 날려준다.
   };
   const checkActive = () => {
-    if (content === '') {
+    if (content === "") {
       setActive(false);
     } else {
       setActive(true);
@@ -94,12 +94,12 @@ function PostCard(props) {
                 postLike();
               }}
             >
-              <FavoriteBorderIcon style={{ color: like && 'pink' }} />
+              <FavoriteBorderIcon style={{ color: like && "pink" }} />
             </IconButton>
             <IconButton
               aria-label="comment"
               onClick={() => {
-                console.log('2');
+                console.log("2");
               }}
             >
               <ChatBubbleOutlineIcon />
@@ -107,7 +107,7 @@ function PostCard(props) {
             <IconButton
               aria-label="send"
               onClick={() => {
-                console.log('3');
+                console.log("3");
               }}
             >
               <SendOutlinedIcon />
@@ -116,7 +116,7 @@ function PostCard(props) {
           <IconButton
             aria-label="save"
             onClick={() => {
-              console.log('4');
+              console.log("4");
             }}
           >
             <BookmarkBorderOutlinedIcon />
@@ -125,7 +125,7 @@ function PostCard(props) {
       </CardActions>
       <CardContent>
         <Typography variant="body2" color="Heading3">
-          <span style={{ fontWeight: 20, fontWeight: 'bold' }}>
+          <span style={{ fontWeight: 20, fontWeight: "bold" }}>
             좋아요 {p.likeCount} 개
           </span>
           <br />
@@ -144,11 +144,11 @@ function PostCard(props) {
         <input
           placeholder="😀 댓글달기..."
           style={{
-            margin: '0',
-            border: 'none',
-            width: '520px',
-            height: '40px',
-            backgroundColor: 'rgba(0,0,0,0)',
+            margin: "0",
+            border: "none",
+            width: "520px",
+            height: "40px",
+            backgroundColor: "rgba(0,0,0,0)",
           }}
           value={content}
           onChange={e => {
@@ -156,19 +156,19 @@ function PostCard(props) {
           }}
           onKeyUp={checkActive}
           onKeyPress={e => {
-            if (e.key === 'Enter') {
+            if (e.key === "Enter") {
               commentWrite(e);
             }
           }}
         />
         <button
           style={{
-            border: 'none',
-            width: '94px',
-            height: '46px',
-            color: active ? '#0095f6' : '#B2DFFC',
-            backgroundColor: 'rgba(0,0,0,0)',
-            cursor: 'pointer',
+            border: "none",
+            width: "94px",
+            height: "46px",
+            color: active ? "#0095f6" : "#B2DFFC",
+            backgroundColor: "rgba(0,0,0,0)",
+            cursor: "pointer",
           }}
           onClick={commentWrite}
           value={content}

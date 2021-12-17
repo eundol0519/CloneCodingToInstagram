@@ -1,7 +1,7 @@
 // *** Spinner.jsx ***
 
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Spinner = props => {
   const { type, size, is_dim } = props;
@@ -16,7 +16,7 @@ const Spinner = props => {
 };
 
 Spinner.defaultProps = {
-  type: 'inline', // inline, page
+  type: "inline", // inline, page
   is_dim: false,
   size: 60,
 };
@@ -28,7 +28,7 @@ const SpinnerWrap = styled.div`
   justify-content: center;
   padding: 20px 0;
   ${props =>
-    props.type === 'page'
+    props.type === "page"
       ? `position: fixed;
         height: 95vh;
         top: 0;

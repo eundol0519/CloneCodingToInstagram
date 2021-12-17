@@ -1,7 +1,7 @@
 // *** Image.jsx ***
 
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Image = props => {
   const { shape, src, size, _onKeyUp } = props;
@@ -10,9 +10,9 @@ const Image = props => {
     size: size,
   };
 
-  if (shape === 'circle') {
+  if (shape === "circle") {
     return <ImageCircle onKeyUp={_onKeyUp} {...styles}></ImageCircle>;
-  } else if (shape === 'rectangle') {
+  } else if (shape === "rectangle") {
     return (
       <AspectOutter>
         <AspectInner onKeyUp={_onKeyUp} {...styles}></AspectInner>
@@ -28,8 +28,8 @@ const Image = props => {
 };
 
 Image.defaultProps = {
-  shape: '',
-  src: 'https://i.ytimg.com/vi/Ct1Pp_4FEIY/maxresdefault.jpg',
+  shape: "",
+  src: "https://i.ytimg.com/vi/Ct1Pp_4FEIY/maxresdefault.jpg",
   size: 36,
   _onKeyUp: () => {},
 };
@@ -40,7 +40,7 @@ const ImageCircle = styled.div`
   height: var(--size);
   border-radius: var(--size);
 
-  background-image: url('${props => props.src}');
+  background-image: url("${props => props.src}");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -51,7 +51,7 @@ const ImageDefault = styled.div`
   --size: ${props => props.size}px;
   width: var(--size);
   height: var(--size);
-  background-image: url('${props => props.src}');
+  background-image: url("${props => props.src}");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -66,7 +66,7 @@ const AspectInner = styled.div`
   position: relative;
   padding-top: 75%;
   overflow: hidden;
-  background-image: url('${props => props.src}');
+  background-image: url("${props => props.src}");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

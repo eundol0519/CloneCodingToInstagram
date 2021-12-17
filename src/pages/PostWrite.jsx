@@ -1,18 +1,18 @@
 // *** PostWrtie.jsx ***
 
-import React from 'react';
-import Modal from 'react-modal';
-import { Grid, Text, Image, Button, Input } from '../elements/index';
-import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { actionCreators as postActions } from '../redux/modules/post';
-import { uploadPostImageOn } from '../shared/api/post';
+import React from "react";
+import Modal from "react-modal";
+import { Grid, Text, Image, Button, Input } from "../elements/index";
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { actionCreators as postActions } from "../redux/modules/post";
+import { uploadPostImageOn } from "../shared/api/post";
 
 const PostWrtie = props => {
   const dispatch = useDispatch();
   const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
   const [active, setActive] = React.useState(true); // 버튼 활성화 유무
-  const [content, setContent] = React.useState(''); // 글 내용 작성
+  const [content, setContent] = React.useState(""); // 글 내용 작성
 
   // 모달창을 닫으면 header state도 false로 바꾸기
   const modalOff = () => {
@@ -26,34 +26,34 @@ const PostWrtie = props => {
   };
 
   // 이미지 업로드
-  const [imgFile, setImgFile] = React.useState('');
-  const [preview, setPreview] = React.useState('');
+  const [imgFile, setImgFile] = React.useState("");
+  const [preview, setPreview] = React.useState("");
 
   const upload = async e => {
     try {
       const files = e.target.files[0];
       const formData = new FormData();
-      formData.append('img', files);
+      formData.append("img", files);
 
       const response = await uploadPostImageOn(formData);
       console.log(response.data.url);
 
-      window.alert('사진이 업로드 되었습니다.');
+      window.alert("사진이 업로드 되었습니다.");
       setImgFile(response.data.url); // 서버에서 받아온 이미지 url
       setPreview(`http://13.125.45.147/${response.data.url}`); // 이미지 url 변수에 저장
     } catch (error) {
-      window.alert('사진 업로드에 실패 했습니다.');
+      window.alert("사진 업로드에 실패 했습니다.");
       console.log(error);
     }
   };
 
   // 버튼 활성화 / 비활성화 유무 확인
   const checkActive = () => {
-    if (imgFile === '') {
-      console.log('이미지 없다.');
+    if (imgFile === "") {
+      console.log("이미지 없다.");
       setActive(true);
-    } else if (content === '') {
-      console.log('글 내용 없다.');
+    } else if (content === "") {
+      console.log("글 내용 없다.");
       setActive(true);
     } else {
       setActive(false);
@@ -74,28 +74,28 @@ const PostWrtie = props => {
         onRequestClose={modalOff}
         style={{
           overlay: {
-            position: 'fixed',
+            position: "fixed",
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(15, 15, 15, 0.79)',
+            backgroundColor: "rgba(15, 15, 15, 0.79)",
           },
           content: {
-            position: 'absolute',
-            top: '70%',
-            left: '50%',
-            width: '50%',
-            height: '70%',
-            border: 'none',
-            background: '#fff',
-            overflow: 'auto',
-            WebkitOverflowScrolling: 'touch',
-            borderRadius: '3px',
-            outline: 'none',
-            transform: 'translate(-50%, -50%)',
-            padding: '0px',
-            margin: 'auto',
+            position: "absolute",
+            top: "70%",
+            left: "50%",
+            width: "50%",
+            height: "70%",
+            border: "none",
+            background: "#fff",
+            overflow: "auto",
+            WebkitOverflowScrolling: "touch",
+            borderRadius: "3px",
+            outline: "none",
+            transform: "translate(-50%, -50%)",
+            padding: "0px",
+            margin: "auto",
           },
         }}
       >
@@ -164,10 +164,10 @@ const PostWrtie = props => {
           <Grid height="10%" center>
             <FileBtn
               style={{
-                width: '55%',
-                height: '28px',
+                width: "55%",
+                height: "28px",
               }}
-              className={!active ? 'activeBtn' : 'unActiveBtn'}
+              className={!active ? "activeBtn" : "unActiveBtn"}
               disabled={active}
               onClick={write}
             >
@@ -185,9 +185,9 @@ const FileBtn = styled.button`
   width: 28%;
   height: 27px;
   background-color: ${props =>
-    props.className === 'unActiveBtn' ? '#B2DFFC' : '#0095f6'};
+    props.className === "unActiveBtn" ? "#B2DFFC" : "#0095f6"};
   border-color : ${props =>
-    props.className === 'unActiveBtn' ? '#B2DFFC' : '#0095f6'};
+    props.className === "unActiveBtn" ? "#B2DFFC" : "#0095f6"};
   color: #ffffff;
   line-height: 45px;
   border-radius: 3px;

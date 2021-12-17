@@ -1,9 +1,9 @@
-import instance from '../instance';
+import instance from "./instance";
 
 // 댓글 조회
 export function getComment(postId) {
   return instance({
-    method: 'GET',
+    method: "GET",
     url: `/api/comments/${postId}`,
   });
 }
@@ -11,7 +11,7 @@ export function getComment(postId) {
 // 댓글 작성
 export function writeComment(postId, content) {
   return instance({
-    method: 'POST',
+    method: "POST",
     url: `/api/comments/${postId}`,
     data: content,
   });
@@ -20,7 +20,7 @@ export function writeComment(postId, content) {
 //댓글 삭제
 export function deleteComment(commentId) {
   return instance({
-    method: 'DELETE',
+    method: "DELETE",
     url: `/api/comments/${commentId}`,
   });
 }

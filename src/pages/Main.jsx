@@ -1,5 +1,6 @@
 // *** Main.jsx ***
 
+
 import React from 'react';
 import styled from 'styled-components';
 import PostDetail from '../pages/PostDetail';
@@ -13,25 +14,33 @@ import unnamed from '../unnamed.jpg';
 import avata from '../avata.png';
 import 다운로드 from '../다운로드.jpg';
 import { getToken } from '../shared/token';
+
 const Main = props => {
   const [postDetailModal, setPostDetailModal] = React.useState(false);
   const dispatch = useDispatch();
   const accessToken = document.cookie.split('=')[1];
   console.log(accessToken);
   React.useEffect(() => {
-    if (!accessToken) {
+
+     if (!accessToken) {
       return history.push('/in/signIn');
     }
-    dispatch(postAtions.getPostDB());
+    dispatch(postActions.getPostDB());
   }, [postDetailModal]);
 
   const postList = useSelector(state => state.post.postList);
-  console.log(postList);
+
+  const detailOpen = async postId => {
+    await dispatch(postActions.PostDetailLookUpFB(postId));
+    // 동기 처리 -> 비동기 처리를 해줘야 상세 페이지 갔을 때 좋아요가 반영된다.
+    setPostDetailModal(true);
+  };
+
   return (
     <React.Fragment>
       <button
         onClick={() => {
-          setPostDetailModal(true);
+          detailOpen(24); // postId 넘겨주기
         }}
       >
         상세 페이지
@@ -40,7 +49,6 @@ const Main = props => {
         <PostDetail
           modal={postDetailModal}
           setPostDetailModal={setPostDetailModal}
-          postId="2" // postId 넘겨 주시면 됩니다.
         ></PostDetail>
       )}
 
@@ -61,20 +69,20 @@ const Main = props => {
                 <Avatar
                   alt="정하나"
                   src={
-                    'https://ca.slack-edge.com/T01L2TNGW3T-U02J6JQU3A8-42ddfd509b3a-512'
+                    "https://ca.slack-edge.com/T01L2TNGW3T-U02J6JQU3A8-42ddfd509b3a-512"
                   }
                 />
                 <Grid is_flex>
-                  <span style={{ marginLeft: '10px', fontWeight: 'bold' }}>
+                  <span style={{ marginLeft: "10px", fontWeight: "bold" }}>
                     hana-j
                   </span>
                   <span
                     style={{
-                      marginLeft: '10px',
-                      fontWeight: 'bold',
-                      fontSize: '15px',
-                      color: 'dodgerblue',
-                      cursor: 'pointer',
+                      marginLeft: "10px",
+                      fontWeight: "bold",
+                      fontSize: "15px",
+                      color: "dodgerblue",
+                      cursor: "pointer",
                     }}
                     onClick={() => {
                       window.open(`https://github.com/hana-j`);
@@ -87,16 +95,16 @@ const Main = props => {
               <ProfileOne>
                 <Avatar alt="이동호" src={unnamed} />
                 <Grid is_flex>
-                  <span style={{ marginLeft: '10px', fontWeight: 'bold' }}>
+                  <span style={{ marginLeft: "10px", fontWeight: "bold" }}>
                     TnIoP
                   </span>
                   <span
                     style={{
-                      marginLeft: '10px',
-                      fontWeight: 'bold',
-                      fontSize: '15px',
-                      color: 'dodgerblue',
-                      cursor: 'pointer',
+                      marginLeft: "10px",
+                      fontWeight: "bold",
+                      fontSize: "15px",
+                      color: "dodgerblue",
+                      cursor: "pointer",
                     }}
                     onClick={() => {
                       window.open(`https://github.com/TnIoP`);
@@ -109,16 +117,16 @@ const Main = props => {
               <ProfileOne>
                 <Avatar alt="라이언" src={avata} />
                 <Grid is_flex>
-                  <span style={{ marginLeft: '10px', fontWeight: 'bold' }}>
+                  <span style={{ marginLeft: "10px", fontWeight: "bold" }}>
                     doyeon8621
                   </span>
                   <span
                     style={{
-                      marginLeft: '10px',
-                      fontWeight: 'bold',
-                      fontSize: '15px',
-                      color: 'dodgerblue',
-                      cursor: 'pointer',
+                      marginLeft: "10px",
+                      fontWeight: "bold",
+                      fontSize: "15px",
+                      color: "dodgerblue",
+                      cursor: "pointer",
                     }}
                     onClick={() => {
                       window.open(`https://github.com/doyeon8621`);
@@ -131,19 +139,22 @@ const Main = props => {
               <ProfileOne>
                 <Avatar
                   alt="최주영"
-                  src="https://ca.slack-edge.com/T01L2TNGW3T-U02K7HPA1BJ-163062d75326-512"
+
+                  src={
+                    "https://ca.slack-edge.com/T01L2TNGW3T-U02K7HPA1BJ-163062d75326-512"
+                  }
                 />
                 <Grid is_flex>
-                  <span style={{ marginLeft: '10px', fontWeight: 'bold' }}>
+                  <span style={{ marginLeft: "10px", fontWeight: "bold" }}>
                     cwd3469
                   </span>
                   <span
                     style={{
-                      marginLeft: '10px',
-                      fontWeight: 'bold',
-                      fontSize: '15px',
-                      color: 'dodgerblue',
-                      cursor: 'pointer',
+                      marginLeft: "10px",
+                      fontWeight: "bold",
+                      fontSize: "15px",
+                      color: "dodgerblue",
+                      cursor: "pointer",
                     }}
                     onClick={() => {
                       window.open(`https://github.com/cwd3469`);
@@ -154,18 +165,20 @@ const Main = props => {
                 </Grid>
               </ProfileOne>
               <ProfileOne>
+
                 <Avatar alt="오은희" src={다운로드} />
+
                 <Grid is_flex>
-                  <span style={{ marginLeft: '10px', fontWeight: 'bold' }}>
+                  <span style={{ marginLeft: "10px", fontWeight: "bold" }}>
                     eundol0519
                   </span>
                   <span
                     style={{
-                      marginLeft: '10px',
-                      fontWeight: 'bold',
-                      fontSize: '15px',
-                      color: 'dodgerblue',
-                      cursor: 'pointer',
+                      marginLeft: "10px",
+                      fontWeight: "bold",
+                      fontSize: "15px",
+                      color: "dodgerblue",
+                      cursor: "pointer",
                     }}
                     onClick={() => {
                       window.open(`https://github.com/eundol0519`);
@@ -179,20 +192,20 @@ const Main = props => {
                 <Avatar
                   alt="신항민"
                   src={
-                    'https://ca.slack-edge.com/T01L2TNGW3T-U02JJ3V9CLT-49c3c240fe6c-512'
+                    "https://ca.slack-edge.com/T01L2TNGW3T-U02JJ3V9CLT-49c3c240fe6c-512"
                   }
                 />
                 <Grid is_flex>
-                  <span style={{ marginLeft: '10px', fontWeight: 'bold' }}>
+                  <span style={{ marginLeft: "10px", fontWeight: "bold" }}>
                     ssinking91
                   </span>
                   <span
                     style={{
-                      marginLeft: '10px',
-                      fontWeight: 'bold',
-                      fontSize: '15px',
-                      color: 'dodgerblue',
-                      cursor: 'pointer',
+                      marginLeft: "10px",
+                      fontWeight: "bold",
+                      fontSize: "15px",
+                      color: "dodgerblue",
+                      cursor: "pointer",
                     }}
                     onClick={() => {
                       window.open(`https://github.com/ssinking91`);

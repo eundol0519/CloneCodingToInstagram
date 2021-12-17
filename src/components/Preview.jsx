@@ -1,6 +1,6 @@
 // *** Preview ***
 
-import React from 'react';
+import React from "react";
 
 const Preview = props => {
   return <React.Fragment></React.Fragment>;

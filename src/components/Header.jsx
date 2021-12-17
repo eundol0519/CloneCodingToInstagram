@@ -1,16 +1,16 @@
 // *** Header.js ***
 
-import React from 'react';
-import styled from 'styled-components';
-import { Grid, Image, Button } from '../elements/index';
-import logo from '../logo.png';
-import write from '../add.svg';
-import myPage from '../person.svg';
-import logOut from '../exit.svg';
-import PostWrite from '../pages/PostWrite';
-import { history } from '../redux/configureStore';
-import { Container } from '../elements';
-import { withRouter } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { Grid, Image, Button } from "../elements/index";
+import logo from "../logo.png";
+import write from "../add.svg";
+import myPage from "../person.svg";
+import logOut from "../exit.svg";
+import PostWrite from "../pages/PostWrite";
+import { history } from "../redux/configureStore";
+import { Container } from "../elements";
+import { withRouter } from "react-router-dom";
 
 const Header = props => {
   const { children } = props;
@@ -23,7 +23,7 @@ const Header = props => {
             <Logo
               src={logo}
               onClick={() => {
-                history.push('/');
+                history.push("/");
               }}
             ></Logo>
             <Grid is_flex gap="20px" width="auto">
@@ -42,14 +42,14 @@ const Header = props => {
               <Btn
                 src={myPage}
                 onClick={() => {
-                  history.push('/myPage');
+                  history.push("/myPage");
                 }}
               ></Btn>
               <Btn
                 src={logOut}
                 onClick={() => {
                   localStorage.clear();
-                  window.alert('로그아웃 되었습니다.');
+                  window.alert("로그아웃 되었습니다.");
                 }}
               ></Btn>
             </Grid>

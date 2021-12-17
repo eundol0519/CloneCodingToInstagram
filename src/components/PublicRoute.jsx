@@ -1,6 +1,6 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import Container from '../elements/Container';
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import Container from "../elements/Container";
 
 const PublicRoute = props => {
   return null;
