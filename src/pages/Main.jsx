@@ -22,6 +22,7 @@ const Main = props => {
   const accessToken = document.cookie.split("=")[1];
 
   console.log(accessToken);
+
   React.useEffect(() => {
     // window.scrollTo(0, 0);
     if (!accessToken) {
