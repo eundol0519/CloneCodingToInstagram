@@ -119,7 +119,7 @@ const PostDetail = props => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: "rgba(15, 15, 15, 0.79)",
+          backgroundColor: "rgba(15, 15, 15, 0.075)",
         },
         content: {
           position: "absolute",
@@ -201,7 +201,7 @@ const PostDetail = props => {
                   })}
                 </>
               ) : (
-                <Grid>댓글이 없습니다.</Grid>
+                <Grid></Grid>
               )}
             </Grid>
           </>
