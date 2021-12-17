@@ -5,7 +5,8 @@ import styled from "styled-components";
 import PostDetail from "../pages/PostDetail";
 import Post from "../components/Post";
 import { history } from "../redux/configureStore";
-import { actionCreators as postAtions } from "../redux/modules/post";
+
+import { actionCreators as postActions } from "../redux/modules/post";
 import { useDispatch, useSelector } from "react-redux";
 
 import Avatar from "@mui/material/Avatar";
@@ -13,11 +14,11 @@ import Grid from "../elements/Grid";
 import unnamed from "../unnamed.jpg";
 import avata from "../avata.png";
 import 다운로드 from "../다운로드.jpg";
-//import { getToken } from "../shared/token";
 
 const Main = props => {
   const [postDetailModal, setPostDetailModal] = React.useState(false);
   const dispatch = useDispatch();
+
 
   const accessToken = document.cookie.split("=")[1];
 
@@ -40,27 +41,27 @@ const Main = props => {
 
   return (
     <React.Fragment>
-      <button
-        onClick={() => {
-          detailOpen(24); // postId 넘겨주기
-        }}
-      >
-        상세 페이지
-      </button>
-      {postDetailModal && (
-        <PostDetail
-          modal={postDetailModal}
-          setPostDetailModal={setPostDetailModal}
-        ></PostDetail>
-      )}
-
       <Box>
         <Container>
           {postList.map((p, idx) => {
             return (
-              <ContainerItem key={p.postId}>
-                <Post p={p} />
-              </ContainerItem>
+              <>
+                <div
+                  onClick={() => {
+                    detailOpen(p.postId); // postId 넘겨주기
+                  }}
+                >
+                  <ContainerItem key={p.postId}>
+                    <Post p={p} />
+                  </ContainerItem>
+                </div>
+                {postDetailModal && (
+                  <PostDetail
+                    modal={postDetailModal}
+                    setPostDetailModal={setPostDetailModal}
+                  ></PostDetail>
+                )}
+              </>
             );
           })}
         </Container>
