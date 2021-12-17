@@ -1,5 +1,5 @@
 import axios from "axios";
-//import { getToken } from './token';
+import { getToken } from "./token";
 
 const instance = axios.create({
   baseURL: "http://13.125.45.147",

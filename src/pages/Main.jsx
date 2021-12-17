@@ -32,7 +32,7 @@ const Main = props => {
     <React.Fragment>
       <button
         onClick={() => {
-          detailOpen(23); // postId 넘겨주기
+          detailOpen(24); // postId 넘겨주기
         }}
       >
         상세 페이지

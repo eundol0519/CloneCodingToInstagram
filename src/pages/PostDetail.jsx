@@ -20,8 +20,10 @@ const PostDetail = props => {
   // const postId = useParams(); // 파라미터로 넘어온 postId
   const dispatch = useDispatch();
   const postInfo = useSelector(state => state.post.cards);
-  const userInfo = useSelector(state => state.user.users);
   const commentInfo = useSelector(state => state.comment.cards.comments);
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  // localStorage.setItem에 데이터가 JSON 형태로 들어가서
+  // 가져다 쓸 때 JSON.parse()를 사용해서 JSON 형태로 바꿔줘야 한다.
 
   const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
   const [active, setActive] = React.useState(true); // 버튼 활성화 유무
