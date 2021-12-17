@@ -1,11 +1,12 @@
 import axios from "axios";
-import { getToken } from "./token";
+import { getToken } from "../token";
 
 // const USER_TOKEN = `Bearer ${getToken("authorization")}`;
 const USER_TOKEN = "Bearer " + getToken("authorization");
 console.log(USER_TOKEN);
+
 const instance = axios.create({
-  timeout: 1000,
+  timeout: 3000,
   baseURL: "http://13.125.45.147",
   headers: {
     "Content-Type": "application/json; charset=utf-8",
