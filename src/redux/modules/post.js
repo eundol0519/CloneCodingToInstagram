@@ -1,14 +1,15 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
+import apis from '../../shared/apis';
+import api from '../../shared/api';
 import {
   getPostList,
-  postWriteOn,
   getDetailPostList,
-  postLikeCancel,
   deletePostList,
   getMyPostList,
+  postLikeCancel,
+  postWriteOn,
 } from '../../shared/api/post';
-
 // Action Type
 
 const GET_ONE_POST = 'GET_ONE_POST';

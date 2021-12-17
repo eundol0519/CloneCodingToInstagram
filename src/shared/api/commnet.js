@@ -1,4 +1,4 @@
-import instance from '../instance';
+import instance from './instance';
 
 // 댓글 조회
 export function getComment(postId) {

@@ -1,6 +1,6 @@
 //프로필 수정페이지
-import instance from '../instance';
-import instanceMulti from '../instanceMulti';
+import instance from './instance';
+import instanceMulti from './instanceMulti';
 
 //프로필 이미지업로드
 export function uploadMyImage(userId, url) {
