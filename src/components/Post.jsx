@@ -53,6 +53,7 @@ function PostCard(props) {
     dispatch(commentActions.CommentAddFB(p.postId, content));
     setContent(""); // 댓글을 입력하면 input의 value를 날려준다.
   };
+
   const checkActive = () => {
     if (content === "") {
       setActive(false);
@@ -60,6 +61,7 @@ function PostCard(props) {
       setActive(true);
     }
   };
+
   return (
     <Card sx={{ maxWidth: 614 }}>
       <CardHeader
@@ -80,13 +82,18 @@ function PostCard(props) {
         title={p.nickname}
         // subheader="September 14, 2016"
       />
-      <CardMedia
-        component="img"
-        height="614"
-        image={p.imageUrl}
-        alt={p.nickname}
-      />
-
+      <div
+        onClick={() => {
+          props.detailOpen(props.postId);
+        }}
+      >
+        <CardMedia
+          component="img"
+          height="614"
+          image={p.imageUrl}
+          alt={p.nickname}
+        />
+      </div>
       <CardActions disableSpacing>
         <Grid is_flex>
           <Grid>

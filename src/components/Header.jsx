@@ -11,10 +11,13 @@ import PostWrite from "../pages/PostWrite";
 import { history } from "../redux/configureStore";
 import { Container } from "../elements";
 import { withRouter } from "react-router-dom";
+import { delToken } from "../shared/token";
 
 const Header = props => {
   const { children } = props;
   const [postWrtieModal, setPostWriteModal] = React.useState(false);
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  console.log(userInfo);
   return (
     <div>
       <HeaderWeb>
@@ -42,13 +45,15 @@ const Header = props => {
               <Btn
                 src={myPage}
                 onClick={() => {
-                  history.push("/myPage");
+                  history.push(`/myPage/${userInfo.userId}`);
                 }}
               ></Btn>
               <Btn
                 src={logOut}
                 onClick={() => {
                   localStorage.clear();
+                  delToken("authorization");
+                  history.push("/in/signIn");
                   window.alert("로그아웃 되었습니다.");
                 }}
               ></Btn>

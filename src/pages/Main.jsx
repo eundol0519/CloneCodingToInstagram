@@ -45,15 +45,10 @@ const Main = props => {
           {postList.map((p, idx) => {
             return (
               <>
-                <div
-                  onClick={() => {
-                    detailOpen(p.postId); // postId 넘겨주기
-                  }}
-                >
-                  <ContainerItem key={p.postId}>
-                    <Post p={p} />
-                  </ContainerItem>
-                </div>
+                <ContainerItem key={p.postId}>
+                  <Post p={p} detailOpen={detailOpen} postId={p.postId} />
+                </ContainerItem>
+
                 {postDetailModal && (
                   <PostDetail
                     modal={postDetailModal}

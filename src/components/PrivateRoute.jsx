@@ -1,22 +1,26 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import Container from "../elements/Container";
+import { isLogin } from "../shared/permit";
+import Header from "./Header";
 
-const PrivateRoute = props => {
-  return null;
+const PrivateRoute = ({ Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        isLogin() ? (
+          <Header>
+            <Container margin="0px">
+              <Component {...props}></Component>
+            </Container>
+          </Header>
+        ) : (
+          <Redirect to="/in/signIn" />
+        )
+      }
+    ></Route>
+  );
 };
 
 export default PrivateRoute;
-
-const AppRoute = ({ Component, Layout, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => (
-      <Layout>
-        <Container margin="0px">
-          <Component {...props}></Component>
-        </Container>
-      </Layout>
-    )}
-  ></Route>
-);
