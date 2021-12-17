@@ -44,7 +44,7 @@ const Main = props => {
         <Container>
           {postList.map((p, idx) => {
             return (
-              <>
+              <div key={p.postId}>
                 <div
                   onClick={() => {
                     detailOpen(p.postId); // postId 넘겨주기
@@ -60,7 +60,7 @@ const Main = props => {
                     setPostDetailModal={setPostDetailModal}
                   ></PostDetail>
                 )}
-              </>
+              </div>
             );
           })}
         </Container>
