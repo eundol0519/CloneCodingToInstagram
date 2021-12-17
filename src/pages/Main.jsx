@@ -18,7 +18,7 @@ const Main = props => {
 
   React.useEffect(() => {
     dispatch(postAtions.getPostDB());
-  }, []);
+  }, [postDetailModal]);
 
   const postList = useSelector(state => state.post.postList);
 
