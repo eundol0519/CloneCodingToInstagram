@@ -36,27 +36,27 @@ const Main = props => {
 
   return (
     <React.Fragment>
-      <button
-        onClick={() => {
-          detailOpen(24); // postId 넘겨주기
-        }}
-      >
-        상세 페이지
-      </button>
-      {postDetailModal && (
-        <PostDetail
-          modal={postDetailModal}
-          setPostDetailModal={setPostDetailModal}
-        ></PostDetail>
-      )}
-
       <Box>
         <Container>
           {postList.map((p, idx) => {
             return (
-              <ContainerItem key={p.postId}>
-                <Post p={p} />
-              </ContainerItem>
+              <>
+                <div
+                  onClick={() => {
+                    detailOpen(p.postId); // postId 넘겨주기
+                  }}
+                >
+                  <ContainerItem key={p.postId}>
+                    <Post p={p} />
+                  </ContainerItem>
+                </div>
+                {postDetailModal && (
+                  <PostDetail
+                    modal={postDetailModal}
+                    setPostDetailModal={setPostDetailModal}
+                  ></PostDetail>
+                )}
+              </>
             );
           })}
         </Container>
