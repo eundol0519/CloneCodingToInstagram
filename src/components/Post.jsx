@@ -126,7 +126,7 @@ function PostCard(props) {
       <CardContent>
         <Typography variant="body2" color="Heading3">
           <span style={{ fontWeight: 20, fontWeight: 'bold' }}>
-            좋아요 {postInfo.likeCount} 개
+            좋아요 {p.likeCount} 개
           </span>
           <br />
           <br />

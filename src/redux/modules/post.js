@@ -138,8 +138,7 @@ const PostDetailLookUpFB = postId => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('PostDetailLookUpFB try!!');
-      const response = await getDetailPostList(19);
-      console.log(response);
+      const response = await getDetailPostList(postId);
       dispatch(getOnePost(response.data));
     } catch (error) {
       console.log(error);
@@ -167,16 +166,24 @@ const PostLikeFB = (postId, likeStatus) => {
       console.log('PostLikeFB try');
       const response = await postLikeCancel(postId);
       let likeCount = parseInt(getState().post.cards.likeCount);
+      let myLike = false;
 
       if (likeStatus === 'plus') {
         console.log('좋아요 +1');
         likeCount++;
+        myLike = true;
       } else if (likeStatus === 'minus') {
         console.log('좋아요 -1');
         likeCount--;
+        myLike = false;
       }
 
-      let postInfo = { ...getState().post.cards, likeCount: likeCount };
+      let postInfo = {
+        ...getState().post.cards,
+        likeCount: likeCount,
+        myLike: myLike,
+      };
+      console.log(postInfo);
       dispatch(setLike(postInfo));
     } catch (error) {
       console.log(error);

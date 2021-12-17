@@ -18,12 +18,11 @@ import ClearIcon from '@mui/icons-material/Clear';
 
 const PostDetail = props => {
   // const postId = useParams(); // 파라미터로 넘어온 postId
-  const postId = 19;
+  const postId = 23;
   const dispatch = useDispatch();
   const postInfo = useSelector(state => state.post.cards);
   const userInfo = useSelector(state => state.user.users);
   const commentInfo = useSelector(state => state.comment.cards[0]);
-  console.log(commentInfo);
 
   const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
   const [active, setActive] = React.useState(true); // 버튼 활성화 유무
@@ -169,7 +168,7 @@ const PostDetail = props => {
               ></ArrowBackIosIcon>
             </Grid>
             <Grid height="60%" overflow="scroll" margin="1% 2% 1% 2%">
-              {commentInfo.length > 0 ? (
+              {commentInfo ? (
                 <>
                   {commentInfo.map(c => {
                     return (
@@ -200,7 +199,9 @@ const PostDetail = props => {
                     );
                   })}
                 </>
-              ) : null}
+              ) : (
+                <Grid>댓글이 없습니다.</Grid>
+              )}
             </Grid>
           </>
         ) : (
