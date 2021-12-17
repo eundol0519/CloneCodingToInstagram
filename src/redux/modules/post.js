@@ -1,7 +1,13 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-import apis from '../../shared/apis';
-import api from '../../shared/api';
+import {
+  getPostList,
+  postWriteOn,
+  getDetailPostList,
+  postLikeCancel,
+  deletePostList,
+  getMyPostList,
+} from '../../shared/api/post';
 
 // Action Type
 
@@ -86,7 +92,7 @@ const getMyPostDB = userId => {
     try {
       console.log('getMyPostDB try!!');
       console.log(userId);
-      const response = await apis.getMyPost(userId);
+      const response = await getMyPostList(userId);
       console.log(response.data);
 
       const myPostInfo = response.data;
