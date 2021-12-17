@@ -18,7 +18,20 @@ const GET_MYPOST = 'GET_MYPOST';
 const SET_LIKE = 'SET_LIKE';
 
 const initialState = {
-  postList: [],
+  postList: [
+    {
+      postId: 4,
+      userId: 4,
+      content: '글내용',
+      commentCount: '3',
+      likeCount: '2',
+      nickname: '스펀지밥',
+      imageUrl: 'uploads/posts/1639370169898_myPhoto.jpg',
+      createdAt: '2021-12-13',
+      imageUrl_profile: 'uploads/profiles/165555_myPhoto.jpg',
+      myLike: false,
+    },
+  ],
 
   post: {
     postId: 4,
@@ -126,8 +139,8 @@ const PostDetailLookUpFB = postId => {
   return async (dispatch, getState, { history }) => {
     try {
       console.log('PostDetailLookUpFB try!!');
-      const response = await getDetailPostList(postId);
-      console.log(response.data);
+      const response = await getDetailPostList(19);
+      console.log(response);
       dispatch(getOnePost(response.data));
     } catch (error) {
       console.log(error);

@@ -31,7 +31,7 @@ export function postWriteOn(postInfo) {
 export function getDetailPostList(postId) {
   return instance({
     method: 'GET',
-    url: `/api/comments/${postId}`,
+    url: `/api/posts/${postId}`,
   });
 }
 
