@@ -1,5 +1,5 @@
-import { createAction, handleActions } from 'redux-actions';
-import { produce } from 'immer';
+import { createAction, handleActions } from "redux-actions";
+import { produce } from "immer";
 import {
   getPostList,
   postWriteOn,
@@ -7,27 +7,27 @@ import {
   postLikeCancel,
   deletePostList,
   getMyPostList,
-} from '../../shared/api/post';
+} from "../../shared/api/post";
 
 // Action Type
 
-const GET_ONE_POST = 'GET_ONE_POST';
-const GET_POST = 'GET_POST';
-const GET_MYPOST = 'GET_MYPOST';
-const SET_LIKE = 'SET_LIKE';
+const GET_ONE_POST = "GET_ONE_POST";
+const GET_POST = "GET_POST";
+const GET_MYPOST = "GET_MYPOST";
+const SET_LIKE = "SET_LIKE";
 
 const initialState = {
   postList: [
     {
       postId: 4,
       userId: 4,
-      content: '글내용',
-      commentCount: '3',
-      likeCount: '2',
-      nickname: '스펀지밥',
-      imageUrl: 'uploads/posts/1639370169898_myPhoto.jpg',
-      createdAt: '2021-12-13',
-      imageUrl_profile: 'uploads/profiles/165555_myPhoto.jpg',
+      content: "글내용",
+      commentCount: "3",
+      likeCount: "2",
+      nickname: "스펀지밥",
+      imageUrl: "uploads/posts/1639370169898_myPhoto.jpg",
+      createdAt: "2021-12-13",
+      imageUrl_profile: "uploads/profiles/165555_myPhoto.jpg",
       myLike: false,
     },
   ],
@@ -35,44 +35,44 @@ const initialState = {
   post: {
     postId: 4,
     userId: 4,
-    content: '글내용',
-    commentCount: '3',
-    likeCount: '2',
-    nickname: '스펀지밥',
-    imageUrl: 'uploads/posts/1639370169898_myPhoto.jpg',
-    createdAt: '2021-12-13',
-    imageUrl_profile: 'uploads/profiles/165555_myPhoto.jpg',
+    content: "글내용",
+    commentCount: "3",
+    likeCount: "2",
+    nickname: "스펀지밥",
+    imageUrl: "uploads/posts/1639370169898_myPhoto.jpg",
+    createdAt: "2021-12-13",
+    imageUrl_profile: "uploads/profiles/165555_myPhoto.jpg",
     myLike: false,
   },
 
   myPageList: [
     {
       postId: 1,
-      content: '글내용1',
+      content: "글내용1",
       likeCount: 2,
       imageUrl:
-        'https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg',
-      createdAt: '2021-12-13',
+        "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg",
+      createdAt: "2021-12-13",
     },
     {
       postId: 2,
-      content: '글내용2',
+      content: "글내용2",
       likeCount: 24,
       imageUrl:
-        'https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg',
-      createdAt: '2021-12-13',
+        "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg",
+      createdAt: "2021-12-13",
     },
   ],
 
   users: {
     userId: 1,
-    userEmail: 'test@test.com',
-    userName: 'Olivi',
-    nickname: '스펀지밥',
+    userEmail: "test@test.com",
+    userName: "Olivi",
+    nickname: "스펀지밥",
     imageUrl_profile:
-      'https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg',
-    introduce: ' Olivia 개인레슨 문의주세요 ❤️🧡💛💚💙💜❤️🧡💛💚💙💜😎😎',
-    phoneNumber: '010-1234-5678',
+      "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg",
+    introduce: " Olivia 개인레슨 문의주세요 ❤️🧡💛💚💙💜❤️🧡💛💚💙💜😎😎",
+    phoneNumber: "010-1234-5678",
   },
 
   cards: {},
@@ -90,7 +90,7 @@ const setLike = createAction(SET_LIKE, postInfo => ({ postInfo }));
 const getPostDB = () => {
   return async (dispatch, getState, { history }) => {
     try {
-      console.log('getPostDB try!!');
+      console.log("getPostDB try!!");
       const response = await getPostList();
       const post_list = response.data.posts;
       dispatch(getPosts(post_list));
@@ -103,7 +103,7 @@ const getPostDB = () => {
 const getMyPostDB = userId => {
   return async (dispatch, getState, { history }) => {
     try {
-      console.log('getMyPostDB try!!');
+      console.log("getMyPostDB try!!");
       console.log(userId);
       const response = await getMyPostList(userId);
       console.log(response.data);
@@ -122,7 +122,7 @@ const getMyPostDB = userId => {
 const PostWriteFB = (content, imageUrl) => {
   return async (dispatch, getState, { history }) => {
     try {
-      console.log('PostWriteFB try!!');
+      console.log("PostWriteFB try!!");
       const postInfo = { content: content, imageUrl: imageUrl };
       console.log(postInfo);
       const response = await postWriteOn(postInfo);
@@ -137,7 +137,7 @@ const PostWriteFB = (content, imageUrl) => {
 const PostDetailLookUpFB = postId => {
   return async (dispatch, getState, { history }) => {
     try {
-      console.log('PostDetailLookUpFB try!!');
+      console.log("PostDetailLookUpFB try!!");
       const response = await getDetailPostList(postId);
       dispatch(getOnePost(response.data));
     } catch (error) {
@@ -149,11 +149,11 @@ const PostDetailLookUpFB = postId => {
 const PostDeleteFB = postId => {
   return async (dispatch, getState, { history }) => {
     try {
-      console.log('PostDeleteFB try');
+      console.log("PostDeleteFB try");
       const response = await deletePostList(postId);
       console.log(response.data.status);
 
-      window.alert('게시물이 삭제 되었습니다.');
+      window.alert("게시물이 삭제 되었습니다.");
     } catch (error) {
       console.log(error);
     }
@@ -163,17 +163,17 @@ const PostDeleteFB = postId => {
 const PostLikeFB = (postId, likeStatus) => {
   return async (dispatch, getState, { history }) => {
     try {
-      console.log('PostLikeFB try');
+      console.log("PostLikeFB try");
       const response = await postLikeCancel(postId);
       let likeCount = parseInt(getState().post.cards.likeCount);
       let myLike = false;
 
-      if (likeStatus === 'plus') {
-        console.log('좋아요 +1');
+      if (likeStatus === "plus") {
+        console.log("좋아요 +1");
         likeCount++;
         myLike = true;
-      } else if (likeStatus === 'minus') {
-        console.log('좋아요 -1');
+      } else if (likeStatus === "minus") {
+        console.log("좋아요 -1");
         likeCount--;
         myLike = false;
       }
@@ -202,7 +202,6 @@ export default handleActions(
     [GET_ONE_POST]: (state, action) => {
       return produce(state, draft => {
         const postInfo = action.payload.postInfo;
-
         draft.cards.postId = postInfo.postId;
         draft.cards.userId = postInfo.userId;
         draft.cards.content = postInfo.content;

@@ -1,7 +1,7 @@
 // *** Span.jsx ***
 
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Span = props => {
   const { className, fontsize, color, children, size } = props;
@@ -23,13 +23,13 @@ const Span = props => {
 
 Span.defaultProps = {
   children: null,
-  className: '',
-  size: '3px',
+  className: "",
+  size: "3px",
 };
 
 const SignUpSpan = styled.span`
   font-size: ${props => props.size};
-  color: ${props => (props.className === 'success' ? 'green' : 'red')};
+  color: ${props => (props.className === "success" ? "green" : "red")};
 `;
 
 export default Span;

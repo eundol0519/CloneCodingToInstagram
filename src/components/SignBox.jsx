@@ -1,25 +1,25 @@
 // *** SignBox.js ***
 
-import React from 'react';
-import styled from 'styled-components';
-import { Grid, Input, Button } from '../elements/';
-import logo from '../logo.png';
-import { actionCreators as userActions } from '../redux/modules/user';
-import { history } from '../redux/configureStore';
-import { useDispatch } from 'react-redux';
-import { isEmail } from '../shared/examine';
+import React from "react";
+import styled from "styled-components";
+import { Grid, Input, Button } from "../elements/";
+import logo from "../logo.png";
+import { actionCreators as userActions } from "../redux/modules/user";
+import { history } from "../redux/configureStore";
+import { useDispatch } from "react-redux";
+import { isEmail } from "../shared/examine";
 const SignBox = props => {
   const dispatch = useDispatch();
   const [succeed, setSucceed] = React.useState(false);
   const [noneDate, setnoneDate] = React.useState(false);
   const [State, setState] = React.useState({
-    IdState: '',
-    PwState: '',
+    IdState: "",
+    PwState: "",
   });
 
   const { IdState, PwState } = State;
   const ClickEvent = () => {
-    history.push('/in/signUp');
+    history.push("/in/signUp");
   };
   const LoginClickEvent = () => {
     if (isEmail(IdState)) {
@@ -67,7 +67,7 @@ const SignBox = props => {
           ></Input>
           <Button
             margin="10px 0px 0px"
-            className={succeed === false ? 'unActiveBtn' : ''}
+            className={succeed === false ? "unActiveBtn" : ""}
             _onClick={LoginClickEvent}
           >
             로그인
@@ -82,10 +82,10 @@ const SignBox = props => {
         color="#000"
         _onClick={ClickEvent}
       >
-        계정이 없으신가요?{' '}
-        <span style={{ color: '#0095F6', fontWeight: 'bold' }}>가입하기</span>
+        계정이 없으신가요?{" "}
+        <span style={{ color: "#0095F6", fontWeight: "bold" }}>가입하기</span>
       </Button>
-      {noneDate ? <Warning>모든 입력해 주십시오</Warning> : ''}
+      {noneDate ? <Warning>모든 입력해 주십시오</Warning> : ""}
     </Grid>
   );
 };

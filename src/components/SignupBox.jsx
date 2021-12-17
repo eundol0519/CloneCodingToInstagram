@@ -1,28 +1,28 @@
 // *** SignBox.js ***
 
-import React from 'react';
-import styled from 'styled-components';
-import { Grid, Input, Button } from '../elements';
-import { actionCreators as userActions } from '../redux/modules/user';
-import logo from '../logo.png';
-import { useDispatch } from 'react-redux';
+import React from "react";
+import styled from "styled-components";
+import { Grid, Input, Button } from "../elements";
+import { actionCreators as userActions } from "../redux/modules/user";
+import logo from "../logo.png";
+import { useDispatch } from "react-redux";
 import {
   isEmail,
   isNameCheck,
   isNickNameCheck,
   isPwCheck,
-} from '../shared/examine';
-import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
-import { history } from '../redux/configureStore';
+} from "../shared/examine";
+import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import { history } from "../redux/configureStore";
 
 const SignBox = props => {
   const dispatch = useDispatch();
 
-  const [signEmail, setsignEmail] = React.useState('');
-  const [signName, setsignName] = React.useState('');
-  const [signNickName, setsignNickName] = React.useState('');
-  const [signPw, setsignPw] = React.useState('');
+  const [signEmail, setsignEmail] = React.useState("");
+  const [signName, setsignName] = React.useState("");
+  const [signNickName, setsignNickName] = React.useState("");
+  const [signPw, setsignPw] = React.useState("");
   const [Email, setEmail] = React.useState({});
   const [Namecheck, setNamecheck] = React.useState({});
   const [Nicknamecheck, setNicknamecheck] = React.useState({});
@@ -53,7 +53,7 @@ const SignBox = props => {
   };
 
   const CheckInputData = (SETSTATE, Checkfuc, Value) => {
-    if (Value !== '') {
+    if (Value !== "") {
       SETSTATE({ check: true });
       console.log(Value);
       console.log(Checkfuc(Value));
@@ -97,7 +97,7 @@ const SignBox = props => {
   };
 
   const ClickMove = () => {
-    history.push('/in/signIn');
+    history.push("/in/signIn");
   };
   return (
     <Grid width="375px">
@@ -127,7 +127,7 @@ const SignBox = props => {
                 </Dot>
               )
             ) : (
-              ''
+              ""
             )}
             {Email.check ? (
               Email.boo ? (
@@ -136,7 +136,7 @@ const SignBox = props => {
                 <SpanTxt className="red">{Email.comment}</SpanTxt>
               )
             ) : (
-              ''
+              ""
             )}
           </InputBox>
           <InputBox>
@@ -159,7 +159,7 @@ const SignBox = props => {
                 </Dot>
               )
             ) : (
-              ''
+              ""
             )}
             {Namecheck.check ? (
               Namecheck.boo ? (
@@ -168,7 +168,7 @@ const SignBox = props => {
                 <SpanTxt className="red">{Namecheck.comment}</SpanTxt>
               )
             ) : (
-              ''
+              ""
             )}
           </InputBox>
           <InputBox>
@@ -191,7 +191,7 @@ const SignBox = props => {
                 </Dot>
               )
             ) : (
-              ''
+              ""
             )}
             {Nicknamecheck.check ? (
               Nicknamecheck.boo ? (
@@ -200,7 +200,7 @@ const SignBox = props => {
                 <SpanTxt className="red">{Nicknamecheck.comment}</SpanTxt>
               )
             ) : (
-              ''
+              ""
             )}
           </InputBox>
           <InputBox>
@@ -224,7 +224,7 @@ const SignBox = props => {
                 </Dot>
               )
             ) : (
-              ''
+              ""
             )}
             {Pwcheck.check ? (
               Pwcheck.boo ? (
@@ -233,13 +233,13 @@ const SignBox = props => {
                 <SpanTxt className="red">{Pwcheck.comment}</SpanTxt>
               )
             ) : (
-              ''
+              ""
             )}
           </InputBox>
 
           <Button
             margin="10px 0px 0px"
-            className={succeed === false ? 'unActiveBtn' : ''}
+            className={succeed === false ? "unActiveBtn" : ""}
             _onClick={ClickEvent}
           >
             가입
@@ -247,7 +247,7 @@ const SignBox = props => {
           {answer ? (
             <SpanTxt className="red">정보를 다 입력하지 않았습니다.</SpanTxt>
           ) : (
-            ''
+            ""
           )}
         </Grid>
       </Grid>
@@ -259,8 +259,8 @@ const SignBox = props => {
         color="#000"
         _onClick={ClickMove}
       >
-        계정이 있으신가요?{' '}
-        <span style={{ color: '#0095F6', fontWeight: 'bold' }}>로그인</span>
+        계정이 있으신가요?{" "}
+        <span style={{ color: "#0095F6", fontWeight: "bold" }}>로그인</span>
       </Button>
     </Grid>
   );

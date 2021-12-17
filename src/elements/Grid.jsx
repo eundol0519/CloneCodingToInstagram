@@ -1,8 +1,8 @@
 //  v.js
 
 // *** 패키지 import
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Grid = props => {
   const {
@@ -76,7 +76,7 @@ Grid.defaultProps = {
   justifyContent: false,
   chidren: null,
   is_flex: false,
-  width: '100%',
+  width: "100%",
   padding: false,
   margin: false,
   bg: false,
@@ -84,10 +84,10 @@ Grid.defaultProps = {
   flexFlow: false,
   _onClick: () => {},
   column: false,
-  border: '0px',
+  border: "0px",
   baseline: false,
   borderBottom: false,
-  overflow: 'auto',
+  overflow: "auto",
 };
 
 const GridBox = styled.div`
@@ -100,22 +100,22 @@ const GridBox = styled.div`
   border-bottom: ${props => props.borderBottom};
   flex-direction: ${props => props.column};
   gap: ${props => props.gap};
-  ${props => (props.padding ? `padding: ${props.padding};` : '')}
-  ${props => (props.margin ? `margin: ${props.margin};` : '')}
-    ${props => (props.bg ? `background-color: ${props.bg};` : '')}
-    ${props => (props.is_flex ? `display: flex; align-items: center; ` : '')}
-    ${props => (props.center ? `text-align: center;` : '')}
-    ${props => (props.flexFlow ? 'flex-flow : row wrap;' : '')}
+  ${props => (props.padding ? `padding: ${props.padding};` : "")}
+  ${props => (props.margin ? `margin: ${props.margin};` : "")}
+    ${props => (props.bg ? `background-color: ${props.bg};` : "")}
+    ${props => (props.is_flex ? `display: flex; align-items: center; ` : "")}
+    ${props => (props.center ? `text-align: center;` : "")}
+    ${props => (props.flexFlow ? "flex-flow : row wrap;" : "")}
     ${props =>
     props.justifyContent
-      ? 'justify-content: flex-start;'
-      : 'justify-content: space-between;'};
-  ${props => (props.baseline ? `align-items: baseline;` : '')}
-  ${props => (props.overflow ? `overflow:scroll;` : '')}
+      ? "justify-content: flex-start;"
+      : "justify-content: space-between;"};
+  ${props => (props.baseline ? `align-items: baseline;` : "")}
+  ${props => (props.overflow ? `overflow:scroll;` : "")}
   ${props =>
     props.Reaction
-      ? '@media (max-width: 935px) { width: 100%;padding: 3%}'
-      : ''}
+      ? "@media (max-width: 935px) { width: 100%;padding: 3%}"
+      : ""}
 `;
 
 const NoWrap = styled.div`

@@ -1,10 +1,10 @@
 // *** SignIn.jsx ***
 
-import React from 'react';
-import styled from 'styled-components';
-import signin_img from '../images/signin_img.png';
-import { Grid } from '../elements';
-import SignupBox from '../components/SignupBox';
+import React from "react";
+import styled from "styled-components";
+import signin_img from "../images/signin_img.png";
+import { Grid } from "../elements";
+import SignupBox from "../components/SignupBox";
 const SignIn = props => {
   return (
     <SenterWep>

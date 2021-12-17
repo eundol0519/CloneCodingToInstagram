@@ -1,33 +1,32 @@
 // *** PostDetail.jsx ***
 
-import React from 'react';
-import Modal from 'react-modal';
-import { Grid, Image, Text } from '../elements/index';
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as postActions } from '../redux/modules/post';
-import { actionCreators as commentActions } from '../redux/modules/comment';
+import React from "react";
+import Modal from "react-modal";
+import { Grid, Image, Text } from "../elements/index";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as postActions } from "../redux/modules/post";
+import { actionCreators as commentActions } from "../redux/modules/comment";
 
 // mui icons import
-import CardActions from '@mui/material/CardActions';
-import IconButton from '@mui/material/IconButton';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ClearIcon from '@mui/icons-material/Clear';
+import CardActions from "@mui/material/CardActions";
+import IconButton from "@mui/material/IconButton";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const PostDetail = props => {
   // const postId = useParams(); // 파라미터로 넘어온 postId
-  const postId = 23;
   const dispatch = useDispatch();
   const postInfo = useSelector(state => state.post.cards);
   const userInfo = useSelector(state => state.user.users);
-  const commentInfo = useSelector(state => state.comment.cards[0]);
+  const commentInfo = useSelector(state => state.comment.cards.comments);
 
   const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
   const [active, setActive] = React.useState(true); // 버튼 활성화 유무
   const [commentBox, setCommentBox] = React.useState(false); // 댓글창 활성화 유무
-  const [content, setContent] = React.useState('');
+  const [content, setContent] = React.useState("");
   const [like, setLike] = React.useState(postInfo.myLike ? true : false); // 사용자별 좋아요 유무
 
   // 모달창을 닫으면 state도 false로 바꾸기
@@ -37,12 +36,12 @@ const PostDetail = props => {
   };
 
   React.useEffect(() => {
-    dispatch(postActions.PostDetailLookUpFB(postId));
+    // dispatch(postActions.PostDetailLookUpFB(postId));
   }, []);
 
   const commentList = () => {
     if (!commentBox) {
-      dispatch(commentActions.CommentLookUpFB(postId));
+      dispatch(commentActions.CommentLookUpFB(postInfo.postId));
       setCommentBox(true);
     } else {
       setCommentBox(false);
@@ -54,7 +53,7 @@ const PostDetail = props => {
   };
 
   const checkActive = () => {
-    if (content === '') {
+    if (content === "") {
       setActive(true);
     } else {
       setActive(false);
@@ -62,34 +61,34 @@ const PostDetail = props => {
   };
 
   const commentWrite = () => {
-    if (content === undefined || content === '') {
-      window.alert('댓글을 입력 해주세요');
+    if (content === undefined || content === "") {
+      window.alert("댓글을 입력 해주세요");
       return;
     }
 
-    dispatch(commentActions.CommentAddFB(postId, content));
-    setContent(''); // 댓글을 입력하면 input의 value를 날려준다.
+    dispatch(commentActions.CommentAddFB(postInfo.postId, content));
+    setContent(""); // 댓글을 입력하면 input의 value를 날려준다.
   };
 
   const commentDelete = commentId => {
-    const deleteConfirm = window.confirm('댓글을 삭제 하시겠습니까?');
+    const deleteConfirm = window.confirm("댓글을 삭제 하시겠습니까?");
 
     if (deleteConfirm) {
-      dispatch(commentActions.CommentDeleteFB(commentId, postId));
+      dispatch(commentActions.CommentDeleteFB(commentId, postInfo.postId));
     }
   };
 
   const postDelete = () => {
-    const deleteConfirm = window.confirm('게시물을 삭제 하시겠습니까?');
+    const deleteConfirm = window.confirm("게시물을 삭제 하시겠습니까?");
 
     if (deleteConfirm) {
-      dispatch(postActions.PostDeleteFB(postId))
+      dispatch(postActions.PostDeleteFB(postInfo.postId))
         .then(response => {
           setModal(false);
           props.setPostDetailModal(false);
         })
         .catch(error => {
-          console.log('PostDetail.jsx PostDeleteFB error', error);
+          console.log("PostDetail.jsx PostDeleteFB error", error);
         });
     }
   };
@@ -98,11 +97,11 @@ const PostDetail = props => {
     if (!like) {
       // 좋아요 갯수 +1
       setLike(true);
-      dispatch(postActions.PostLikeFB(postId, 'plus'));
+      dispatch(postActions.PostLikeFB(postInfo.postId, "plus"));
     } else {
       // 좋아요 갯수 -1
       setLike(false);
-      dispatch(postActions.PostLikeFB(postId, 'minus'));
+      dispatch(postActions.PostLikeFB(postInfo.postId, "minus"));
     }
   };
 
@@ -113,36 +112,36 @@ const PostDetail = props => {
       onRequestClose={modalOff}
       style={{
         overlay: {
-          position: 'fixed',
+          position: "fixed",
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: 'rgba(15, 15, 15, 0.79)',
+          backgroundColor: "rgba(15, 15, 15, 0.79)",
         },
         content: {
-          position: 'absolute',
-          top: '70%',
-          left: '50%',
-          width: '60%',
-          height: '70%',
-          border: 'none',
-          background: '#fff',
-          overflow: 'auto',
-          WebkitOverflowScrolling: 'touch',
-          borderRadius: '3px',
-          outline: 'none',
-          transform: 'translate(-50%, -50%)',
-          padding: '0px',
-          margin: 'auto',
+          position: "absolute",
+          top: "70%",
+          left: "50%",
+          width: "60%",
+          height: "70%",
+          border: "none",
+          background: "#fff",
+          overflow: "auto",
+          WebkitOverflowScrolling: "touch",
+          borderRadius: "3px",
+          outline: "none",
+          transform: "translate(-50%, -50%)",
+          padding: "0px",
+          margin: "auto",
         },
       }}
     >
       <Grid width="60%" height="100%" float="left">
         <img
           style={{
-            width: '100%',
-            height: '500px',
+            width: "100%",
+            height: "500px",
           }}
           src={`${postInfo.imageUrl}`}
           alt="게시물 사진"
@@ -230,7 +229,7 @@ const PostDetail = props => {
                     postLike();
                   }}
                 >
-                  <FavoriteBorderIcon style={{ color: like && 'pink' }} />
+                  <FavoriteBorderIcon style={{ color: like && "pink" }} />
                 </IconButton>
                 <IconButton
                   aria-label="comment"
@@ -260,11 +259,11 @@ const PostDetail = props => {
           <input
             placeholder="😀 댓글달기..."
             style={{
-              margin: '0',
-              border: 'none',
-              width: '520px',
-              height: '40px',
-              backgroundColor: 'rgba(0,0,0,0)',
+              margin: "0",
+              border: "none",
+              width: "520px",
+              height: "40px",
+              backgroundColor: "rgba(0,0,0,0)",
             }}
             value={content}
             onChange={e => {
@@ -272,19 +271,19 @@ const PostDetail = props => {
             }}
             onKeyUp={checkActive}
             onKeyPress={e => {
-              if (e.key === 'Enter') {
+              if (e.key === "Enter") {
                 commentWrite(e);
               }
             }}
           />
           <button
             style={{
-              border: 'none',
-              width: '94px',
-              height: '46px',
-              backgroundColor: 'rgba(0,0,0,0)',
-              color: active ? '#B2DFFC' : '#0095f6',
-              cursor: 'pointer',
+              border: "none",
+              width: "94px",
+              height: "46px",
+              backgroundColor: "rgba(0,0,0,0)",
+              color: active ? "#B2DFFC" : "#0095f6",
+              cursor: "pointer",
             }}
           >
             게시

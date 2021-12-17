@@ -1,6 +1,6 @@
 // *** Header.js ***
 
-import React from 'react';
+import React from "react";
 
 const noneHeader = props => {
   const { children } = props;

@@ -1,27 +1,27 @@
 // *** ProfileEdit.jsx ***
 
-import React from 'react';
-import { Grid, Input, Button, Image, Text } from '../elements/';
-import styled from 'styled-components';
-import { actionCreators as userActions } from '../redux/modules/user';
-import { useDispatch } from 'react-redux';
-import { uploadMyImage } from '../shared/api/myinto';
+import React from "react";
+import { Grid, Input, Button, Image, Text } from "../elements/";
+import styled from "styled-components";
+import { actionCreators as userActions } from "../redux/modules/user";
+import { useDispatch } from "react-redux";
+import { uploadMyImage } from "../shared/api/myinto";
 import {
   isNameCheck,
   isNickNameCheck,
   isPhoneNumber,
   isIntro,
-} from '../shared/examine';
+} from "../shared/examine";
 
 const ProfileEdit = props => {
   const dispatch = useDispatch();
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const [succeed, setSucceed] = React.useState(false);
   const [preview, setPreview] = React.useState(
     userInfo.imageUrl_profile
       ? userInfo.imageUrl_profile
-      : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+      : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
   );
   const [NameCheck, setNameCheck] = React.useState({});
   const [NickCheck, setNickCheck] = React.useState({});
@@ -34,7 +34,7 @@ const ProfileEdit = props => {
   const [phone_num, setphone_num] = React.useState(userInfo.phoneNumber);
 
   const CheckInputData = (SETSTATE, Checkfuc, Value) => {
-    if (Value !== '') {
+    if (Value !== "") {
       SETSTATE({ check: true });
       if (Checkfuc(Value).boo) {
         SETSTATE(Checkfuc(Value));
@@ -104,13 +104,13 @@ const ProfileEdit = props => {
     try {
       const imgfile = e.target.files[0];
       const formData = new FormData();
-      formData.append('img', imgfile);
+      formData.append("img", imgfile);
       console.log(formData);
       const response = await uploadMyImage(String(userInfo.userId), formData);
-      alert('프로필 이미지가 변경 되었습니다.');
+      alert("프로필 이미지가 변경 되었습니다.");
       setPreview(response.data.url);
     } catch (error) {
-      alert('프로필 이미지가 변경 되지 않았습니다.');
+      alert("프로필 이미지가 변경 되지 않았습니다.");
     }
   };
 
@@ -165,7 +165,7 @@ const ProfileEdit = props => {
                 사용하여 회원님의 계정을 찾을 수 있도록 도와주세요. 이름은 14일
                 안에 두 번만 변경할 수 있습니다.
               </InputInfo>
-              <SpanTxt className={NameCheck.boo ? 'green' : 'red'}>
+              <SpanTxt className={NameCheck.boo ? "green" : "red"}>
                 {NameCheck.comment}
               </SpanTxt>
             </Grid>
@@ -188,7 +188,7 @@ const ProfileEdit = props => {
                 대부분의 경우 14일 이내에 사용자 이름을 다시 {userInfo.nickname}
                 (으)로 변경할 수 있습니다. 더 알아보기
               </InputInfo>
-              <SpanTxt className={NickCheck.boo ? 'green' : 'red'}>
+              <SpanTxt className={NickCheck.boo ? "green" : "red"}>
                 {NickCheck.comment}
               </SpanTxt>
             </Grid>
@@ -216,7 +216,7 @@ const ProfileEdit = props => {
                 회원님의 개인정보를 입력하세요. 공개 프로필에는 포함되지
                 않습니다
               </InputInfo>
-              <SpanTxt className={IntroCheck.boo ? 'green' : 'red'}>
+              <SpanTxt className={IntroCheck.boo ? "green" : "red"}>
                 {IntroCheck.comment}
               </SpanTxt>
             </Grid>
@@ -238,7 +238,7 @@ const ProfileEdit = props => {
                 value={phone_num}
                 _onChange={PhoneCheckEvent}
               ></Input>
-              <SpanTxt className={PhoneCheck.boo ? 'green' : 'red'}>
+              <SpanTxt className={PhoneCheck.boo ? "green" : "red"}>
                 {PhoneCheck.comment}
               </SpanTxt>
             </Grid>
@@ -250,7 +250,7 @@ const ProfileEdit = props => {
             size=""
             padding="5px"
             size="15px"
-            className={succeed === false ? 'unActiveBtn' : ''}
+            className={succeed === false ? "unActiveBtn" : ""}
             _onClick={ClickEvent}
           >
             제출

@@ -1,7 +1,7 @@
 // *** Button.jsx ***
 
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Button = props => {
   const {
@@ -55,34 +55,34 @@ const Button = props => {
 };
 
 Button.defaultProps = {
-  className: '',
+  className: "",
   text: false,
   children: null,
   _onClick: () => {},
   is_float: false,
   margin: false,
-  width: '100%',
-  padding: '12px 0px',
+  width: "100%",
+  padding: "12px 0px",
   disabled: false,
   img: false,
   bg: false,
-  color: '#ffffff',
-  border: 'none',
-  size: '12px',
+  color: "#ffffff",
+  border: "none",
+  size: "12px",
 };
 
 const ElButton = styled.button`
   width: ${props => props.width};
   background-color: ${props =>
-    props.className === 'unActiveBtn' ? '#B2DFFC' : '#0095F6'};
-  ${props => (props.img ? `background-image : ${props.img};` : '')}
+    props.className === "unActiveBtn" ? "#B2DFFC" : "#0095F6"};
+  ${props => (props.img ? `background-image : ${props.img};` : "")}
   color: ${props => props.color};
   background: ${props => props.bg};
   padding: ${props => props.padding};
   box-sizing: border-box;
   border-radius: 3px;
   border: ${props => props.border};
-  ${props => (props.margin ? `margin: ${props.margin};` : '')}
+  ${props => (props.margin ? `margin: ${props.margin};` : "")}
   cursor: pointer;
   font-size: ${props => props.size};
 `;

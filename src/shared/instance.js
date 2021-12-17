@@ -1,16 +1,17 @@
-import axios from 'axios';
-import { getToken } from './token';
+import axios from "axios";
+import { getToken } from "./token";
 
-const USER_TOKEN = `Bearer ${getToken('authorization')}`;
+// const USER_TOKEN = `Bearer ${getToken("authorization")}`;
+const USER_TOKEN = "Bearer " + getToken("authorization");
 console.log(USER_TOKEN);
 const instance = axios.create({
   timeout: 1000,
-  baseURL: 'http://13.125.45.147',
+  baseURL: "http://13.125.45.147",
   headers: {
-    'Content-Type': 'application/json; charset=utf-8',
-    'X-Requested-With': 'XMLHttpRequest',
+    "Content-Type": "application/json; charset=utf-8",
+    "X-Requested-With": "XMLHttpRequest",
     authorization: USER_TOKEN,
-    Accept: 'application/json',
+    Accept: "application/json",
   },
 });
 

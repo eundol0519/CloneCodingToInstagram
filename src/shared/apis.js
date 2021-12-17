@@ -1,18 +1,18 @@
 // *** apis.js ***
 
-import axios from 'axios';
-import { getToken } from './token';
-import instanceMulti from './instanceMulti';
-import instance from './instance';
+import axios from "axios";
+import { getToken } from "./token";
+import instanceMulti from "./instanceMulti";
+import instance from "./instance";
 
 const apis = {
   // 로그인,회원가입
-  signin: userInfo => instance.post('/api/users/login', userInfo), // 로그인
-  signup: userInfo => instance.post('/api/users/Signup', userInfo), // 회원가입
-  getUserInfo: () => instance.get('/api/users/me'), //로그인 시 유저정보 가지고 오는 api
+  signin: userInfo => instance.post("/api/users/login", userInfo), // 로그인
+  signup: userInfo => instance.post("/api/users/Signup", userInfo), // 회원가입
+  getUserInfo: () => instance.get("/api/users/me"), //로그인 시 유저정보 가지고 오는 api
 
   //전체 게시글 조회 페이지
-  getPost: () => instance.get('/api/posts'), // 전체 게시글 조회
+  getPost: () => instance.get("/api/posts"), // 전체 게시글 조회
 
   //게시글 작성페이지 (모달창)
   uploadPostImage: img => instance.post(`/api/posts/images`, img), // 게시글 이미지업로드
