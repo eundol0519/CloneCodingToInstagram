@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getToken } from "./token";
+import { getToken } from "../token";
 
 const USER_TOKEN = `Bearer ${getToken("authorization")}`;
 

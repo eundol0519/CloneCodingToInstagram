@@ -2,8 +2,8 @@
 
 import axios from "axios";
 import { getToken } from "./token";
-import instanceMulti from "./instanceMulti";
-import instance from "./instance";
+import instanceMulti from "./api/instanceMulti";
+import instance from "./api/instance";
 
 const apis = {
   // 로그인,회원가입

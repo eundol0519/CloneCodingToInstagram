@@ -40,19 +40,19 @@ const verticalInterval = {
 };
 
 const deviceSizes = {
-  mobileS: '320px',
-  mobileM: '375px',
-  mobileL: '450px',
-  tablet: '768px',
-  tabletL: '1024px',
+  mobileS: "320px",
+  mobileM: "375px",
+  mobileL: "450px",
+  tablet: "768px",
+  tabletL: "1024px",
 };
 
 const colors = {
-  black: '#000000',
-  white: '#FFFFFF',
-  gray_1: '#222222',
-  gray_2: '#767676',
-  green_1: '#3cb46e',
+  black: "#000000",
+  white: "#FFFFFF",
+  gray_1: "#222222",
+  gray_2: "#767676",
+  green_1: "#3cb46e",
 };
 
 const device = {

@@ -1,5 +1,5 @@
-import instance from "../instance";
-import instanceMulti from "../instanceMulti";
+import instance from "./instance";
+import instanceMulti from "./instanceMulti";
 
 //전체 게시글 조회 페이지
 export function getPostList() {
