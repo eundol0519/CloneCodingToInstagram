@@ -75,14 +75,14 @@ function PostCard(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={p.userNickname}
+        title={p.nickname}
         // subheader="September 14, 2016"
       />
       <CardMedia
         component="img"
         height="614"
         image={p.imageUrl}
-        alt={p.userNickname}
+        alt={p.nickname}
       />
 
       <CardActions disableSpacing>

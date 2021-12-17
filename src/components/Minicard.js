@@ -10,6 +10,7 @@ import Grid from "../elements/Grid";
 
 const MiniCard = props => {
   const users = props.users;
+  console.log(users);
   return (
     <Card sx={{ minWidth: 614 }}>
       <CardContent>
