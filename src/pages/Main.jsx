@@ -35,7 +35,7 @@ const Main = props => {
         <PostDetail
           modal={postDetailModal}
           setPostDetailModal={setPostDetailModal}
-          postId="8" // postId 넘겨 주시면 됩니다.
+          postId="2" // postId 넘겨 주시면 됩니다.
         ></PostDetail>
       )}
 

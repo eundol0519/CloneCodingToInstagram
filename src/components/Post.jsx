@@ -23,7 +23,6 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 
 function PostCard(props) {
   const p = props.p;
-  console.log(p);
   const dispatch = useDispatch();
   const postInfo = useSelector(state => state.post.cards);
 

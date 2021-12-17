@@ -17,11 +17,13 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ClearIcon from '@mui/icons-material/Clear';
 
 const PostDetail = props => {
-  const postId = useParams(); // 파라미터로 넘어온 postId
+  // const postId = useParams(); // 파라미터로 넘어온 postId
+  const postId = 19;
   const dispatch = useDispatch();
   const postInfo = useSelector(state => state.post.cards);
   const userInfo = useSelector(state => state.user.users);
-  const commentInfo = useSelector(state => state.comment.cards);
+  const commentInfo = useSelector(state => state.comment.cards[0]);
+  console.log(commentInfo);
 
   const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
   const [active, setActive] = React.useState(true); // 버튼 활성화 유무
@@ -36,12 +38,12 @@ const PostDetail = props => {
   };
 
   React.useEffect(() => {
-    dispatch(postActions.PostDetailLookUpFB(8));
+    dispatch(postActions.PostDetailLookUpFB(postId));
   }, []);
 
   const commentList = () => {
     if (!commentBox) {
-      dispatch(commentActions.CommentLookUpFB(8));
+      dispatch(commentActions.CommentLookUpFB(postId));
       setCommentBox(true);
     } else {
       setCommentBox(false);
@@ -66,7 +68,7 @@ const PostDetail = props => {
       return;
     }
 
-    dispatch(commentActions.CommentAddFB(8, content));
+    dispatch(commentActions.CommentAddFB(postId, content));
     setContent(''); // 댓글을 입력하면 input의 value를 날려준다.
   };
 
@@ -74,7 +76,7 @@ const PostDetail = props => {
     const deleteConfirm = window.confirm('댓글을 삭제 하시겠습니까?');
 
     if (deleteConfirm) {
-      dispatch(commentActions.CommentDeleteFB(commentId, 8));
+      dispatch(commentActions.CommentDeleteFB(commentId, postId));
     }
   };
 
@@ -82,7 +84,7 @@ const PostDetail = props => {
     const deleteConfirm = window.confirm('게시물을 삭제 하시겠습니까?');
 
     if (deleteConfirm) {
-      dispatch(postActions.PostDeleteFB(props.postId))
+      dispatch(postActions.PostDeleteFB(postId))
         .then(response => {
           setModal(false);
           props.setPostDetailModal(false);
@@ -97,11 +99,11 @@ const PostDetail = props => {
     if (!like) {
       // 좋아요 갯수 +1
       setLike(true);
-      dispatch(postActions.PostLikeFB(props.postId, 'plus'));
+      dispatch(postActions.PostLikeFB(postId, 'plus'));
     } else {
       // 좋아요 갯수 -1
       setLike(false);
-      dispatch(postActions.PostLikeFB(props.postId, 'minus'));
+      dispatch(postActions.PostLikeFB(postId, 'minus'));
     }
   };
 
@@ -152,7 +154,10 @@ const PostDetail = props => {
           <>
             <Grid height="10%" is_flex margin="1% 1% 2% 1%">
               <Grid is_flex justifyContent>
-                <Image shape="circle" src={`${postInfo.imageUrl}`}></Image>
+                <Image
+                  shape="circle"
+                  src={`${postInfo.imageUrl_profile}`}
+                ></Image>
                 <Text width="85%" bold>
                   {postInfo.nickname}
                 </Text>
@@ -163,8 +168,8 @@ const PostDetail = props => {
                 }}
               ></ArrowBackIosIcon>
             </Grid>
-            <Grid height="60%" overflow margin="1% 2% 1% 2%">
-              {commentInfo.length === 0 ? (
+            <Grid height="60%" overflow="scroll" margin="1% 2% 1% 2%">
+              {commentInfo.length > 0 ? (
                 <>
                   {commentInfo.map(c => {
                     return (
@@ -209,7 +214,7 @@ const PostDetail = props => {
                 {postInfo.nickname}
               </Text>
             </Grid>
-            <Grid height="60%" overflow margin="1% 2% 1% 2%">
+            <Grid height="60%" overflow="scroll" margin="1% 2% 1% 2%">
               {postInfo.content}
             </Grid>
           </>

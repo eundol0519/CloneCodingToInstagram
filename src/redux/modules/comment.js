@@ -69,9 +69,7 @@ const get_Comment = createAction(GET_COMMENT, commentInfo => ({
 const CommentLookUpFB = postId => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log('CommentLookUpFB try');
       const response = await getComment(postId);
-      console.log('CommentLookUpFB response', response.data);
 
       dispatch(get_Comment(response.data));
     } catch (error) {
@@ -83,7 +81,7 @@ const CommentLookUpFB = postId => {
 const CommentAddFB = (postId, content) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log('AddCommentFB try');
+      console.log(postId, content);
       const response = await writeComment(postId, content);
 
       dispatch(CommentLookUpFB(postId)); // 댓글 목록 다시 요청
