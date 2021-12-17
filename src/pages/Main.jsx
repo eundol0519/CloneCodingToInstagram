@@ -5,31 +5,36 @@ import styled from "styled-components";
 import PostDetail from "../pages/PostDetail";
 import Post from "../components/Post";
 import { history } from "../redux/configureStore";
+
 import { actionCreators as postActions } from "../redux/modules/post";
 import { useDispatch, useSelector } from "react-redux";
+
 import Avatar from "@mui/material/Avatar";
 import Grid from "../elements/Grid";
 import unnamed from "../unnamed.jpg";
 import avata from "../avata.png";
 import 다운로드 from "../다운로드.jpg";
-import { getToken } from "../shared/token";
 
 const Main = props => {
   const [postDetailModal, setPostDetailModal] = React.useState(false);
   const dispatch = useDispatch();
+
+
   const accessToken = document.cookie.split("=")[1];
+
   console.log(accessToken);
   React.useEffect(() => {
+    window.scrollTo(0, 0);
     if (!accessToken) {
       return history.push("/in/signIn");
     }
-    dispatch(postActions.getPostDB());
+    dispatch(postAtions.getPostDB());
   }, [postDetailModal]);
 
   const postList = useSelector(state => state.post.postList);
 
   const detailOpen = async postId => {
-    await dispatch(postActions.PostDetailLookUpFB(postId));
+    await dispatch(postAtions.PostDetailLookUpFB(postId));
     // 동기 처리 -> 비동기 처리를 해줘야 상세 페이지 갔을 때 좋아요가 반영된다.
     setPostDetailModal(true);
   };
