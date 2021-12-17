@@ -64,6 +64,22 @@ const Main = props => {
           <ItemBoxIn>
             <Profile>
               <ProfileOne>
+                <Grid is_flex>
+                  <span style={{ fontSize: "15px", fontWeight: "bold" }}>
+                    회원님을 위한 추천
+                  </span>
+                  <span
+                    style={{
+                      marginLeft: "10px",
+                      fontWeight: "bold",
+                      fontSize: "15px",
+                    }}
+                  >
+                    모두보기
+                  </span>
+                </Grid>
+              </ProfileOne>
+              <ProfileOne>
                 <Avatar
                   alt="정하나"
                   src={
@@ -215,22 +231,11 @@ const Main = props => {
           </ItemBoxIn>
         </ItemBox>
       </Box>
-      {/* 
-      <Container>
-        {postList.map((p, idx) => {
-          return (
-            <ContainerItem key={idx}>
-              <Post p={p} />
-            </ContainerItem>
-          );
-        })}
-      </Container>
-      <ItemBox /> */}
     </React.Fragment>
   );
 };
 const Box = styled.div`
-  max-width: 934px;
+  max-width: 944px;
   /* width: 891px; */
   margin: 0 auto;
   display: flex;
@@ -242,29 +247,31 @@ const Container = styled.div`
   /* margin: 0 auto; */
   display: flex;
   flex-wrap: wrap;
+  margin-top: 30px;
 `;
 
 const ContainerItem = styled.div`
   width: 614px;
   height: 891px;
-  margin-bottom: 120px;
+  margin-bottom: 80px;
 `;
 
 const ItemBox = styled.div`
   display: flex;
   max-width: 304px;
-  margin-left: 20px;
+  margin-left: 30px;
+  margin-top: 30px;
 `;
 const ItemBoxIn = styled.div`
   position: fixed;
   width: 304px;
-  height: 600px;
+  height: 400px;
 `;
 const Profile = styled.div`
   display: flex;
   flex-direction: column;
   width: 304px;
-  height: 600px;
+  height: 400px;
   margin: 0 auto;
 `;
 const ProfileOne = styled.div`
