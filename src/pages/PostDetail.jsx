@@ -157,7 +157,11 @@ const PostDetail = props => {
                   {postInfo.nickname}
                 </Text>
               </Grid>
-              <ArrowBackIosIcon onClick={back}></ArrowBackIosIcon>
+              <ArrowBackIosIcon
+                onClick={() => {
+                  back();
+                }}
+              ></ArrowBackIosIcon>
             </Grid>
             <Grid height="60%" overflow margin="1% 2% 1% 2%">
               {commentInfo.length === 0 ? (
@@ -214,20 +218,30 @@ const PostDetail = props => {
           <CardActions disableSpacing>
             <Grid is_flex>
               <Grid>
-                <IconButton aria-label="add to favorites">
-                  <FavoriteBorderIcon
-                    style={{ color: like && 'pink' }}
-                    onClick={postLike}
-                  />
+                <IconButton
+                  aria-label="add to favorites"
+                  onClick={() => {
+                    postLike();
+                  }}
+                >
+                  <FavoriteBorderIcon style={{ color: like && 'pink' }} />
                 </IconButton>
-                <IconButton aria-label="comment">
-                  <ChatBubbleOutlineIcon
-                    onClick={commentList}
-                  ></ChatBubbleOutlineIcon>
+                <IconButton
+                  aria-label="comment"
+                  onClick={() => {
+                    commentList();
+                  }}
+                >
+                  <ChatBubbleOutlineIcon></ChatBubbleOutlineIcon>
                 </IconButton>
                 {userInfo.nickname === postInfo.nickname ? (
-                  <IconButton aria-label="delete">
-                    <ClearIcon onClick={postDelete}></ClearIcon>
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => {
+                      postDelete();
+                    }}
+                  >
+                    <ClearIcon></ClearIcon>
                   </IconButton>
                 ) : null}
               </Grid>

@@ -2,11 +2,11 @@
 
 import React from 'react';
 import Modal from 'react-modal';
-import apis from '../shared/apis';
 import { Grid, Text, Image, Button, Input } from '../elements/index';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
+import { uploadPostImageOn } from '../shared/api/post';
 
 const PostWrtie = props => {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ const PostWrtie = props => {
       const formData = new FormData();
       formData.append('img', files);
 
-      const response = await apis.uploadPostImage(formData);
+      const response = await uploadPostImageOn(formData);
       console.log(response.data.url);
 
       window.alert('사진이 업로드 되었습니다.');
@@ -63,6 +63,7 @@ const PostWrtie = props => {
   // 게시글 작성
   const write = () => {
     dispatch(postActions.PostWriteFB(content, imgFile));
+    modalOff();
   };
 
   return (

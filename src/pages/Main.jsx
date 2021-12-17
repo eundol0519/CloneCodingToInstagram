@@ -11,6 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Grid from '../elements/Grid';
 import unnamed from '../unnamed.jpg';
 import avata from '../avata.png';
+import { getToken } from '../shared/token';
 const Main = props => {
   const [postDetailModal, setPostDetailModal] = React.useState(false);
   const dispatch = useDispatch();
@@ -20,7 +21,6 @@ const Main = props => {
   }, []);
 
   const postList = useSelector(state => state.post.postList);
-  console.log(postList);
 
   return (
     <React.Fragment>
@@ -43,8 +43,8 @@ const Main = props => {
         <Container>
           {postList.map((p, idx) => {
             return (
-              <ContainerItem>
-                <Post key={p.postId} p={p} />
+              <ContainerItem key={p.postId}>
+                <Post p={p} />
               </ContainerItem>
             );
           })}

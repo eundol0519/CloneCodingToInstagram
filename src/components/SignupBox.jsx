@@ -97,7 +97,7 @@ const SignBox = props => {
   };
 
   const ClickMove = () => {
-    history.push('/in/signin');
+    history.push('/in/signIn');
   };
   return (
     <Grid width="375px">
