@@ -38,7 +38,7 @@ https://www.youtube.com/watch?v=DxQZ4e5tRxw<br>
  * Axios
 
 <code> Back-end </code>
-* [Back-end 개발Page](https://github.com/HanghaeAnonymous/Team-11-Back)
+* [Back-end 개발Page](https://github.com/TnIoP/BE_instagram_clone.git)
 
 
 <code>Tool</code>
