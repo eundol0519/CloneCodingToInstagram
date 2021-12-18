@@ -1,4 +1,4 @@
-# 익명의 멘탈케어
+# 인스타그램
 <p align="center"><img width="500"  alt="스크린샷 2021-12-09 오후 2 32 42" src="https://sightmap.co.kr/wp-content/uploads/sites/2/2021/05/instagram.jpg">
  </p>
 
