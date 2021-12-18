@@ -12,11 +12,10 @@
 
 
 ## 🎥 시연 영상
- [![Hnet-image](https://www.youtube.com/watch?v=DxQZ4e5tRxw )<br>
-이미지를 클릭하시면 유튜브 영상으로 이동됩니다.
+https://www.youtube.com/watch?v=DxQZ4e5tRxw<br>
 
 ## 🧑🏼‍💻 개발기간 및 팀원소개
-### 기간: 2021.12.06 ~ 2021.12.11 (5일)  
+### 기간: 2021.12.13 ~ 2021.12.18 (5일)  
 </br>
 
 ### Front-end   
