@@ -61,8 +61,8 @@ function PostCard(props) {
     }
   };
 
-  React.useEffect(() => {
-    dispatch(postAtions.PostDetailLookUpFB(p.postId));
+  React.useEffect(async () => {
+    await dispatch(postAtions.PostDetailLookUpFB(p.postId));
   }, []);
 
   return (

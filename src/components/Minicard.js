@@ -11,7 +11,6 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { history } from "../redux/configureStore";
 const MiniCard = props => {
   const users = props.users;
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   return (
     <Card sx={{ minWidth: 614, backgroundColor: "inherit", boxShadow: 0 }}>
