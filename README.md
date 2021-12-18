@@ -45,5 +45,5 @@ https://www.youtube.com/watch?v=DxQZ4e5tRxw<br>
 * Git
 * GitHub
 
-## ⚒️ 노션
-https://www.notion.so/ccfb34c041e444b29d05923414f38cbe?v=b548d83b8ded4c05b882023e3af88e90&p=df520861e834478395662d48b4885e14
+## ⚒️ Notion
+[Notion](https://www.notion.so/ccfb34c041e444b29d05923414f38cbe?v=b548d83b8ded4c05b882023e3af88e90)
