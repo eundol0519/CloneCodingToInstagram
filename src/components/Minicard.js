@@ -57,7 +57,6 @@ const MiniCard = props => {
         <Typography variant="body2">
           {users.introduce}
           <br />
-          {/* {'"개인레슨"'} */}
         </Typography>
       </CardContent>
       <CardActions>
