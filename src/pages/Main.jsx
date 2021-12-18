@@ -49,19 +49,6 @@ const Main = props => {
                 <ContainerItem key={p.postId}>
                   <Post p={p} detailOpen={detailOpen} postId={p.postId} />
                 </ContainerItem>
-                <button
-                  onClikc={() => {
-                    setPostDetailModal(true);
-                  }}
-                >
-                  모달
-                </button>
-                {postDetailModal && (
-                  <PostDetail
-                    modal={postDetailModal}
-                    setPostDetailModal={setPostDetailModal}
-                  ></PostDetail>
-                )}
               </>
             );
           })}
