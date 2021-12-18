@@ -53,6 +53,7 @@ const signInGetDB = userInfo => {
             console.log("회원정보 DB ERROR", error);
           });
         history.push("/");
+        window.location.reload();
       })
       .catch(error => {
         alert("로그인에 실패 했습니다.");
