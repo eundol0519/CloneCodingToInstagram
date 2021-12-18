@@ -112,7 +112,7 @@ function PostCard(props) {
             <IconButton
               aria-label="comment"
               onClick={() => {
-                console.log("2");
+                props.detailOpen(props.postId);
               }}
             >
               <ChatBubbleOutlineIcon />
