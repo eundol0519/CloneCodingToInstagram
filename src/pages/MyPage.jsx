@@ -13,14 +13,14 @@ import Grid from "../elements/Grid";
 const MyPage = props => {
   const params = useParams();
   const userId = params.id;
-  console.log(params);
+  //console.log(params);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(postAtions.getMyPostDB(userId));
   }, []);
 
-  const myPageList = useSelector(state => state.post.myPageList);
+  //const myPageList = useSelector(state => state.post.myPageList);
 
   const users = useSelector(state => state.post.users);
 
