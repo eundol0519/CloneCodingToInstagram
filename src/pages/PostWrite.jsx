@@ -13,6 +13,7 @@ const PostWrtie = props => {
   const [modal, setModal] = React.useState(props.modal ? true : false); // 모달창
   const [active, setActive] = React.useState(true); // 버튼 활성화 유무
   const [content, setContent] = React.useState(""); // 글 내용 작성
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   // 모달창을 닫으면 header state도 false로 바꾸기
   const modalOff = () => {
@@ -87,8 +88,8 @@ const PostWrtie = props => {
             left: "13%",
             right: "13%",
             bottom: "13%",
-            width: "68%",
-            height: "80vh",
+            width: "60%",
+            height: "70vh",
             border: "none",
             background: "#fff",
             overflow: "auto",
@@ -143,9 +144,13 @@ const PostWrtie = props => {
         </Grid>
         <Grid width="40%" height="90%" float="left" is_fix>
           <Grid height="10%" is_flex jusifyContent>
-            <Image padding="10px" shape="circle"></Image>
+            <Image
+              padding="10px"
+              shape="circle"
+              src={userInfo.imageUrl_profile}
+            ></Image>
             <Text width="85%" bold>
-              eundol
+              {userInfo.nickname}
             </Text>
           </Grid>
           <Grid height="80%">

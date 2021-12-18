@@ -19,53 +19,13 @@ const GET_MYPOST = "GET_MYPOST";
 const SET_LIKE = "SET_LIKE";
 
 const initialState = {
-  postList: [
-    {
-      postId: 0,
-      userId: 0,
-      content: "",
-      commentCount: "",
-      likeCount: "",
-      nickname: "",
-      imageUrl: "",
-      createdAt: "",
-      imageUrl_profile: "",
-      myLike: false,
-    },
-  ],
+  postList: [],
 
-  post: {
-    postId: 0,
-    userId: 0,
-    content: "",
-    commentCount: "",
-    likeCount: "",
-    nickname: "",
-    imageUrl: "",
-    createdAt: "",
-    imageUrl_profile: "",
-    myLike: false,
-  },
+  post: {},
 
-  myPageList: [
-    {
-      postId: 0,
-      content: "",
-      likeCount: 0,
-      imageUrl: "",
-      createdAt: "",
-    },
-  ],
+  myPageList: [],
 
-  users: {
-    userId: 0,
-    userEmail: "",
-    userName: "",
-    nickname: "",
-    imageUrl_profile: "",
-    introduce: "",
-    phoneNumber: "",
-  },
+  users: {},
 
   cards: {},
 };

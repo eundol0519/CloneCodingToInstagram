@@ -123,7 +123,7 @@ const PostDetail = props => {
         },
         content: {
           position: "absolute",
-          top: "70%",
+          top: "80%",
           left: "50%",
           width: "60%",
           height: "70%",
