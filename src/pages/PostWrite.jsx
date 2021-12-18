@@ -81,6 +81,7 @@ const PostWrtie = props => {
             right: 0,
             bottom: 0,
             backgroundColor: "rgba(15, 15, 15, 0.79)",
+            zIndex: 99,
           },
           content: {
             position: "absolute",

@@ -134,7 +134,7 @@ const ProfileEdit = props => {
             </div>
             <Grid is_flex column="column" baseline gap="10px">
               <Text bold size="18px">
-                mong_c_young2
+                {userInfo.userName}
               </Text>
               <TextBtn>
                 <InvisibleFileUpbtn

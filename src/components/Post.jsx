@@ -86,6 +86,7 @@ function PostCard(props) {
         // subheader="September 14, 2016"
       />
       <div
+        className="ssssClick"
         onClick={() => {
           props.detailOpen(props.postId);
         }}

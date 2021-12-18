@@ -28,6 +28,7 @@ const Grid = props => {
     borderBottom,
     baseline,
     float,
+    Control,
   } = props;
 
   const styles = {
@@ -49,6 +50,7 @@ const Grid = props => {
     Reaction,
     float,
     overflow,
+    Control,
   };
 
   if (noWrap) {
@@ -88,6 +90,7 @@ Grid.defaultProps = {
   baseline: false,
   borderBottom: false,
   overflow: "auto",
+  Control: false,
 };
 
 const GridBox = styled.div`
@@ -112,6 +115,7 @@ const GridBox = styled.div`
       : "justify-content: space-between;"};
   ${props => (props.baseline ? `align-items: baseline;` : "")}
   ${props => (props.overflow ? `overflow:scroll;` : "")}
+  justify-content :${props => props.Control}
   ${props =>
     props.Reaction
       ? "@media (max-width: 935px) { width: 100%;padding: 3%}"

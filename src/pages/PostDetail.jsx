@@ -119,31 +119,39 @@ const PostDetail = props => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: "rgba(15, 15, 15, 0.075)",
+          backgroundColor: "rgba(15, 15, 15, 0.79)",
+          zIndex: 99,
         },
         content: {
           position: "absolute",
-          top: "80%",
-          left: "50%",
-          width: "60%",
-          height: "70%",
+          top: "13%",
+          left: "13%",
+          right: "13%",
+          bottom: "13%",
+          width: "68%",
+          height: "80vh",
           border: "none",
           background: "#fff",
           overflow: "auto",
           WebkitOverflowScrolling: "touch",
           borderRadius: "3px",
-          outline: "none",
-          transform: "translate(-50%, -50%)",
           padding: "0px",
           margin: "auto",
         },
       }}
     >
-      <Grid width="60%" height="100%" float="left">
+      <Grid
+        width="60%"
+        height="100%"
+        float="left"
+        is_flex
+        column="column"
+        Control="center"
+        bg="#000"
+      >
         <img
           style={{
             width: "100%",
-            height: "500px",
           }}
           src={`${postInfo.imageUrl}`}
           alt="게시물 사진"
