@@ -20,8 +20,8 @@ https://www.youtube.com/watch?v=DxQZ4e5tRxw<br>
 
 ### Front-end   
    <p><a href="https://github.com/eundol0519" target="_blank"><img width="150"  src="https://img.shields.io/static/v1?label=React&message=오은희&color=61dafb&style=for-the-badge&>"/></a></p>
-   <p><a href="https://github.com/WooMinGy" target="_blank"><img width="150"  src="https://img.shields.io/static/v1?label=React&message=최주영&color=61dafb&style=for-the-badge&>"/></a></p>
-   <p><a href="https://github.com/WooMinGy" target="_blank"><img width="150"  src="https://img.shields.io/static/v1?label=React&message=신항민&color=61dafb&style=for-the-badge&>"/></a></p>
+   <p><a href="https://github.com/cwd3469" target="_blank"><img width="150"  src="https://img.shields.io/static/v1?label=React&message=최주영&color=61dafb&style=for-the-badge&>"/></a></p>
+   <p><a href="https://github.com/ssinking91" target="_blank"><img width="150"  src="https://img.shields.io/static/v1?label=React&message=신항민&color=61dafb&style=for-the-badge&>"/></a></p>
    
   
 ### Back-end
