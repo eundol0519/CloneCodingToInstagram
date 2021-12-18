@@ -14,12 +14,11 @@ const MiniCard = props => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   return (
-    <Card sx={{ minWidth: 614 }}>
+    <Card sx={{ minWidth: 614, backgroundColor: "inherit", boxShadow: 0 }}>
       <CardContent>
         <Grid is_flex margin="0px 0px 20px" gap="20px">
           <Typography
-            sx={{ fontSize: 30, marginBottom: 0 }}
-            color="text.secondary"
+            sx={{ fontSize: 30, marginBottom: 0, color: "#000" }}
             gutterBottom
           >
             {users.nickname}

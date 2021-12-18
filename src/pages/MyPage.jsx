@@ -32,9 +32,21 @@ const MyPage = props => {
           <Grid is_flex>
             <Items2>
               <Avatar
-                alt="hello"
-                src={users.imageUrl_profile}
-                sx={{ width: 200, height: 200, margin: "auto" }}
+                src={
+                  users.imageUrl_profile
+                    ? users.imageUrl_profile
+                    : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                }
+                sx={{
+                  width: 200,
+                  height: 200,
+                  margin: "auto",
+                  border: "5px solid transparent",
+                  backgroundImage:
+                    "linear-gradient(#444444, #444444), linear-gradient(135deg,  #ff0000 0%,#ed7200 50%,#9d00ff 100%)",
+                  backgroundOrigin: "border-box",
+                  backgroundClip: "content-box, border-box",
+                }}
               />
             </Items2>
             <Items3>
@@ -52,7 +64,7 @@ const Container = styled.div`
   max-width: 935px;
   /* width: 891px; */
   margin: 0 auto;
-  background-color: #fff;
+  background-color: ;
   display: flex;
   flex-wrap: wrap;
 `;
