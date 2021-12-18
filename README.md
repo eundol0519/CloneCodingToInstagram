@@ -27,7 +27,7 @@ https://www.youtube.com/watch?v=DxQZ4e5tRxw<br>
 ### Back-end
 <p><a href="https://github.com/jybin96" target="_blank"><img width="150"  src="https://img.shields.io/static/v1?label=Spring&message=이동호&color=08CE5D&style=for-the-badge&>"/></a></p>
    <p><a href="https://github.com/Zabee52" target="_blank"><img width="150"  src="https://img.shields.io/static/v1?label=Spring&message=정하나&color=08CE5D&style=for-the-badge&>"/></a></p>
-   <p><a href="https://github.com/HundredCleanWater" target="_blank"><img width="150"  src="https://img.shields.io/static/v1?label=Spring&message=백정수&color=08CE5D&style=for-the-badge&>"/></a></p>
+   <p><a href="https://github.com/HundredCleanWater" target="_blank"><img width="150"  src="https://img.shields.io/static/v1?label=Spring&message=이도연&color=08CE5D&style=for-the-badge&>"/></a></p>
    
 
   
