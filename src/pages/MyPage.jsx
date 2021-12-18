@@ -21,10 +21,8 @@ const MyPage = props => {
   }, []);
 
   const myPageList = useSelector(state => state.post.myPageList);
-  console.log(myPageList);
 
   const users = useSelector(state => state.post.users);
-  console.log(users);
 
   return (
     <React.Fragment>
